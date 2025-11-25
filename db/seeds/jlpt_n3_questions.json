@@ -1,0 +1,62 @@
+[
+  {
+    "type": "grammar",
+    "question": "彼は会社を＿＿して、新しい仕事を始めた。",
+    "answers": ["やめ", "とめ", "さめ", "きめ"],
+    "correct_index": 0
+  },
+  {
+    "type": "grammar",
+    "question": "この薬を飲むと、頭痛が＿＿します。",
+    "answers": ["やわらく", "やわらかく", "やわらぎ", "やわらげ"],
+    "correct_index": 2
+  },
+  {
+    "type": "grammar",
+    "question": "雨が降りそうだから、傘を＿＿ほうがいい。",
+    "answers": ["持つ", "持った", "持って", "持ち"],
+    "correct_index": 2
+  },
+  {
+    "type": "grammar",
+    "question": "彼女は日本語が上手に＿＿ように、毎日勉強している。",
+    "answers": ["なる", "なった", "なり", "なって"],
+    "correct_index": 0
+  },
+  {
+    "type": "grammar",
+    "question": "この問題は難しくて、なかなか＿＿が出ない。",
+    "answers": ["返事", "答え", "質問", "相談"],
+    "correct_index": 1
+  },
+  {
+    "type": "grammar",
+    "question": "忙しくて疲れている＿＿、手伝ってくれた。",
+    "answers": ["にもかかわらず", "のに", "ので", "ために"],
+    "correct_index": 1
+  },
+  {
+    "type": "grammar",
+    "question": "会議の時間が＿＿になったので、お知らせします。",
+    "answers": ["変更", "交換", "移動", "変化"],
+    "correct_index": 0
+  },
+  {
+    "type": "grammar",
+    "question": "この本は子供＿＿読みやすく書かれている。",
+    "answers": ["でも", "にも", "とも", "ほど"],
+    "correct_index": 0
+  },
+  {
+    "type": "grammar",
+    "question": "彼の説明は＿＿で、よく分からなかった。",
+    "answers": ["あいまい", "はっきり", "めいかく", "ていねい"],
+    "correct_index": 0
+  },
+  {
+    "type": "grammar",
+    "question": "日本に来て3年____、だいぶ慣れてきました。",
+    "answers": ["たつと", "たって", "たった", "たてば"],
+    "correct_index": 1
+  }
+]
