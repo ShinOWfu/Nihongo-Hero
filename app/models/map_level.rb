@@ -1,2 +1,0 @@
-class MapLevel < ApplicationRecord
-end
