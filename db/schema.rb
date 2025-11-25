@@ -47,10 +47,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_075522) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "type"
+    t.string "question_type"
     t.string "question"
-    t.string "answers", default: [], array: true
+    t.jsonb "answers"
     t.integer "correct_index"
+    t.string "difficulty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
