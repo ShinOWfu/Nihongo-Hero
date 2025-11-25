@@ -3,7 +3,7 @@ require 'json'
 # story creation for japanese questions and answers
 puts 'Creating Japanese (N3) questions..'
 
-file_path = './jlpt_n3_questions.json'
+file_path = Rails.root.join('db', 'seeds', 'jlpt_n3_questions.json')
 questions_data = JSON.parse(File.read(file_path))
 
 questions_data.each_with_index do |q_data, index|
@@ -19,12 +19,27 @@ puts "Created #{questions_array.length} N3 questions!"
 
 # story creation for map levels
 puts 'Creating stories...'
-story_file_path = './map_stories.json'
+story_file_path = Rails.root.join('db', 'seeds', 'story_levels.json')
 stories_data = JSON.parse(File.read(story_file_path))
 
 stories_data.each do |story|
   MapLevel.create(
-    story_content: story["story_content"]
+    story_content: story["story_content"],
+    map_image: story["map_image"],
+    map_node: story["map_node"]
   )
 end
 puts "Created #{stories_data.length} Stories for your map levels!"
+
+# enemies seeds
+puts 'Generating enemies'
+enemy_file_path = Rails.roots.join('db', 'seeds', 'enemies.json')
+enemies_data = JSON.parse(File.read(enemy_file_path))
+enemies_data.each do |enemy|
+  Enemey.create(
+    name: enemy['name'],
+    hitpoints: enemy['hitpoints'],
+    sprite: story['sprite']
+  )
+end
+puts 'Generated enemies!'

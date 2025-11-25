@@ -1,0 +1,27 @@
+[
+  {
+    "name": "キノコさん",
+    "hitpoints": 30,
+    "sprite": "Mushroom.png"
+  },
+  {
+    "name": "スケルトン",
+    "hitpoints": 40,
+    "sprite": "skeleton.png"
+  },
+  {
+    "name": "侍",
+    "hitpoints": 60,
+    "sprite": "samurai.png"
+  },
+  {
+    "name": "ヴァンパイア",
+    "hitpoints": 70,
+    "sprite": "vampire.png"
+  },
+  {
+    "name": "鬼の王",
+    "hitpoints": 100,
+    "sprite": "demon_boss.png"
+  }
+]
