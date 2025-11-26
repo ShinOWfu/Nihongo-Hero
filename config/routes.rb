@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "map", to: "story_levels#map", as: :map
 
+  # for selecting attack type (question type) when in fight. This is hooked up to the _menu_contents.html.erb buttons.
+
+
   resources :fights, only: [:show, :create, :update] do
     resources :fight_questions, only: [:create, :index]
   end
