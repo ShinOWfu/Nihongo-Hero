@@ -9,8 +9,8 @@ class FightsController < ApplicationController
     if @fight.save
       redirect_to fight_path(@fight)
     else
-    flash[:alert] = @fight.errors.full_messages.join(", ")
-    redirect_to map_path
+      flash[:alert] = @fight.errors.full_messages.join(", ")
+      redirect_to map_path
     end
   end
 
