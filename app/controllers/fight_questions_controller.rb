@@ -1,19 +1,15 @@
 class FightQuestionsController < ApplicationController
-
-  def index
-    @fight = Fight.find(params[:fight_id])
-    @fight_questions = @fight.fight_questions
-  end
-
   def create
     @fight = Fight.find(params[:fight_id])
-    @fight_question = FightQuestion.new(fight_question_params)
-    #Assign a random question to the @fight_question
-    @fight_question.question = Question.all.sample
-        # @question = Question
-        #             .where(question_type: params[:question_type])
-        #             .where.not(id: used_ids)
-        #             .sample
+    question_type = params[:question_type]
+
+    if question_type == "random"
+      @question = Question.all.sample
+    else
+      @question = Question.where(question_type: question_type).all.sample
+    end
+
+    @fight_question = FightQuestion.new(fight: @fight, question: @question)
 
     if @fight_question.save
       redirect_to fight_fight_question_path(@fight, @fight_question)
@@ -60,13 +56,5 @@ class FightQuestionsController < ApplicationController
 
   def fight_question_params
     params.require(:fight_question).permit(:selected_index)
-  end
-
-  def create
-    #Create a question when picking one of the attack options on the fight screen. Get the fight from the params
-    @fight_question = FightQuestion.new(fight: Fight.find(params[:fight_id]))
-    #Assign a random question to the @fight_question
-    used_question_ids = FightQuestion.pluck(:question_id).uniq
-    @fight_question = Question.where.not(id: used_question_ids).where(type: params[:type]).sample
   end
 end

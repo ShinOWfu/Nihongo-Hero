@@ -10,9 +10,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "map", to: "story_levels#map", as: :map
-  # get "results", to: "fights#results", as: :fight_results   <---- Oliver: Do we need this?
+
+  # for selecting attack type (question type) when in fight. This is hooked up to the _menu_contents.html.erb buttons.
+
+
   resources :fights, only: [:show, :create, :update] do
-    resources :fight_questions, only: [:create, :index, :show]
+    resources :fight_questions, only: [:show, :create, :index]
   end
   resources :fight_questions, only: [:update]
   resources :users, only: [:update]
