@@ -33,10 +33,10 @@ class FightQuestionsController < ApplicationController
 
     #Check answer and do calculate damage
     if @fight_question.selected_index.to_i == @question.correct_index
-      @fight.enemy_hitpoints -= 100
+      @fight.enemy_hitpoints -= 50
       flash[:notice] = "正解！ 敵に10ダメージ！"
     else
-      @fight.player_hitpoints -= 100
+      @fight.player_hitpoints -= 50
       flash[:alert] = "不正解！ ダメージを受けた！"
     end
 
@@ -55,6 +55,7 @@ class FightQuestionsController < ApplicationController
     @fight.save
   end
 
+  # Implement xp earning calculation & level up the user
   def index
     @fight = Fight.find(params[:fight_id])
     @user = current_user
