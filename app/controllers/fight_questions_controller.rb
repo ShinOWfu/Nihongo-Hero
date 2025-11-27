@@ -2,11 +2,12 @@ class FightQuestionsController < ApplicationController
   def create
     @fight = Fight.find(params[:fight_id])
     question_type = params[:question_type]
+    used_question_ids = FightQuestion.pluck(:question_id).uniq
 
     if question_type == "random"
-      @question = Question.all.sample
+      @question = Question.all.where.not(id: used_question_ids).sample
     else
-      @question = Question.where(question_type: question_type).all.sample
+      @question = Question.where(question_type: question_type).where.not(id: used_question_ids).all.sample
     end
 
     @fight_question = FightQuestion.new(fight: @fight, question: @question)
@@ -33,11 +34,13 @@ class FightQuestionsController < ApplicationController
 
     #Check answer and do calculate damage
     if @fight_question.selected_index.to_i == @question.correct_index
-      @fight.enemy_hitpoints -= 50
-      flash[:notice] = "正解！ 敵に10ダメージ！"
+      @damage_dealt = 5
+      @fight.enemy_hitpoints -= @damage_dealt
+      flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
     else
-      @fight.player_hitpoints -= 50
-      flash[:alert] = "不正解！ ダメージを受けた！"
+      @damage_received = 50
+      @fight.player_hitpoints -= @damage_received
+      flash[:alert] = "不正解！ #{@damage_received}ダメージを受けた！"
     end
 
     #Fight over?
