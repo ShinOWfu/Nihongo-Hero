@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "map", to: "story_level#map", as: :map
   resources :fights, only: [:show, :create, :update] do
-    resources :fight_questions, only: [:create, :index]
+    resources :fight_questions, only: [:create, :index, :show]
   end
   resources :fight_questions, only: [:update]
   resources :users, only: [:update]

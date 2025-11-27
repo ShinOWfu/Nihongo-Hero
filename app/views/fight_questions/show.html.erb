@@ -1,0 +1,18 @@
+<div class="question-container">
+  <h2><%= @question.question %></h2>
+  <div class="answers">
+
+
+    <% @question.answers.each_with_index do |a,index| %>
+      <%= snt_question do |f| %>
+        <input type="hidden" name="fight_question[selected_index]" value="<%= index %>">
+        <button> <%= a %></button>
+      <% end %>
+
+    <% end %>
+  </div>
+
+
+
+
+</div>

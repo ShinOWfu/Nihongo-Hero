@@ -1,5 +1,11 @@
 require 'json'
 
+Question.destroy_all
+Fight.destroy_all
+StoryLevel.destroy_all
+Enemy.destroy_all
+
+
 # story creation for japanese questions and answers
 puts 'Creating Japanese (N3) questions..'
 
@@ -43,3 +49,6 @@ enemies_data.each do |enemy|
   )
 end
 puts 'Generated enemies!'
+
+fight = Fight.create(enemy: Enemy.last, story_level: StoryLevel.last, user: User.last, enemy_hitpoints: 100, player_hitpoints: 100 )
+fight_question = FightQuestion.create(fight: fight, question: Question.last)

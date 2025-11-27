@@ -1,0 +1,7 @@
+<% if @fight_questions.present? %>
+  <% @fight_questions.each do |q| %>
+    <%= q.question.question %><br>
+  <% end %>
+<% else %>
+  まだ質問がありません。
+<% end %>
