@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
 
   resources :fights, only: [:show, :create, :update] do
-    resources :fight_questions, only: [:create, :index]
+    resources :fight_questions, only: [:show, :create, :index]
   end
   resources :fight_questions, only: [:update]
   resources :users, only: [:update]
