@@ -58,5 +58,149 @@
     "question": "日本に来て3年____、だいぶ慣れてきました。",
     "answers": ["たつと", "たって", "たった", "たてば"],
     "correct_index": 1
+  },
+  {
+    "type": "kanji",
+    "question": "彼は会社を____して、新しい仕事を始めた。",
+    "answers": ["辞め", "止め", "冷め", "決め"],
+    "correct_index": 0
+  },
+  {
+    "type": "kanji",
+    "question": "この薬を飲むと、頭痛が____します。",
+    "answers": ["柔らぐ", "和らぐ", "緩らぐ", "軟らぐ"],
+    "correct_index": 1
+  },
+  {
+    "type": "kanji",
+    "question": "彼女の説明は____で、よく理解できなかった。",
+    "answers": ["曖昧", "愛妹", "哀昧", "愛昧"],
+    "correct_index": 0
+  },
+  {
+    "type": "kanji",
+    "question": "この問題を____するには時間がかかる。",
+    "answers": ["回決", "解決", "会決", "快決"],
+    "correct_index": 1
+  },
+  {
+    "type": "kanji",
+    "question": "電車が____して、会議に遅れてしまった。",
+    "answers": [ "遅炎", "痴延", "遅延", "知延"],
+    "correct_index": 2
+  },
+  {
+    "type": "kanji",
+    "question": "彼は____な性格で、みんなに好かれている。",
+    "answers": ["素直", "素植", "素殖", "素職"],
+    "correct_index": 0
+  },
+  {
+    "type": "kanji",
+    "question": "この地域は自然が____されている。",
+    "answers": ["保前", "補全", "補前", "保全"],
+    "correct_index": 3
+  },
+  {
+    "type": "kanji",
+    "question": "新しい技術の____が期待されている。",
+    "answers": ["開発", "会発", "解発", "快発"],
+    "correct_index": 0
+  },
+  {
+    "type": "words",
+    "question": "彼は毎朝ジョギングを____います。",
+    "answers": ["やって", "して", "行って", "走って"],
+    "correct_index": 1
+  },
+  {
+    "type": "words",
+    "question": "この料理は____が強くて食べられない。",
+    "answers": ["甘み", "辛み", "苦み", "酸み"],
+    "correct_index": 1
+  },
+  {
+    "type": "words",
+    "question": "彼女は____が良くて、何でもすぐに覚える。",
+    "answers": ["頭脳", "記憶力", "理解力", "集中力"],
+    "correct_index": 1
+  },
+  {
+    "type": "words",
+    "question": "この本は____が難しくて読みにくい。",
+    "answers": ["文章", "内容", "表現", "漢字"],
+    "correct_index": 2
+  },
+  {
+    "type": "words",
+    "question": "彼は____に合格して、大学生になった。",
+    "answers": ["テスト", "試合", "検査", "試験"],
+    "correct_index": 3
+  },
+  {
+    "type": "words",
+    "question": "この問題は____が必要だ。",
+    "answers": ["時間", "努力", "工夫", "根気"],
+    "correct_index": 2
+  },
+  {
+    "type": "words",
+    "question": "彼女の____を聞いて、私も頑張ろうと思った。",
+    "answers": ["意見", "感想", "経験", "体験"],
+    "correct_index": 3
+  },
+  {
+    "type": "words",
+    "question": "この仕事は____がいいので人気がある。",
+    "answers": ["給料", "時間", "待遇", "環境"],
+    "correct_index": 2
+  },
+  {
+    "type": "words",
+    "question": "彼は____な人で、いつも冷静だ。",
+    "answers": ["静か", "真面目", "落ち着いた", "優しい"],
+    "correct_index": 2
+  },
+  {
+    "type": "words",
+    "question": "この地域は____が多くて住みやすい。",
+    "answers": ["自然", "店", "人", "建物"],
+    "correct_index": 0
+  },
+  {
+    "type": "words",
+    "question": "彼女は____を大切にする人だ。",
+    "answers": ["お金", "時間", "約束", "仕事"],
+    "correct_index": 2
+  },
+  {
+    "type": "words",
+    "question": "この映画は____が素晴らしかった。",
+    "answers": ["話", "内容", "演技", "音楽"],
+    "correct_index": 2
+  },
+  {
+    "type": "words",
+    "question": "彼は____を活かして新しい仕事を始めた。",
+    "answers": ["能力", "才能", "経験", "知識"],
+    "correct_index": 1
+  },
+  {
+    "type": "words",
+    "question": "この店は____が豊富で選びやすい。",
+    "answers": ["商品", "料理", "品揃え", "メニュー"],
+    "correct_index": 2
+  },
+  {
+    "type": "words",
+    "question": "彼女の____のおかげで、プロジェクトは成功した。",
+    "answers": ["頑張り", "協力", "努力", "助け"],
+    "correct_index": 2
+  },
+  {
+    "type": "grammar",
+    "question": "ゲリーさんのパンツは何色ですか？😍",
+    "answers": ["ピンク", "スティンキー", "しろい", "緑"],
+    "correct_index": 1
   }
 ]
