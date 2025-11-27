@@ -1,3 +1,112 @@
-<% @fight_questions.each do |q| %>
-  <%= q.question %>
-<% end %>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <!-- Victory/Defeat Banner -->
+          <div class="bg-light rounded p-4 text-center mb-4">
+            <h1 class="display-5 mb-0">
+              <%= @fight.status == 'completed' ? '勝った！' : '負けた...' %>
+            </h1>
+          </div>
+          <!-- Player Info -->
+          <div class="d-flex align-items-center mb-4">
+            <div class="rounded-circle bg-secondary" style="width: 50px; height: 50px; min-width: 50px;"></div>
+            <div class="flex-grow-1 ms-3">
+              <div class="fw-bold mb-2"><%= @user.email.split('@').first %></div>
+              <div class="position-relative bg-light rounded-pill" style="height: 20px;">
+                <% xp_in_current_level = @user.experience_points % 100 %>
+                <div class="position-absolute top-0 start-0 h-100 rounded-pill" style="width: <%= xp_in_current_level %>%; background: linear-gradient(to right, #4a4a4a, #8a8a8a);"></div>
+                <span class="position-absolute top-50 end-0 translate-middle-y pe-2 small fw-bold">
+                  Level <%= @user.level %>
+                </span>
+              </div>
+              <div class="text-end small text-muted mt-1">
+                +<%= @xp_gained %>XP
+              </div>
+            </div>
+          </div>
+          <!-- Stats -->
+          <div class="mb-4">
+            <div class="d-flex align-items-center mb-2">
+              <span class="me-3" style="min-width: 50px;">正解</span>
+              <div class="flex-grow-1 bg-light rounded-pill position-relative" style="height: 20px;">
+                <div class="position-absolute top-0 start-0 h-100 rounded-pill" style="width: <%= @correct_percentage %>%; background: linear-gradient(to right, #4a4a4a, #8a8a8a);"></div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="me-3" style="min-width: 50px;">新線</span>
+              <div class="flex-grow-1 bg-light rounded-pill position-relative" style="height: 20px;">
+                <div class="position-absolute top-0 start-0 h-100 rounded-pill" style="width: 60%; background: linear-gradient(to right, #6a6a6a, #aaa);"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Question History -->
+          <div class="bg-light rounded p-3 mb-4">
+            <h3 class="h5 mb-3">質問歴史</h3>
+            <div class="border-top pt-3">
+              <% @fight_questions.each_with_index do |fq, index| %>
+                <% question = fq.question %>
+                <% is_correct = fq.selected_index == question.correct_index %>
+                <div class="mb-2">
+                  <!-- Question Header -->
+                  <div class="d-flex align-items-center py-3 <%= 'border-bottom' unless index == @fight_questions.length - 1 %>"
+                       <%= "style='cursor: pointer;' data-bs-toggle='collapse' data-bs-target='#question-#{fq.id}'" unless is_correct %>>
+                    <!-- Status Icon (X or ✓) -->
+                    <div class="me-3 fs-5 <%= is_correct ? 'text-success' : 'text-danger' %>">
+                      <%= is_correct ? '✓' : '✗' %>
+                    </div>
+                    <!-- Question Text -->
+                    <div class="flex-grow-1">
+                      <div class="mb-1">
+                        <%= truncate(question.question, length: 30) %>
+                      </div>
+                      <div class="small text-muted">質問 <%= index + 1 %></div>
+                    </div>
+                    <!-- Dropdown Arrow (only for wrong answers) -->
+                    <% unless is_correct %>
+                      <div>▼</div>
+                    <% end %>
+                  </div>
+                  <!-- Expanded Content (Only for wrong answers) -->
+                  <% unless is_correct %>
+                    <div class="collapse" id="question-<%= fq.id %>">
+                      <div class="card card-body bg-white mt-2">
+                        <!-- Full Question -->
+                        <div class="mb-3">
+                          <strong>質問:</strong>
+                          <p class="mb-2"><%= question.question %></p>
+                        </div>
+                        <!-- Answer Options -->
+                        <div class="mb-2">
+                          <% question.answers.each_with_index do |answer, answer_index| %>
+                            <div class="p-2 mb-2 rounded
+                                        <%= 'bg-success bg-opacity-25 border border-success' if answer_index == question.correct_index %>
+                                        <%= 'bg-danger bg-opacity-25 border border-danger' if answer_index == fq.selected_index && answer_index != question.correct_index %>
+                                        <%= 'bg-light' if answer_index != question.correct_index && answer_index != fq.selected_index %>">
+                              <strong><%= answer_index + 1 %>.</strong> <%= answer %>
+                              <% if answer_index == fq.selected_index %>
+                                <span class="badge bg-danger ms-2">あなたの回答</span>
+                              <% end %>
+                              <% if answer_index == question.correct_index %>
+                                <span class="badge bg-success ms-2">正解</span>
+                              <% end %>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <!-- Continue Button -->
+          <%= link_to map_path, class: 'btn btn-dark w-100 py-3 fw-bold' do %>
+            続き
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

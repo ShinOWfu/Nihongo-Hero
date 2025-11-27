@@ -6,8 +6,13 @@ class FightsController < ApplicationController
 
   def create
     #Oliver: Update the story level to the next higher level. If this is the first fight, start at 1
-    @story_level = 1
-    @story_level = current_user.fights.last.story_level_id + 1 if current_user.fights.last
+    if current_user.fights.count == 0
+      @story_level = 1
+    elsif current_user.fights.last.status == 'completed'
+      @story_level = current_user.fights.last.story_level_id + 1
+    else
+      @story_level = current_user.fights.last.story_level_id
+    end
 
     enemy = Enemy.all.sample
     @fight = Fight.new(
