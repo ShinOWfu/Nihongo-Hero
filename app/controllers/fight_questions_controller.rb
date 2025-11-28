@@ -66,17 +66,31 @@ class FightQuestionsController < ApplicationController
     # Get all fight questions for this fight
     @fight_questions = @fight.fight_questions.all
 
-    # Calculate stats
-    # correct_count = @fight_questions.count { |fq| fq.selected_index == fq.question.correct_index }
-    # @correct_percentage = (@fight_questions.count > 0) ? (correct_count.to_f / @fight_questions.count * 100).round : 0
-
-    # Determine XP player won based on status
-    # @xp_gained = @fight.status == 'completed' ? 50 : 10
-
-    # Update user's experience points and level
-
+    #Update level and experience points
+    experience_points
+    #Calculate the percentage of correct questions
+    @percentage_correct = percentage_correct
   end
 
+  def experience_points
+    @current_exp = @user.experience_points
+    # Allocate exp points after the fight, based on enemy hp. Maybe change this later to make more sophisticated
+    @fight.status == "complete" ? @exp_gained = @fight.enemy.hitpoints : @exp_gained = 0
+    # Check for player level up. Assuming each level requires 100 exp. Make better later
+    if @current_exp + @exp_gained / 100 != current_user.level
+      @level_up = true
+      @current_exp = @current_exp + @exp_gained
+      current_user.level = @current_exp / 100
+    else
+      @level_up = false
+    end
+  end
+
+  def percentage_correct
+    all_count = @fight.fight_questions.all.count
+    correct_count = @fight.fight_questions.where(:selected_index == @question.correct_index).count
+    return percentage_correct = all_count/correct_count
+  end
   private
 
   def fight_question_params
