@@ -7,10 +7,10 @@
            style="background: rgba(10, 12, 20, 0.92) url('<%= asset_path(@current_level.map_image) %>') center/cover no-repeat;
                   border: 1px solid #0e2757ff;">
         <div class="card-body text-center p-5" style="background: rgba(0,0,0,0.45); backdrop-filter: blur(1px); border-radius: 10px;">
-          <h1 class="display-5 fw-bold text-white mb-3" style="text-shadow: 0 2px 8px black;">
+          <h1 class="display-5 fw-bold text-white mb-0" style="text-shadow: 0 2px 8px black;">
             Your Journey
           </h1>
-          <h4 class="fw-bold mb-2" style="color: #f0c31eff;">
+          <h4 class="mb-5" style="color: #f0c31eff;">
             Level <%= @accessible_level_id %>
           </h4>
           <p class="text-white lead mb-4 px-4" style="text-shadow: 0 2px 6px black;">
@@ -24,16 +24,16 @@
             %>
             <div class="mb-3">
               <div class="p-3 rounded border text-center" style="
-                <%= 'background: #555657ff; color: white; text-shadow: 0 2px 5px black; font-size: 1.3rem;' if is_completed %>
-                <%= 'background: #f0c529ff; border: 2px solid #f0c31eff;' if is_current %>
-                <%= 'background: #2c2b2bff; color: #bebebeff; border: 1px solid #696868ff; text-shadow: 0 2px 5px black; font-size: 1.3rem;' if is_locked %>
+                <%= 'background: #1f1e1eff; color: white; text-shadow: 0 2px 5px black; font-size: 1.3rem;' if is_completed %>
+                <%= 'background: #142243ff; border: 2px solid #f0c31eff;' if is_current %>
+                <%= 'background: #555454ff; color: #bebebeff; text-shadow: 0 2px 5px black; font-size: 1.3rem;' if is_locked %>
               ">
                 <% if is_completed %>
-                  <p class="mb-1">Level <%= level.id %> - Completed</p>
+                  <p class="mb-1">✅ Level <%= level.id %> - Completed</p>
                 <% elsif is_current %>
                   <%= button_to fights_path, method: :post,
                       class: "btn btn-lg w-100 fw-bold py-2",
-                      style: "background: #91908dff; color: #ffffffff; border: 1px solid #000000ff; text-shadow: 0 2px 8px black; box-shadow: 0 6px 10px rgba(0,0,0,0.5); font-size: 1.4rem !important; transition: all 0.3s ease;" do %>
+                      style: "background: #b8b8b7ff; color: #ffffffff; border: 3px solid #f7c821ff; transition: all 0.5s ease; text-shadow: 0 3px 0 #666666, 0 5px 8px black; box-shadow: 0 8px 25px rgba(0,0,0,0.8), 0 15px 40px rgba(240, 195, 30, 0.3); font-size: 1.5rem !important; border-bottom: 9px solid #dfc119ff" do %>
                     ▶  Level <%= level.id %>
                   <% end %>
                 <% else %>
