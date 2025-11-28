@@ -7,10 +7,6 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#scene {
-  height: 50vh;
-}
-
 #menu {
   height: 50vh;
   background-color: $gray-800;
@@ -50,9 +46,14 @@
 #scene {
   height: 50vh;
   display: flex;
-  flex-direction: row; // Side by side
-  gap: 2rem; // Space between the two columns
+  flex-direction: row;
+  gap: 2rem;
   padding: 1rem;
+
+  background-image: url('backgrounds/origbig.png');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
 }
 
 .character-container {
@@ -65,12 +66,24 @@
 }
 
 .sprite-container {
-  // Style your sprite here
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .player-sprite {
+    height: 60vh; // 35% of viewport height
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .enemy-sprite {
+    height: 15vh; // 20% of viewport height
+    max-width: 100%;
+    object-fit: contain;
+  }
 }
+
 
 .healthbar-container {
   // Style your healthbar here
