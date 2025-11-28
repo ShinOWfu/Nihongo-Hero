@@ -6,7 +6,7 @@ div for the text box: it takes up the bottom 1/3 and holds a transparent card wi
 
 <div class="container-fluid vh-100 d-flex flex-column p-0">
 
-  <div id="scene" class="flex-fill d-flex flex-column justify-content-center align-items-center">
+  <div id="scene" class="d-flex flex-column justify-content-center align-items-center">
     <h1>scene</h1>
 
     <div id="player">
@@ -29,10 +29,8 @@ div for the text box: it takes up the bottom 1/3 and holds a transparent card wi
 
   <%# middle of the page %>
 
-  <div id="menu" class="flex-fill d-flex flex-column justify-content-center align-items-center bg-dark">
-    <div id="menu-contents">
-      <%= render 'menu_contents' %>
-    </div>
+  <div id="menu" class="menu d-flex flex-column">
+    <%= render 'menu_contents' %>
   </div>
 
 </div>
