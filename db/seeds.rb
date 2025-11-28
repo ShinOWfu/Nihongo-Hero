@@ -4,7 +4,7 @@ Question.destroy_all
 Fight.destroy_all
 StoryLevel.destroy_all
 Enemy.destroy_all
-
+User.destroy_all
 
 # story creation for japanese questions and answers
 puts 'Creating Japanese (N3) questions..'

@@ -2,7 +2,7 @@
   {
     "name": "キノコさん",
     "hitpoints": 30,
-    "sprite": "Mushroom.png"
+    "sprite": "mushroom.png"
   },
   {
     "name": "スケルトン",
