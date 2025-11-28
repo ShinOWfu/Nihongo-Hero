@@ -49,6 +49,7 @@
   flex-direction: row;
   gap: 2rem;
   padding: 1rem;
+  position: relative;
 
   background-image: url('backgrounds/origbig.png');
   background-size: cover;
@@ -68,17 +69,21 @@
 .sprite-container {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding-bottom: 1rem;
 
   .player-sprite {
-    height: 60vh; // 35% of viewport height
+    height: 50vh;
+    max-height: 100%;
     max-width: 100%;
     object-fit: contain;
+    bottom: 1rem;
   }
 
   .enemy-sprite {
-    height: 15vh; // 20% of viewport height
+    height: 25vh;
+    max-height: 100%;
     max-width: 100%;
     object-fit: contain;
   }
@@ -90,7 +95,21 @@
   width: 100%;
 }
 
-// Textbox in fight -- should be dark but transparent
-// .textbox{
+.textbox-container {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  height: 33%;
 
-// }
+  background-color: rgba($gray-900, 0.4);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: $gray-100;
+
+  // text alignment settings
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

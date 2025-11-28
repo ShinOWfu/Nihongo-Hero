@@ -2,42 +2,36 @@
 
 <div class="container-fluid vh-100 d-flex flex-column p-0">
 
-  <div id="scene" class="flex-fill d-flex flex-column justify-content-center align-items-center">
-    <h1>scene</h1>
-
-    <div id="player">
-      <div id="player-hitpoints">
-
+  <div id="scene" class="d-flex">
+    <!-- Left side: Player -->
+    <div class="character-container">
+      <div class="sprite-container">
+        <%= render 'fights/player_sprite' %>
+      </div>
+      <div class="healthbar-container">
+        <%= render 'fights/player_hitpoints' %>
       </div>
     </div>
 
-    <div id="enemy">
-      <div id="enemy-hitpoints">
-
+    <!-- Right side: Enemy -->
+    <div class="character-container">
+      <div class="sprite-container">
+        <%= render 'fights/enemy_sprite' %>
+      </div>
+      <div class="healthbar-container">
+        <%= render 'fights/enemy_hitpoints' %>
       </div>
     </div>
 
-    <div id="textbox">
-      <h2><%= @question.question %></h2>
+    <div class="textbox-container">
+      <%= render 'question' %>
     </div>
-
   </div>
 
   <%# middle of the page %>
 
-  <div id="menu" class="flex-fill d-flex flex-column justify-content-center align-items-center bg-dark">
-    <div id="menu-contents">
-      <div class="question-container">
-        <div id="menu-buttons" class="answers w-75 bg-dark">
-          <% @question.answers.each_with_index do |answer,index| %>
-            <%= simple_form_for @fight_question do |f| %>
-              <input type="hidden" name="fight_question[selected_index]" value="<%= index %>">
-              <button class="btn"> <%= answer %></button>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+  <div id="menu" class="menu d-flex flex-column">
+    <%= render 'fight_questions' %>
   </div>
 
 </div>
