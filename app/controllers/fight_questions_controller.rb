@@ -70,6 +70,7 @@ class FightQuestionsController < ApplicationController
     experience_points
     #Calculate the percentage of correct questions
     @percentage_correct = percentage_correct
+    raise
   end
 
   def experience_points
