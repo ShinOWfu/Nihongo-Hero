@@ -58,7 +58,7 @@ class FightQuestionsController < ApplicationController
     @fight.save
   end
 
-  # Implement xp earning calculation & level up the user
+  #This needs to be changed to a custom results function since we need the index function to show all questions
   def index
     @fight = Fight.find(params[:fight_id])
     @user = current_user
@@ -80,7 +80,7 @@ class FightQuestionsController < ApplicationController
     if @current_exp + @exp_gained / 100 != current_user.level
       @level_up = true
       @current_exp = @current_exp + @exp_gained
-      current_user.level = @current_exp / 100
+      current_user.level = @current_exp / 100 if @current_exp > 100
     else
       @level_up = false
     end
@@ -88,8 +88,9 @@ class FightQuestionsController < ApplicationController
 
   def percentage_correct
     all_count = @fight.fight_questions.all.count
-    correct_count = @fight.fight_questions.where(:selected_index == @question.correct_index).count
-    return percentage_correct = all_count/correct_count
+    # @question = @fight.fight_questions
+    correct_count = @fight.fight_questions.joins(:question).where('fight_questions.selected_index = questions.correct_index').count
+    return percentage_correct = correct_count.to_f/all_count * 100
   end
   private
 
