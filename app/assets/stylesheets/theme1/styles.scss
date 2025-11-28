@@ -1,10 +1,11 @@
 // Many of these are imported directly from AdventureMaker
 
-// Textbox in fight -- should be dark but transparent
-.textbox{
-
+// If we need a card
+.card {
+  background-color: $gray-800;
+  border: 1px solid $gray-700;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 
 #scene {
   height: 50vh;
@@ -46,9 +47,37 @@
   }
 }
 
-// If we need a card
-.card {
-  background-color: $gray-800;
-  border: 1px solid $gray-700;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+#scene {
+  height: 50vh;
+  display: flex;
+  flex-direction: row; // Side by side
+  gap: 2rem; // Space between the two columns
+  padding: 1rem;
 }
+
+.character-container {
+  flex: 1; // Each takes 50% width
+  display: flex;
+  flex-direction: column; // Sprite on top, healthbar below
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sprite-container {
+  // Style your sprite here
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.healthbar-container {
+  // Style your healthbar here
+  width: 100%;
+}
+
+// Textbox in fight -- should be dark but transparent
+// .textbox{
+
+// }
