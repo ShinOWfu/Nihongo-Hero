@@ -1,31 +1,47 @@
 <!-- app/views/story_levels/map.html.erb -->
-<div class="container mt-3">
+<div class="container-fluid mt-2">
   <div class="row justify-content-center">
-    <div class="col-md-4">
-      <div class="card shadow">
-        <div class="card-body text-center">
-          <h1 class="card-title mb-3">Your Journey</h1>
-          <div class="d-flex flex-column gap-3">
-            <!-- Reversed for bottom to top display? Might adjust -->
-            <% @story_levels.reverse_each do |level| %>
-              <%
-                is_completed = @completed_level_ids.include?(level.id)
-                is_current = level.id == @accessible_level_id
-                is_locked = level.id > @accessible_level_id
-              %>
-              <div class="p-1 border rounded <%= 'bg-success text-white' if is_completed %> <%= 'bg-danger text-white' if is_current %> <%= 'bg-secondary text-white' if is_locked %>">
+    <div class="col-md-5">
+      <!-- Main card -->
+      <div class="card shadow-lg border-0"
+           style="background: rgba(10, 12, 20, 0.92) url('<%= asset_path(@current_level.map_image) %>') center/cover no-repeat;
+                  border: 1px solid #0e2757ff;">
+        <div class="card-body text-center p-5" style="background: rgba(0,0,0,0.45); backdrop-filter: blur(1px); border-radius: 10px;">
+          <h1 class="display-5 fw-bold text-white mb-0" style="text-shadow: 0 2px 8px black;">
+            Your Journey
+          </h1>
+          <h4 class="mb-5" style="color: #f0c31eff;">
+            Level <%= @accessible_level_id %>
+          </h4>
+          <p class="text-white lead mb-4 px-4" style="text-shadow: 0 2px 6px black;">
+            <%= @current_level&.story_content %>
+          </p>
+          <% @story_levels.reverse_each do |level| %>
+            <%
+              is_completed = @completed_level_ids.include?(level.id)
+              is_current   = level.id == @accessible_level_id
+              is_locked    = level.id > @accessible_level_id
+            %>
+            <div class="mb-3">
+              <div class="p-3 rounded border text-center" style="
+                <%= 'background: #1f1e1eff; color: white; text-shadow: 0 2px 5px black; font-size: 1.3rem;' if is_completed %>
+                <%= 'background: #142243ff; border: 2px solid #f0c31eff;' if is_current %>
+                <%= 'background: #555454ff; color: #bebebeff; text-shadow: 0 2px 5px black; font-size: 1.3rem;' if is_locked %>
+              ">
                 <% if is_completed %>
-                  <p class="mb-0">✓ Level <%= level.id %> - Completed</p>
+                  <p class="mb-1">✅ Level <%= level.id %> - Completed</p>
                 <% elsif is_current %>
-                  <%= button_to fights_path, method: :post, class: "btn btn-light btn-lg w-100" do %>
-                    <strong>▶ Start Level <%= level.id %></strong>
+                  <%= button_to fights_path, method: :post,
+                      class: "btn btn-lg w-100 fw-bold py-2",
+                      style: "background: #b8b8b7ff; color: #ffffffff; border: 3px solid #f7c821ff; transition: all 0.5s ease; text-shadow: 0 3px 0 #666666, 0 5px 8px black; box-shadow: 0 8px 25px rgba(0,0,0,0.8), 0 15px 40px rgba(240, 195, 30, 0.3); font-size: 1.5rem !important; border-bottom: 9px solid #dfc119ff" do %>
+                    ▶  Level <%= level.id %>
                   <% end %>
                 <% else %>
-                  <p class="mb-0">🔒 Level <%= level.id %> - Locked</p>
+                  <p class="mb-0">🔒 Level <%= level.id %></p>
                 <% end %>
               </div>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

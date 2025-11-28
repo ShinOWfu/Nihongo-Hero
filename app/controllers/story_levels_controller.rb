@@ -11,5 +11,8 @@ class StoryLevelsController < ApplicationController
     else
       @accessible_level_id = 1
     end
+
+    # Get instance of current level's story
+    @current_level = StoryLevel.find_by(id: @accessible_level_id)
   end
 end
