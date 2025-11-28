@@ -25,19 +25,19 @@
                 </span>
               </div>
               <div class="text-end small text-muted mt-1">
-                +<%= @exp_gained %>XP
+                You gained +<%= @exp_gained %>XP
               </div>
             </div>
           </div>
           <!-- Stats -->
           <div class="mb-4">
             <div class="d-flex align-items-center justify-content-center mb-2">
-              <span class="me-3" style="min-width: 50px;">問題正解率: <%= @percentage_correct.to_i %>%</span>
+              <span class="me-3 fs-4" style="min-width: 50px;">問題正解率: <%= @percentage_correct.to_i %>%</span>
             </div>
           </div>
         </div>
         <!-- Question History -->
-        <div class="bg-light rounded p-3 mb-4">
+        <div class="bg-light rounded p-3 mb-4 text-dark">
           <h3 class="h5 mb-3">質問歴史</h3>
           <div class="border-top pt-3">
             <% @fight_questions.each_with_index do |fq, index| %>
@@ -97,7 +97,7 @@
           </div>
         </div>
         <!-- Continue Button -->
-        <%= link_to map_path, class: 'btn btn-dark w-100 py-3 fw-bold' do %>
+        <%= link_to map_path, class: 'btn btn-secondary w-100 py-3 fw-bold' do %>
           続き
         <% end %>
       </div>
