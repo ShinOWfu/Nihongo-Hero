@@ -1,0 +1,54 @@
+// Many of these are imported directly from AdventureMaker
+
+// Textbox in fight -- should be dark but transparent
+.textbox{
+
+}
+
+
+#scene {
+  height: 50vh;
+}
+
+#menu {
+  height: 50vh;
+  background-color: $gray-800;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem; // Space from edges
+  gap: 0.5rem; // Space between buttons
+
+  form {
+    flex: 1;
+    display: flex;
+  }
+
+}
+
+.btn-primary {
+  background-color: $gray-700;
+  border-color: $gray-500;
+  color: $gray-100;
+  width: 100%;
+
+  flex: 1; // Makes buttons grow to fill available space equally
+
+  font-size: 1.25rem;
+  padding: 1rem 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: $gray-600;
+    border-color: $gray-500;
+  }
+}
+
+// If we need a card
+.card {
+  background-color: $gray-800;
+  border: 1px solid $gray-700;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

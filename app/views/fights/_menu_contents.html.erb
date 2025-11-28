@@ -1,7 +1,4 @@
-
-<div id="menu-buttons" class="w-75 bg-dark">
-  <%= button_to "戦う", fight_fight_questions_path(@fight), params: { question_type: "random" }, data: { turbo_method: :post }, class: "btn" %>
-  <%= button_to "漢字マジック", fight_fight_questions_path(@fight), params: { question_type: "kanji" }, method: :post, class: "btn" %>
-  <%= button_to "単語マホウ", fight_fight_questions_path(@fight), params: { question_type: "words" }, method: :post, class: "btn" %>
-  <%= button_to "文法シュリケン", fight_fight_questions_path(@fight), params: { question_type: "grammar" }, method: :post, class: "btn" %>
-</div>
+<%= button_to "戦う", fight_fight_questions_path(@fight), params: { question_type: "random" }, data: { turbo_method: :post }, class: "btn btn-primary" %>
+<%= button_to "漢字マジック", fight_fight_questions_path(@fight), params: { question_type: "kanji" }, method: :post, class: "btn btn-primary" %>
+<%= button_to "単語マホウ", fight_fight_questions_path(@fight), params: { question_type: "words" }, method: :post, class: "btn btn-primary" %>
+<%= button_to "文法シュリケン", fight_fight_questions_path(@fight), params: { question_type: "grammar" }, method: :post, class: "btn btn-primary" %>

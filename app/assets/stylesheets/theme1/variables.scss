@@ -1,0 +1,48 @@
+// Haley: all the colors and fonts are described here first *before* importing bootstrap
+
+// Grayscale palette from AdventureMaker
+$gray-100: #E8E8E8;  // Lightest (primary text)
+$gray-200: #C0C0C0;  // (secondary text)
+$gray-300: #A0A0A0;
+$gray-400: #808080;
+$gray-500: #606060;  // Middle
+$gray-600: #404040;
+$gray-700: #2A2A2A;
+$gray-800: #1A1A1A;  // Very dark gray
+$gray-900: #0A0A0A;  // Darkest (backgrounds)
+
+// Body defaults
+$body-bg: $gray-900;           // Nearly black background
+$body-color: $gray-200;        // Light gray text
+
+// Component backgrounds
+$card-bg: lighten($gray-900, 3%);  // Slightly lighter than body
+$modal-content-bg: $gray-800;
+$dropdown-bg: $gray-800;
+
+// Borders
+$border-color: $gray-800;
+
+// Links
+$link-color: $gray-100;
+$link-hover-color: $gray-300;
+
+
+// Typography
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+$font-family-monospace: 'Fira Code', monospace;
+
+$font-size-base: 1rem;
+$h1-font-size: 2.5rem;
+$h2-font-size: 2rem;
+
+// Spacing
+$spacer: 1rem;
+
+// Border Radius
+$border-radius: 0.75rem;
+$border-radius-lg: 0.75rem;
+$border-radius-sm: 0.25rem;
+
+// Import Bootstrap NOW!!! WAHOOOO
+@import 'bootstrap';

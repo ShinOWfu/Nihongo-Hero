@@ -4,7 +4,9 @@
 @import "config/bootstrap_variables";
 
 // External libraries
+@import "theme1/variables"; // variables come before bootstrap
 @import "bootstrap";
+@import "theme1/styles"; // styles come after bootstrap
 @import "font-awesome";
 
 // Your CSS partials
