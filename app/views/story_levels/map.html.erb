@@ -33,7 +33,7 @@
                 <% elsif is_current %>
                   <%= button_to fights_path, method: :post,
                       class: "btn btn-lg w-100 fw-bold py-3",
-                      style: "background: #1a2a43ff; color: #f0c31eff; border: 2px solid #f0c31eff; text-shadow: 0 2px 8px black; box-shadow: 0 6px 20px rgba(0,0,0,0.5); font-size: 1.6rem !important;" do %>
+                      style: "background: #1a2a43ff; color: #f0c31eff; border: 2px solid #f0c31eff; text-shadow: 0 2px 8px black; box-shadow: 0 6px 20px rgba(0,0,0,0.5); font-size: 1.6rem !important; transition: all 0.3s ease;" do %>
                     ▶  Level <%= level.id %>
                   <% end %>
                 <% else %>
