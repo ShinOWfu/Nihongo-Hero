@@ -26,18 +26,13 @@
     </div>
 
     <div class="level-path">
-      <!-- Finish Line at the top -->
-      <div class="finish-line">
-        <span class="finish-icon"><i class="fa-solid fa-torii-gate"></i></span>
-        <span class="finish-label">Final Battle</span>
-      </div>
-
       <!-- Reverse due to start from the bottom -->
       <% @story_levels.reverse_each do |level| %>
         <%
           is_completed = @completed_level_ids.include?(level.id)
           is_current   = level.id == @accessible_level_id
           is_locked    = level.id > @accessible_level_id
+          is_final     = level.id == 10
         %>
 
         <div class="level-row">
@@ -65,10 +60,17 @@
               </div>
             </div>
           <% else %>
-            <div class="level-node node-locked">
-              <span class="node-icon"><i class="fa-solid fa-lock"></i></span>
-              <span class="node-label"><%= level.id %></span>
-            </div>
+            <% if is_final %>
+              <div class="level-node node-locked node-final <%= 'node-final-close' if @accessible_level_id >= 7 %>">
+                <span class="node-icon"><i class="fa-solid fa-torii-gate"></i></span>
+                <span class="node-icon-lock"><i class="fa-solid fa-lock"></i></span>
+              </div>
+            <% else %>
+              <div class="level-node node-locked">
+                <span class="node-icon"><i class="fa-solid fa-lock"></i></span>
+                <span class="node-label"><%= level.id %></span>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>

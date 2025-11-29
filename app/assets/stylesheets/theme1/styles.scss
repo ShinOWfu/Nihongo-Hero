@@ -355,6 +355,69 @@
   }
 }
 
+// ===== FINAL LEVEL (Level 10) =====
+
+.node-final {
+  width: 90px;
+  height: 90px;
+  justify-content: center;
+  gap: 0;
+}
+
+.node-final .node-icon {
+  font-size: 1.6rem;
+}
+
+.node-icon-lock {
+  font-size: 0.6rem;
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.node-final .node-label {
+  font-size: 0.5rem;
+  margin-top: 3px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+// Breathing glow when close (level 7+)
+.node-final-close {
+  border: 2px dashed $accent-gold;
+  animation: final-breathe 3s ease-in-out infinite;
+
+  .node-icon {
+    color: $accent-gold;
+    opacity: 0.9;
+  }
+
+  .node-icon-lock {
+    color: $accent-gold;
+    opacity: 0.7;
+  }
+
+  .node-label {
+    color: $accent-gold;
+  }
+}
+
+@keyframes final-breathe {
+  0%, 100% {
+    box-shadow:
+      0 4px 0 $gray-800,
+      0 6px 12px rgba(0, 0, 0, 0.4),
+      0 0 15px rgba($accent-gold, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 4px 0 $gray-800,
+      0 6px 12px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba($accent-gold, 0.4);
+    transform: scale(1.05);
+  }
+}
+
 // ===== STORY BUBBLE =====
 
 .story-bubble {
