@@ -12,8 +12,8 @@
   background-color: $gray-800;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  gap: 0.5rem;
+  padding: 1rem; // Space from edges
+  gap: 0.5rem; // Space between buttons
 
   form {
     flex: 1;
@@ -26,7 +26,7 @@
   border-color: $gray-500;
   color: $gray-100;
   width: 100%;
-  flex: 1;
+  flex: 1; // Makes buttons grow to fill available space equally
   font-size: 1.25rem;
   padding: 1rem 1.5rem;
   display: flex;
@@ -54,7 +54,7 @@
 }
 
 .character-container {
-  flex: 1;
+  flex: 1; // Each takes 50% width
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,6 +63,7 @@
 }
 
 .sprite-container {
+  // flex: 1;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -85,8 +86,10 @@
 
 .healthbar-container {
   width: 100%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem; // gap between healthbar and sprite
   color: red;
+
+  // centering text
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -104,6 +107,8 @@
   padding: 1rem;
   border-radius: 0.5rem;
   color: $gray-100;
+
+  // text alignment settings
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,6 +175,7 @@
   gap: 20px;
 }
 
+// The connecting trail line (gray - locked portion)
 .level-path::before {
   content: '';
   position: absolute;
@@ -229,6 +235,7 @@
   color: $accent-gold;
   border: 3px solid $accent-gold;
 
+  // Gold trail connector going DOWN (to next level below)
   &::after {
     content: '';
     position: absolute;
@@ -244,10 +251,12 @@
   }
 }
 
+// Hide connector on last completed
 .level-row:last-child .node-completed::after {
   display: none;
 }
 
+// Completed final level
 .node-completed.node-final {
   width: 100px;
   height: 100px;
@@ -311,6 +320,7 @@
   line-height: 1;
 }
 
+// Breathing glow when close (level 7+)
 .node-final-close {
   border: 2px dashed $accent-gold;
   animation: final-breathe 4s ease-in-out infinite;
@@ -354,6 +364,7 @@
   align-items: center;
   position: relative;
 
+  // Gold trail going DOWN through bubble and continuing past it
   &::after {
     content: '';
     position: absolute;
@@ -413,6 +424,7 @@
   }
 }
 
+// Current final level
 .node-current.node-current-final {
   width: 120px;
   height: 120px;
