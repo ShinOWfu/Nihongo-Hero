@@ -10,8 +10,8 @@
     </div>
   </div>
 <% end %>
-
-<div class="map-container" style="background-image: url('<%= asset_path(@current_level&.map_image || 'default_map.jpg') %>');">
+<!-- Main Map Container with dynamic background image, default in case current level does not contain an image -->
+<div class="map-container" style="background-image: url('<%= asset_path(@current_level&.map_image || 'default.jpg') %>');">
   <!-- Overlay for map content with Stimulus controller for scroll to current level on page load -->
   <div class="map-overlay" id="map-scroll" data-controller="scroll-to-current-level">
     <div class="map-header">
