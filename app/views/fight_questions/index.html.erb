@@ -27,6 +27,9 @@
               <div class="text-end small text-muted mt-1">
                 You gained +<%= @exp_gained %>XP
               </div>
+              <div class="text-end small text-muted mt-1">
+                <%= "You have leveled up to level #{@user.level}!!!" if @level_up = true%>
+              </div>
             </div>
           </div>
           <!-- Stats -->

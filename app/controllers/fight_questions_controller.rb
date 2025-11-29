@@ -2,7 +2,7 @@ class FightQuestionsController < ApplicationController
   def create
     @fight = Fight.find(params[:fight_id])
     question_type = params[:question_type]
-    used_question_ids = FightQuestion.pluck(:question_id).uniq
+    used_question_ids = current_user.fight_questions.pluck(:question_id).uniq
 
     if question_type == "random"
       @question = Question.all.where.not(id: used_question_ids).sample
@@ -11,7 +11,7 @@ class FightQuestionsController < ApplicationController
     end
 
     @fight_question = FightQuestion.new(fight: @fight, question: @question)
-
+    
     if @fight_question.save
       redirect_to fight_fight_question_path(@fight, @fight_question)
     else
@@ -75,15 +75,13 @@ class FightQuestionsController < ApplicationController
   def experience_points
     @current_exp = @user.experience_points
     # Allocate exp points after the fight, based on enemy hp. Maybe change this later to make more sophisticated
-    @fight.status == "complete" ? @exp_gained = @fight.enemy.hitpoints : @exp_gained = 0
+    @fight.status == "completed" ? @exp_gained = @fight.enemy.hitpoints : @exp_gained = 0
     # Check for player level up. Assuming each level requires 100 exp. Make better later
-    if @current_exp + @exp_gained / 100 != current_user.level
-      @level_up = true
-      @current_exp = @current_exp + @exp_gained
-      current_user.level = @current_exp / 100 if @current_exp > 100
-    else
-      @level_up = false
-    end
+    @current_exp + @exp_gained / 100 > @user.level ? @level_up = true : @level_up = false
+    # Update the user level and exp
+    @user.experience_points = @current_exp + @exp_gained
+    @user.level = @user.experience_points / 100 if @current_exp > 100
+    @user.save    
   end
 
   def percentage_correct
