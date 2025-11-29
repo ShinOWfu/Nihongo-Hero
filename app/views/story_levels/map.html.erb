@@ -1,5 +1,5 @@
 <!-- app/views/story_levels/map.html.erb -->
-<!-- We can hide navbar because of new log-out button -->
+<!-- We can hide navbar because of new log-out button on the bottom right -->
 <% content_for :hide_navbar, true %>
 
 <!-- Toast Notification for Level 10 Completion -->
@@ -18,7 +18,7 @@
       <h1 class="map-title">Your Journey</h1>
       <p class="map-subtitle">
         <% if @all_complete %>
-          All Levels Complete! 🎉
+          All Levels Complete! <i class="fa-solid fa-crown"></i>
         <% else %>
           Level <%= @accessible_level_id %> of <%= @story_levels.count %>
         <% end %>
@@ -28,7 +28,7 @@
     <div class="level-path">
       <!-- Finish Line at the top -->
       <div class="finish-line">
-        <span class="finish-icon">🏯</span>
+        <span class="finish-icon"><i class="fa-solid fa-torii-gate"></i></span>
         <span class="finish-label">Final Battle</span>
       </div>
 
@@ -43,13 +43,13 @@
         <div class="level-row">
           <% if is_completed %>
             <div class="level-node node-completed">
-              <span class="node-icon">✓</span>
+              <span class="node-icon"><i class="fa-solid fa-check"></i></span>
               <span class="node-label"><%= level.id %></span>
             </div>
           <% elsif is_current %>
             <div class="current-level-wrapper" data-scroll-to-current-level-target="current">
               <%= button_to fights_path, method: :post, class: "level-node node-current" do %>
-                <span class="node-icon">▶</span>
+                <span class="node-icon"><i class="fa-solid fa-play"></i></span>
                 <span class="node-label"><%= level.id %></span>
               <% end %>
 
@@ -66,7 +66,7 @@
             </div>
           <% else %>
             <div class="level-node node-locked">
-              <span class="node-icon">🔒</span>
+              <span class="node-icon"><i class="fa-solid fa-lock"></i></span>
               <span class="node-label"><%= level.id %></span>
             </div>
           <% end %>
@@ -79,19 +79,19 @@
 <nav class="bottom-nav">
   <!-- Bookmarks Link (Placeholder for now, does nothing) -->
   <%= link_to "#", class: "nav-item" do %>
-    <span class="nav-icon">🔖</span>
+    <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
     <span class="nav-label">Bookmarks</span>
   <% end %>
 
   <!-- Map Link (Active status) -->
   <%= link_to map_path, class: "nav-item nav-item-active" do %>
-    <span class="nav-icon">🗺</span>
+    <span class="nav-icon"><i class="fa-solid fa-map"></i></span>
     <span class="nav-label">My Journey</span>
   <% end %>
 
   <!-- Profile but it's just a Logout Link -->
   <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-item" do %>
-    <span class="nav-icon">👤</span>
+    <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
     <span class="nav-label">My Profile</span>
   <% end %>
 </nav>
