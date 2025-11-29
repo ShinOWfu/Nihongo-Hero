@@ -1,8 +1,6 @@
 <!-- app/views/story_levels/map.html.erb -->
-<!-- We can hide navbar because of new log-out button on the bottom right -->
 <% content_for :hide_navbar, true %>
 
-<!-- Toast Notification for Level 10 Completion -->
 <% if flash[:level_10_complete] %>
   <div class="toast-notification">
     <div class="toast-body">
@@ -10,9 +8,8 @@
     </div>
   </div>
 <% end %>
-<!-- Main Map Container with dynamic background image, default in case current level does not contain an image -->
+
 <div class="map-container" style="background-image: url('<%= asset_path(@current_level&.map_image || 'default.jpg') %>');">
-  <!-- Overlay for map content with Stimulus controller for scroll to current level on page load -->
   <div class="map-overlay" id="map-scroll" data-controller="scroll-to-current-level">
     <div class="map-header">
       <h1 class="map-title">Your Journey</h1>
@@ -26,7 +23,6 @@
     </div>
 
     <div class="level-path">
-      <!-- Reverse due to start from the bottom -->
       <% @story_levels.reverse_each do |level| %>
         <%
           is_completed = @completed_level_ids.include?(level.id)
@@ -48,14 +44,9 @@
                 <span class="node-label"><%= level.id %></span>
               <% end %>
 
-              <!-- Story content attached to current level, Stimulus will center this bubble in the middle of the screen on page load -->
               <div class="story-bubble">
                 <div class="story-bubble-content">
-                  <% if @all_complete %>
-                    ご苦労様です！
-                  <% else %>
-                    <%= @current_level&.story_content %>
-                  <% end %>
+                  <%= @current_level&.story_content %>
                 </div>
               </div>
             </div>
@@ -79,19 +70,16 @@
 </div>
 
 <nav class="bottom-nav">
-  <!-- Bookmarks Link (Placeholder for now, does nothing) -->
   <%= link_to "#", class: "nav-item" do %>
     <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
     <span class="nav-label">Bookmarks</span>
   <% end %>
 
-  <!-- Map Link (Active status) -->
   <%= link_to map_path, class: "nav-item nav-item-active" do %>
     <span class="nav-icon"><i class="fa-solid fa-map"></i></span>
     <span class="nav-label">My Journey</span>
   <% end %>
 
-  <!-- Profile but it's just a Logout Link -->
   <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-item" do %>
     <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
     <span class="nav-label">My Profile</span>
