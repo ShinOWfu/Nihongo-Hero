@@ -7,6 +7,7 @@
 @import "theme1/variables"; // variables come before bootstrap
 @import "bootstrap";
 @import "theme1/styles"; // styles come after bootstrap
+@import "theme1/map"; // map styles
 @import "font-awesome";
 
 // Your CSS partials

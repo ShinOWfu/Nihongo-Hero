@@ -1,68 +1,99 @@
 <!-- app/views/story_levels/map.html.erb -->
+<% content_for :hide_navbar, true %>
+
 <% if flash[:level_10_complete] %>
-  <div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 11; margin-top: 20px;">
-    <div class="toast show" role="alert" data-bs-autohide="true" data-bs-delay="2500"
-         style="background: linear-gradient(135deg, #f0c31eff 0%, #dfc119ff 100%); border: none;">
-      <div class="toast-body text-center fw-bold py-3" style="color: #000;">
-        🎉 Last level Complete!
-      </div>
+  <div class="toast-notification">
+    <div class="toast-body">
+      <i class="fa-solid fa-trophy"></i> Last level Completed!
     </div>
   </div>
 <% end %>
-<div class="container-fluid px-2 py-2">
-  <div class="row justify-content-center g-0">
-    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-      <!-- Main card -->
-      <div class="card shadow-lg border-0"
-           style="background: rgba(10, 12, 20, 0.92) <%= "url('#{asset_path(@current_level.map_image)}') center/cover no-repeat" if @current_level %>;
-                  border: 1px solid #0e2757ff; min-height: 100vh;">
-        <div class="card-body text-center p-4" style="background: rgba(0,0,0,0.45); backdrop-filter: blur(1px); border-radius: 10px;">
-          <h1 class="display-6 display-md-5 fw-bold text-white mb-0" style="text-shadow: 0 2px 8px black;">
-            Your Journey
-          </h1>
-          <h4 class="h5 h-md-4 mb-4 mb-md-5" style="color: #f0c31eff;">
-            <% if @all_complete %>
-              All Levels Complete! 🎉
-            <% else %>
-              Level <%= @accessible_level_id %>
-            <% end %>
-          </h4>
-          <p class="text-white lead mb-4 px-2 px-md-4" style="text-shadow: 0 2px 6px black; font-size: 1rem;">
-            <% if @all_complete %>
-              ご苦労様です！
-            <% else %>
-              <%= @current_level.story_content %>
-            <% end %>
-          </p>
-          <!-- Reversed due to level 1 being bottom -->
-          <% @story_levels.reverse_each do |level| %>
-            <%
-              is_completed = @completed_level_ids.include?(level.id)
-              is_current   = level.id == @accessible_level_id
-              is_locked    = level.id > @accessible_level_id
-            %>
-            <div class="mb-3">
-              <div class="p-3 rounded border text-center" style="
-                <%= 'background: #1f1e1eff; color: white; text-shadow: 0 2px 5px black; font-size: 1.3rem;' if is_completed %>
-                <%= 'background: #142243ff; border: 2px solid #f0c31eff;' if is_current %>
-                <%= 'background: #555454ff; color: #bebebeff; text-shadow: 0 2px 5px black; font-size: 1.3rem;' if is_locked %>
-              ">
-                <% if is_completed %>
-                  <p class="mb-1">✅ Level <%= level.id %> - Completed</p>
-                <% elsif is_current %>
-                  <%= button_to fights_path, method: :post,
-                      class: "btn btn-lg w-100 fw-bold py-3 py-md-2",
-                      style: "background: #b8b8b7ff; color: #ffffffff; border: 3px solid #f7c821ff; transition: all 0.5s ease; text-shadow: 0 3px 0 #666666, 0 5px 8px black; box-shadow: 0 8px 25px rgba(0,0,0,0.8), 0 15px 40px rgba(240, 195, 30, 0.3); font-size: 1.25rem !important; border-bottom: 6px solid #dfc119ff" do %>
-                    ▶  Level <%= level.id %>
-                  <% end %>
+
+<div class="map-container" style="background-image: url('<%= asset_path(@current_level&.map_image || 'default.jpg') %>');">
+  <div class="map-overlay" id="map-scroll" data-controller="scroll-to-current-level">
+    <div class="map-header">
+      <h1 class="map-title">Your Journey</h1>
+      <p class="map-subtitle">
+        <% if @all_complete %>
+          All Levels Complete! <i class="fa-solid fa-crown"></i>
+        <% else %>
+          Level <%= @accessible_level_id %>
+        <% end %>
+      </p>
+    </div>
+
+    <div class="level-path">
+      <% @story_levels.reverse_each do |level| %>
+        <%
+          is_completed = @completed_level_ids.include?(level.id)
+          is_current   = level.id == @accessible_level_id
+          is_locked    = level.id > @accessible_level_id
+          is_final     = level.id == 10
+        %>
+
+        <div class="level-row">
+          <% if is_completed %>
+            <div class="level-node node-completed <%= 'node-final' if is_final %>">
+              <span class="node-icon">
+                <% if is_final %>
+                  <i class="fa-solid fa-torii-gate"></i>
                 <% else %>
-                  <p class="mb-0">🔒 Level <%= level.id %></p>
+                  <i class="fa-solid fa-star"></i>
                 <% end %>
+              </span>
+              <span class="node-label"><%= is_final ? 'Complete' : level.id %></span>
+            </div>
+          <% elsif is_current %>
+            <div class="current-level-wrapper" data-scroll-to-current-level-target="current">
+              <%= button_to fights_path, method: :post, class: "level-node node-current #{'node-current-final' if is_final}" do %>
+                <span class="node-icon">
+                  <% if is_final %>
+                    <i class="fa-solid fa-torii-gate"></i>
+                  <% else %>
+                    <i class="fa-solid fa-play"></i>
+                  <% end %>
+                </span>
+                <span class="node-label"><%= is_final ? 'Final' : level.id %></span>
+              <% end %>
+
+              <div class="story-bubble">
+                <div class="story-bubble-content">
+                  <%= @current_level&.story_content %>
+                </div>
               </div>
             </div>
+          <% else %>
+            <% if is_final %>
+              <div class="level-node node-locked node-final <%= 'node-final-close' if @accessible_level_id >= 7 %>">
+                <span class="node-icon"><i class="fa-solid fa-torii-gate"></i></span>
+                <span class="node-icon-lock"><i class="fa-solid fa-lock"></i></span>
+              </div>
+            <% else %>
+              <div class="level-node node-locked">
+                <span class="node-icon"><i class="fa-solid fa-lock"></i></span>
+                <span class="node-label"><%= level.id %></span>
+              </div>
+            <% end %>
           <% end %>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
+
+<nav class="bottom-nav">
+  <%= link_to "#", class: "nav-item" do %>
+    <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
+    <span class="nav-label">Bookmarks</span>
+  <% end %>
+
+  <%= link_to map_path, class: "nav-item nav-item-active" do %>
+    <span class="nav-icon"><i class="fa-solid fa-map"></i></span>
+    <span class="nav-label">My Journey</span>
+  <% end %>
+
+  <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-item" do %>
+    <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+    <span class="nav-label">My Profile</span>
+  <% end %>
+</nav>

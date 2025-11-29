@@ -1,0 +1,438 @@
+
+// ===== MAP SCREEN =====
+
+.map-container {
+  height: 100vh;
+  height: 100dvh;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.map-overlay {
+  height: 100vh;
+  height: 100dvh;
+  background: linear-gradient(
+    to bottom,
+    rgba($gray-900, 0.7) 0%,
+    rgba($gray-900, 0.4) 30%,
+    rgba($gray-900, 0.4) 70%,
+    rgba($gray-900, 0.8) 100%
+  );
+  padding: 24px 20px;
+  padding-bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.map-header {
+  text-align: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.map-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $gray-100;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  margin: 0 0 6px;
+}
+
+.map-subtitle {
+  font-size: 1.1rem;
+  color: $accent-gold;
+  margin: 0;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+// ===== LEVEL PATH =====
+
+.level-path {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 20px 0 40px;
+  gap: 20px;
+}
+
+// The connecting trail line (gray - locked portion)
+.level-path::before {
+  content: '';
+  position: absolute;
+  top: 45px;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  background: $gray-700;
+  border-radius: 6px;
+  z-index: 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+// ===== LEVEL ROWS =====
+
+.level-row {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+// ===== LEVEL NODES =====
+
+.level-node {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: default;
+  transition: transform 0.15s ease;
+}
+
+.node-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.node-label {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+// ===== COMPLETED NODE =====
+
+.node-completed {
+  background: linear-gradient(145deg, $gray-700, $gray-800);
+  box-shadow:
+    0 5px 0 $gray-900,
+    0 8px 15px rgba(0, 0, 0, 0.5);
+  color: $accent-gold;
+  border: 3px solid $accent-gold;
+
+  // Gold trail connector going DOWN (to next level below)
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 28px;
+    background: $accent-gold;
+    border-radius: 6px;
+    z-index: -1;
+    box-shadow: 0 0 10px rgba($accent-gold, 0.3);
+  }
+}
+
+// Hide connector on last completed
+.level-row:last-child .node-completed::after {
+  display: none;
+}
+
+// Completed final level
+.node-completed.node-final {
+  width: 100px;
+  height: 100px;
+
+  .node-icon {
+    font-size: 2rem;
+  }
+
+  .node-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+// ===== LOCKED NODE =====
+
+.node-locked {
+  width: 80px;
+  height: 80px;
+  background: rgba($gray-700, 0.6);
+  box-shadow:
+    0 4px 0 $gray-800,
+    0 6px 12px rgba(0, 0, 0, 0.4);
+  color: $gray-500;
+  backdrop-filter: blur(4px);
+
+  .node-icon {
+    font-size: 1.3rem;
+    opacity: 0.5;
+  }
+
+  .node-label {
+    font-size: 0.9rem;
+    opacity: 0.5;
+  }
+}
+
+// ===== FINAL LEVEL (Level 10) =====
+
+.node-final {
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  gap: 4px;
+}
+
+.node-final .node-icon {
+  font-size: 2rem;
+}
+
+.node-final .node-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.node-icon-lock {
+  font-size: 0.65rem;
+  opacity: 0.5;
+  line-height: 1;
+}
+
+// Breathing glow when close (level 7+)
+.node-final-close {
+  border: 2px dashed $accent-gold;
+  animation: final-breathe 4s ease-in-out infinite;
+
+  .node-icon {
+    color: $accent-gold;
+    opacity: 0.8;
+  }
+
+  .node-icon-lock {
+    color: $accent-gold;
+    opacity: 0.6;
+  }
+
+  .node-label {
+    color: $accent-gold;
+    opacity: 0.8;
+  }
+}
+
+@keyframes final-breathe {
+  0%, 100% {
+    box-shadow:
+      0 4px 0 $gray-800,
+      0 6px 12px rgba(0, 0, 0, 0.4),
+      0 0 10px rgba($accent-gold, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 4px 0 $gray-800,
+      0 6px 12px rgba(0, 0, 0, 0.4),
+      0 0 35px rgba($accent-gold, 0.4);
+  }
+}
+
+// ===== CURRENT LEVEL WRAPPER =====
+
+.current-level-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  // Gold trail going DOWN through bubble and continuing past it
+  &::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    background: $accent-gold;
+    border-radius: 6px;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba($accent-gold, 0.3);
+  }
+}
+
+// ===== CURRENT NODE =====
+
+.node-current {
+  width: 105px;
+  height: 105px;
+  background: linear-gradient(145deg, lighten($accent-gold, 8%), $accent-gold);
+  box-shadow:
+    0 8px 0 $accent-gold-dark,
+    0 12px 30px rgba(0, 0, 0, 0.5),
+    0 0 30px $accent-gold-glow;
+  color: $gray-900;
+  cursor: pointer;
+  animation: bounce 2s ease-in-out infinite;
+  font-weight: 700;
+  position: relative;
+  z-index: 3;
+
+  .node-icon {
+    font-size: 1.8rem;
+  }
+
+  .node-label {
+    font-size: 1.1rem;
+  }
+
+  &:active {
+    transform: translateY(6px);
+    box-shadow:
+      0 2px 0 $accent-gold-dark,
+      0 4px 15px rgba(0, 0, 0, 0.5),
+      0 0 30px $accent-gold-glow;
+    animation: none;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+// Current final level
+.node-current.node-current-final {
+  width: 120px;
+  height: 120px;
+
+  .node-icon {
+    font-size: 2.5rem;
+  }
+
+  .node-label {
+    font-size: 1rem;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+// ===== STORY BUBBLE =====
+
+.story-bubble {
+  background: rgba($gray-900, 0.9);
+  border: 2px solid $accent-gold;
+  border-radius: $border-radius;
+  padding: 14px 18px;
+  max-width: 260px;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba($accent-gold, 0.15);
+  margin-top: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.story-bubble-content {
+  color: $gray-100;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+// ===== BOTTOM NAVIGATION =====
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: $gray-800;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid $gray-700;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 50;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 28px;
+  border-radius: $border-radius;
+  text-decoration: none;
+  color: $gray-400;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $gray-200;
+    text-decoration: none;
+  }
+}
+
+.nav-item-active {
+  background: rgba($accent-gold, 0.15);
+  color: $accent-gold;
+}
+
+.nav-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.nav-label {
+  font-size: 0.8rem;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+// ===== TOAST NOTIFICATION =====
+
+.toast-notification {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  animation: slide-down 0.3s ease, fade-out 0.5s ease 2.5s forwards;
+
+  .toast-body {
+    background: linear-gradient(135deg, $accent-gold, darken($accent-gold, 8%));
+    color: $gray-900;
+    padding: 14px 28px;
+    border-radius: $border-radius;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}

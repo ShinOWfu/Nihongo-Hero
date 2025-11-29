@@ -19,7 +19,6 @@
     flex: 1;
     display: flex;
   }
-
 }
 
 .btn-primary {
@@ -27,12 +26,9 @@
   border-color: $gray-500;
   color: $gray-100;
   width: 100%;
-
   flex: 1; // Makes buttons grow to fill available space equally
-
   font-size: 1.25rem;
   padding: 1rem 1.5rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,12 +46,10 @@
   gap: 2rem;
   padding: 1rem;
   position: relative;
-
   background-image: url('backgrounds/origbig.png');
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
-
   overflow: hidden;
 }
 
@@ -90,10 +84,9 @@
   }
 }
 
-
 .healthbar-container {
   width: 100%;
-  margin-bottom: 0.5rem;  // gap between healthbar and sprite
+  margin-bottom: 0.5rem; // gap between healthbar and sprite
   color: red;
 
   // centering text
@@ -109,9 +102,7 @@
   left: 0.5rem;
   right: 0.5rem;
   height: 33%;
-
   font-size: clamp(0.875rem, 5vw, 1.5rem);
-
   background-color: rgba($gray-900, 0.4);
   padding: 1rem;
   border-radius: 0.5rem;
