@@ -26,9 +26,14 @@
   gap: 0.5rem; // Space between buttons
   overflow: hidden; // Questions menu cant become bigger
 
-  form {
+    form {
     flex: 1;
     display: flex;
+    min-height: 0; // Prevents flex items from overflowing
+
+    button {
+      flex: 1; // Make the button fill the form
+    }
   }
 
 }
@@ -51,11 +56,13 @@
 
 .btn-primary {
   background-color: $gray-700;
+  border-width: 4px;
+  border-style: solid;
   border-color: $gray-500;
   color: $gray-100;
   width: 100%;
   flex: 1; // Makes buttons grow to fill available space equally
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 4vw, 2rem);
   padding: 0.5rem 1.5rem;
   display: flex;
   align-items: center;
@@ -110,6 +117,30 @@
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   75% { transform: translateX(5px); }
+}
+
+.btn-action{
+  background-color: $gray-100;
+  border-width: 4px;
+  border-style: solid;
+  border-color: $gray-300;
+  font-weight: bold;
+  color: $gray-600;
+  width: 100%;
+  max-height: 100%;
+  flex: 1; // Makes buttons grow to fill available space equally
+  font-size: clamp(2rem, 4vw, 2rem);
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background-color: $accent-gold-dark;
+    border-color: $accent-gold;
+    color: black;
+  }
 }
 
 .character-container {
