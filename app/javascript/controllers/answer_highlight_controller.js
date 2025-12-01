@@ -36,8 +36,6 @@ export default class extends Controller {
       // If selected answer is correct -> highlight green
       event.currentTarget.classList.add("correct");
 
-
-
     } else {
       // Find correct button if the answer was wrong
       const correctButton = this.answerTargets.find(button => button.dataset.answerIndex == this.correctIndexValue)
@@ -48,9 +46,12 @@ export default class extends Controller {
       correctButton.classList.add("correct");
     }
 
+    // Set delay to be longer if answer was incorrect
+    const delay = isCorrect ? 1800 : 3000
+
     // Wait and then submit the form reference
     setTimeout(() => {
       form.submit();
-    }, 3000);
+    }, delay);
   }
 }
