@@ -1,16 +1,17 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="answer-highlight"
+// Connects to data-controller="answer-feedback"
 export default class extends Controller {
   // Create a target on the button that the user selects
-  static targets = ["answer"]
-  // Creates getter for data-answer-highlight-correct-index-value which is @question.correct_index
+  static targets = ["answer", "player", "enemy"]
+  // Creates getter for @question.correct_index, @damage_dealt & @damage_received
   static values = {
-    correctIndex: Number
+    correctIndex: Number,
+    damageDealt: Number,
+    damageReceived: Number
   }
 
-  // Highlight correct answer with green, and wrong answer with red
-  highlight(event) {
+  feedback(event) {
     // Get the selected answer with index dataset on each button
     const selectedIndex = event.currentTarget.dataset.answerIndex
 
@@ -24,6 +25,10 @@ export default class extends Controller {
     // console.log("Button clicked!")
     // console.log("Correct index is:", this.correctIndexValue)
     // console.log("Is the answer correct?:", isCorrect);
+    // console.log("Damage dealt:", this.damageDealtValue);
+    // console.log("Damage received:", this.damageReceivedValue);
+    // console.log("Player target:", this.playerTarget)
+    // console.log("Enemy target:", this.enemyTarget)
 
     event.preventDefault();
 
@@ -35,10 +40,17 @@ export default class extends Controller {
     if (isCorrect) {
       // If selected answer is correct -> highlight green
       event.currentTarget.classList.add("correct", "selected");
+      const damageEl = document.createElement("div");
+      damageEl.textContent = `-${this.damageDealtValue}`;
+      this.enemyTarget.appendChild(damageEl);
 
     } else {
       // Find correct button if the answer was wrong
       const correctButton = this.answerTargets.find(button => button.dataset.answerIndex == this.correctIndexValue)
+
+      const damageEl = document.createElement("div");
+      damageEl.textContent = `-${this.damageReceivedValue}`;
+      this.playerTarget.appendChild(damageEl);
 
       // If selected answer is incorrect -> highlight red
       // Additionally correct answer -> highlight green

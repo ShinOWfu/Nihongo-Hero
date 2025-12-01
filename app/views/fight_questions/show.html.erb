@@ -1,8 +1,11 @@
 <% content_for :hide_navbar, true %>
-<div class="container-fluid vh-100 d-flex flex-column p-0">
+<div class="container-fluid vh-100 d-flex flex-column p-0" data-controller="answer-feedback"
+  data-answer-feedback-correct-index-value="<%= @question.correct_index %>"
+  data-answer-feedback-damage-dealt-value="50"
+  data-answer-feedback-damage-received-value="5">
   <div id="scene" class="d-flex">
     <!-- Left side: Player -->
-    <div class="character-container">
+    <div class="character-container" data-answer-feedback-target="player">
       <div class="healthbar-container">
         <%= render 'fights/player_hitpoints' %>
       </div>
@@ -11,7 +14,7 @@
       </div>
     </div>
     <!-- Right side: Enemy -->
-    <div class="character-container">
+    <div class="character-container" data-answer-feedback-target="enemy">
       <div class="healthbar-container">
         <%= render 'fights/enemy_hitpoints' %>
       </div>
@@ -24,9 +27,7 @@
     </div>
   </div>
   <%# middle of the page %>
-  <div id="menu" class="menu d-flex flex-column"
-     data-controller="answer-highlight"
-     data-answer-highlight-correct-index-value="<%= @question.correct_index %>">
+  <div id="menu" class="menu d-flex flex-column">
     <%= render 'fight_questions' %>
   </div>
 </div>
