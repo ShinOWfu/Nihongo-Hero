@@ -9,11 +9,57 @@
 
 
 // If we need a card
+
 .card {
   background-color: $gray-800;
   border: 1px solid $gray-700;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.fight-card {
+  background-color: $gray-700;
+  border-color: $gray-600;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  justify-content: space-between;
+  display: flex;
+
+  .dropdown-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 4%;
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(117, 218, 255, 0.3), 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.fight-list {
+  a {
+    color: inherit;
+  }
+}
+
+.fight-image-card {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; // 16:9 aspect ratio (9/16 = 0.5625)
+  overflow: hidden;
+
+  .fight-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Crops image to fill frame
+  }
+}
+
 
 #menu {
   height: 50vh;
@@ -24,9 +70,14 @@
   gap: 0.5rem; // Space between buttons
   overflow: hidden; // Questions menu cant become bigger
 
-  form {
+    form {
     flex: 1;
     display: flex;
+    min-height: 0; // Prevents flex items from overflowing
+
+    button {
+      flex: 1; // Make the button fill the form
+    }
   }
 
 }
@@ -49,11 +100,13 @@
 
 .btn-primary {
   background-color: $gray-700;
+  border-width: 4px;
+  border-style: solid;
   border-color: $gray-500;
   color: $gray-100;
   width: 100%;
   flex: 1; // Makes buttons grow to fill available space equally
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 4vw, 2rem);
   padding: 0.5rem 1.5rem;
   display: flex;
   align-items: center;

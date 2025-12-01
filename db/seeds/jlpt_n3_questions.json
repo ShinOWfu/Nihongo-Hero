@@ -1,21 +1,15 @@
 [
   {
     "type": "grammar",
-    "question": "彼は会社を＿＿して、新しい仕事を始めた。",
+    "question": "彼は会社を＿＿て、新しい仕事を始めた。",
     "answers": ["やめ", "とめ", "さめ", "きめ"],
     "correct_index": 0
   },
   {
     "type": "grammar",
-    "question": "この薬を飲むと、頭痛が＿＿します。",
-    "answers": ["やわらく", "やわらかく", "やわらぎ", "やわらげ"],
-    "correct_index": 2
-  },
-  {
-    "type": "grammar",
     "question": "雨が降りそうだから、傘を＿＿ほうがいい。",
     "answers": ["持つ", "持った", "持って", "持ち"],
-    "correct_index": 2
+    "correct_index": 1
   },
   {
     "type": "grammar",
@@ -170,7 +164,7 @@
   {
     "type": "words",
     "question": "彼女は____を大切にする人だ。",
-    "answers": ["お金", "時間", "約束", "仕事"],
+    "answers": ["ペット", "役即", "約束", "仕事"],
     "correct_index": 2
   },
   {
@@ -196,11 +190,5 @@
     "question": "彼女の____のおかげで、プロジェクトは成功した。",
     "answers": ["頑張り", "協力", "努力", "助け"],
     "correct_index": 2
-  },
-  {
-    "type": "grammar",
-    "question": "ゲリーさんのパンツは何色ですか？😍",
-    "answers": ["ピンク", "スティンキー", "しろい", "緑"],
-    "correct_index": 1
   }
 ]

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # for selecting attack type (question type) when in fight. This is hooked up to the _menu_contents.html.erb buttons.
 
 
-  resources :fights, only: [:show, :create, :update] do
+  resources :fights, only: [:show, :create, :update, :index] do
     resources :fight_questions, only: [:show, :create, :index]
   end
   resources :fight_questions, only: [:update]

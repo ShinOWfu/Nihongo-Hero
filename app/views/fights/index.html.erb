@@ -1,0 +1,92 @@
+<% content_for :hide_navbar, true %>
+<h2 class="text-center my-3"> Your Fights </h2>
+<div class="container">
+  <% @fights.each do |fight| %>
+  <div class="card fight-card my-3 p-3 mx-3">
+    <button class="w-100 p-0 text-start border-0 bg-transparent"type="button"data-bs-toggle="collapse"
+      data-bs-target="#fight-<%= fight.id %>"
+      aria-expanded="false"
+      aria-controls="fight-<%= fight.id %>">
+      <div class="d-flex align-items-center justify-content-between px-3">
+        <h2 class="m-0 text-white">Fight <%= "#{fight.id} : #{fight.status.capitalize}" %></h2>
+        <span class="dropdown-arrow text-white">▼</span>
+      </div>
+    </button>
+  </div>
+  <!-- Fight dropdown content -->
+  <div class="collapse ms-3" id="fight-<%= fight.id %>">
+    <div class="p-3 border-start border-light">
+
+      <% fight.fight_questions.each_with_index do |fq, idx| %>
+        <% question = fq.question %>
+        <% is_correct = fq.selected_index == question.correct_index %>
+
+        <!-- Nested question dropdown -->
+        <button class="btn w-100 p-0 text-start border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#question-<%= fq.id %>"
+          aria-expanded="false"
+          aria-controls="question-<%= fq.id %>">
+
+          <div class="d-flex align-items-center py-2 border-bottom">
+            <div class="me-3 <%= is_correct ? 'text-success' : 'text-danger' %> fs-5">
+              <%= is_correct ? '✓' : '✗' %>
+            </div>
+
+            <div>
+              <div class="text-light">
+                <%= truncate(question.question, length: 40) %>
+              </div>
+              <div class="small text-secondary">Question <%= idx + 1 %></div>
+            </div>
+
+            <div class="ms-auto">▼</div>
+          </div>
+        </button>
+
+        <!-- Nested question details -->
+        <div class="collapse" id="question-<%= fq.id %>">
+          <div class="card card-body bg-dark mt-2">
+
+            <% question.answers.each_with_index do |answer, a_index| %>
+              <div class="p-2 mb-1 rounded
+                <%= 'bg-success bg-opacity-25 border border-success' if a_index == question.correct_index %>
+                <%= 'bg-danger bg-opacity-25 border border-danger' if a_index == fq.selected_index && a_index != question.correct_index %>
+                <%= 'bg-secondary bg-opacity-25' if a_index != question.correct_index && a_index != fq.selected_index %>">
+
+                <strong><%= a_index + 1 %>.</strong> <%= answer %>
+
+                <% if a_index == fq.selected_index %>
+                  <span class="badge bg-danger ms-2">あなたの回答</span>
+                <% end %>
+
+                <% if a_index == question.correct_index %>
+                  <span class="badge bg-success ms-2">正解</span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+  <nav class="bottom-nav">
+    <%= link_to fights_path, class: "nav-item #{'nav-item-active' if current_page?(fights_path)}" do %>
+      <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
+      <span class="nav-label">Fight History</span>
+    <% end %>
+
+    <%= link_to map_path, class: "nav-item #{'nav-item-active' if current_page?(map_path)}" do %>
+      <span class="nav-icon"><i class="fa-solid fa-map"></i></span>
+      <span class="nav-label">My Journey</span>
+    <% end %>
+
+    <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-item #{'nav-item-active' if current_page?(destroy_user_session_path)}" do %>
+      <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="nav-label">My Profile</span>
+    <% end %>
+  </nav>
+
+</div>
