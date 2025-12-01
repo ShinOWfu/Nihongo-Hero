@@ -1,7 +1,7 @@
 class FightsController < ApplicationController
 
   def index
-    @fights = Fight.find(params[:id]).all
+    @fights = Fight.find(params[:fight_id]).all
   end
 
   def show     #I can see a list of actions at the start of the fight (attack, ability, item, retreat)
