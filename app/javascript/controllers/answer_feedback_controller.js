@@ -58,13 +58,10 @@ export default class extends Controller {
 
       // Calculate new HP
       const newEnemyHp = this.enemyHpValue - this.damageDealtValue
-
-      // Calculate percentage
-      const newPercent = (newEnemyHp / this.enemyMaxHpValue) * 100
-
+      // Calculate percentage, round to get exact number and max to make it not go below 0 for the bar
+      const newPercent = Math.max(Math.round((newEnemyHp / this.enemyMaxHpValue) * 100))
       // Update the healthbar width
       this.enemyHealthbarTarget.style.width = `${newPercent}%`
-
       // Update the text
       this.enemyHealthTextTarget.textContent = `${newEnemyHp}HP`
 
@@ -85,7 +82,7 @@ export default class extends Controller {
 
       // Same block as up before
       const newPlayerHp = this.playerHpValue - this.damageReceivedValue
-      const newPercent = (newPlayerHp / this.playerMaxHpValue) * 100
+      const newPercent = Math.max(Math.round((newPlayerHp / this.playerMaxHpValue) * 100))
       this.playerHealthbarTarget.style.width = `${newPercent}%`
       this.playerHealthTextTarget.textContent = `${newPlayerHp}HP`
     }
