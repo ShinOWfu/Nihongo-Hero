@@ -1,5 +1,15 @@
 // Many of these are imported directly from AdventureMaker
 
+// REMOVE THIS!
+// DEEEEEBUGGGGGGGG
+// DEBUG - Remove when done
+// * {
+//   border: 1px solid red !important;
+// }
+
+
+
+
 // If we need a card
 .card {
   background-color: $gray-800;
@@ -12,7 +22,7 @@
   background-color: $gray-800;
   display: flex;
   flex-direction: column;
-  padding: 1rem; // Space from edges
+  padding: 1rem 1rem 1rem 1rem;
   gap: 0.5rem; // Space between buttons
   overflow: hidden; // Questions menu cant become bigger
 
@@ -22,14 +32,30 @@
   }
 }
 
+#scene {
+  height: 50vh;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 1rem;
+  position: relative;
+
+  background-image: url('backgrounds/origbig.png');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
 .btn-primary {
   background-color: $gray-700;
   border-color: $gray-500;
   color: $gray-100;
   width: 100%;
   flex: 1; // Makes buttons grow to fill available space equally
-  font-size: 1.25rem;
-  padding: 1rem 1.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  padding: 0.5rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,27 +111,13 @@
   75% { transform: translateX(5px); }
 }
 
-#scene {
-  height: 50vh;
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  padding: 1rem;
-  position: relative;
-  background-image: url('backgrounds/origbig.png');
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  overflow: hidden;
-}
-
 .character-container {
   flex: 1; // Each takes 50% width
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  gap: 1rem;
+  gap: 0rem;
 }
 
 .sprite-container {
@@ -113,42 +125,33 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 1rem;
 
   .player-sprite {
-    height: 30vh;
+    height: 20vh;
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
+    padding-bottom: 0rem;
   }
 
   .enemy-sprite {
-    height: 10vh;
+    height: 20vh;
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
+    padding-bottom: 2rem;
   }
 }
 
-.healthbar-container {
-  width: 100%;
-  margin-bottom: 0.5rem; // gap between healthbar and sprite
-  color: red;
-
-  // centering text
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  text-align: center;
-}
 
 .textbox-container {
   position: absolute;
   bottom: 0.5rem;
   left: 0.5rem;
   right: 0.5rem;
-  height: 33%;
-  font-size: clamp(0.875rem, 5vw, 1.5rem);
+  min-height: 20%;
+  max-height: 40%;
+  font-size: clamp(1.5rem, 8vw, 3rem);
   background-color: rgba($gray-900, 0.4);
   padding: 1rem;
   border-radius: 0.5rem;
@@ -159,4 +162,51 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.healthbar-container {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  color: red; // text
+
+  // centering text
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
+}
+
+.healthbar-wrapper {
+  width: 60%; // how much of the container width the hp bar takes up
+}
+
+.healthbar-bg {
+  position: relative; // This makes the text position relative to the bar
+  width: 100%;
+  height: 24px;
+  background-color: rgba($gray-900, 0.6);
+  border: 2px solid rgba(rgb(186, 255, 186), 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.healthbar-fill {
+  height: 100%;
+  background: linear-gradient(to bottom, #4ade80, #167e3c);
+  transition: width 0.5s ease-out;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.healthbar-text {
+  position: absolute; // Position over the bar
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); // Center it perfectly
+  color: rgba(white, 0.6);
+  font-weight: bold;
+  font-size: clamp(0.6rem, 2vw, 1rem);
+  // text-shadow: 1px 1px 1px rgb(0, 48, 12);
+  z-index: 1; // Ensure it's on top
+  white-space: nowrap;
 }
