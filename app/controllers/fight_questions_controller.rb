@@ -74,9 +74,18 @@ class FightQuestionsController < ApplicationController
 
     @fight_question.update(selected_index: fight_question_params[:selected_index])
 
+    # Calculate damage multiplier
+    if @fight.enemy.weakness == @fight_question.question.question_type
+      damage_multiplier = 2
+    elsif @fight.enemy.strength == @fight_question.question.question_type
+      damage_multiplier = 0.5
+    else
+      damage_multiplier = 1
+    end
+
     #Check answer and do calculate damage
     if @fight_question.selected_index.to_i == @question.correct_index
-      @damage_dealt = 50
+      @damage_dealt = 10 * damage_multiplier
       @fight.enemy_hitpoints -= @damage_dealt
       flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
     else

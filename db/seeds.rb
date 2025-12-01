@@ -45,7 +45,9 @@ enemies_data.each do |enemy|
   Enemy.create(
     name: enemy['name'],
     hitpoints: enemy['hitpoints'],
-    sprite: enemy['sprite']
+    sprite: enemy['sprite'],
+    weakness: enemy['weakness'],
+    strength: enemy['strength']
   )
 end
 puts 'Generated enemies!'

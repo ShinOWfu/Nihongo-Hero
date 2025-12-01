@@ -2,26 +2,36 @@
   {
     "name": "キノコさん",
     "hitpoints": 30,
-    "sprite": "mushroom.png"
+    "sprite": "mushroom.png",
+    "weakness": "kanji",
+    "strength": "nothing"
   },
   {
     "name": "スケルトン",
     "hitpoints": 40,
-    "sprite": "skeleton.png"
+    "sprite": "skeleton.png",
+    "weakness": "grammar",
+    "strength": "words"
   },
   {
     "name": "侍",
     "hitpoints": 60,
-    "sprite": "samurai.png"
+    "sprite": "samurai.png",
+    "weakness": "words",
+    "strength": "kanji"
   },
   {
     "name": "ヴァンパイア",
     "hitpoints": 70,
-    "sprite": "vampire.png"
+    "sprite": "vampire.png",
+    "weakness": "nothing",
+    "strength": "grammar"
   },
   {
     "name": "鬼の王",
     "hitpoints": 100,
-    "sprite": "demon_boss.png"
+    "sprite": "demon_boss.png",
+    "weakness": "nothing",
+    "strength": "words"
   }
 ]
