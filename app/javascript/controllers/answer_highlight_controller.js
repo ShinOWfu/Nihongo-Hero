@@ -34,7 +34,7 @@ export default class extends Controller {
 
     if (isCorrect) {
       // If selected answer is correct -> highlight green
-      event.currentTarget.classList.add("correct");
+      event.currentTarget.classList.add("correct", "selected");
 
     } else {
       // Find correct button if the answer was wrong
@@ -42,12 +42,12 @@ export default class extends Controller {
 
       // If selected answer is incorrect -> highlight red
       // Additionally correct answer -> highlight green
-      event.currentTarget.classList.add("incorrect");
+      event.currentTarget.classList.add("incorrect", "selected");
       correctButton.classList.add("correct");
     }
 
     // Set delay to be longer if answer was incorrect
-    const delay = isCorrect ? 3800 : 5000
+    const delay = isCorrect ? 1800 : 3200
 
     // Wait and then submit the form reference
     setTimeout(() => {
