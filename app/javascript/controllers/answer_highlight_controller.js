@@ -15,6 +15,8 @@ export default class extends Controller {
     const selectedIndex = event.currentTarget.dataset.answerIndex
     // Compare the selected answer index with the getter of correct index
     const isCorrect = selectedIndex == this.correctIndexValue
+    // Save a reference to the form to find it after the timeout
+    const form = event.currentTarget.closest('form');
 
     // console.log("Button clicked!")
     // console.log("Correct index is:", this.correctIndexValue)
@@ -35,5 +37,8 @@ export default class extends Controller {
       correctButton.classList.add("correct");
     }
 
+    setTimeout(() => {
+      form.submit();
+    }, 3000);
   }
 }
