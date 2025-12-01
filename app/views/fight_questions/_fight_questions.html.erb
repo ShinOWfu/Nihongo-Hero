@@ -1,8 +1,6 @@
-<div data-controller="answer-highlight" data-answer-highlight-correct-index-value="<%= @question.correct_index %>">
   <% @question.answers.each_with_index do |answer,index| %>
-    <%= simple_form_for @fight_question do |f| %>
-      <input type="hidden" name="fight_question[selected_index]" value="<%= index %>">
-      <button class="btn btn-primary" data-answer-highlight-target="answer" data-action="click->answer-highlight#highlight" data-answer-index="<%= index %>"> <%= answer %></button>
-    <% end %>
+  <%= simple_form_for @fight_question do |f| %>
+    <input type="hidden" name="fight_question[selected_index]" value="<%= index %>">
+    <button class="btn btn-primary" data-answer-highlight-target="answer" data-action="click->answer-highlight#highlight" data-answer-index="<%= index %>"> <%= answer %></button>
   <% end %>
-</div>
+<% end %>
