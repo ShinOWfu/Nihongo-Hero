@@ -72,9 +72,10 @@
     }
 
     &.selected {
-      border-width: 3px;
-      outline: 4px solid $accent-gold;
-    }
+    border-width: 3px;
+    outline: 4px solid $accent-gold;
+    z-index: 1;
+  }
 }
 
 // Shake animation for the answer feedback
