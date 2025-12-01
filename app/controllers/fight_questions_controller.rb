@@ -52,7 +52,7 @@ class FightQuestionsController < ApplicationController
     # MUST DUPLICATE INSTANCE & REMOVE INCORRECT_ID FROM ARRAY
     # @fight_question = FightQuestion.find_by(fight: @fight, question: @question)
     @fight_question = FightQuestion.new(fight: @fight, question: @question)
-    
+
     if @fight_question.save
       redirect_to fight_fight_question_path(@fight, @fight_question)
     else
@@ -97,6 +97,7 @@ class FightQuestionsController < ApplicationController
       redirect_to fight_path(@fight)
     end
     @fight.save
+  end
 
   #This needs to be changed to a custom results function since we need the index function to show all questions
   def index
@@ -121,7 +122,7 @@ class FightQuestionsController < ApplicationController
     # Update the user level and exp
     @user.experience_points = @current_exp + @exp_gained
     @user.level = @user.experience_points / 100 if @current_exp > 100
-    @user.save    
+    @user.save
   end
 
   def percentage_correct
