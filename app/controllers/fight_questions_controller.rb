@@ -4,19 +4,61 @@ class FightQuestionsController < ApplicationController
     question_type = params[:question_type]
     used_question_ids = current_user.fight_questions.pluck(:question_id).uniq
 
-    if question_type == "random"
-      @question = Question.all.where.not(id: used_question_ids).sample
+    # This line ensures instances are duplicated but incorrectquestionID will be removed once corrected
+    latest_fight_questions = FightQuestion.where( id: FightQuestion.group(:question_id).select('MAX(id)') )
+    # get all past questions answered incorrectly in THIS fight
+    incorrect_question_ids = latest_fight_questions  # <- this is an array
+      .select{ |fq| fq.selected_index != fq.question.correct_index }
+      .map do |q|
+        q.question_id
+      end.uniq
+
+    # get all past questions answered correctly in THIS fight
+    correct_question_ids = latest_fight_questions   # <- this is an array
+      .select{ |fq| fq.selected_index == fq.question.correct_index }
+      .map do |q|
+        q.question_id
+      end.uniq
+
+
+    # no questions at start of the fight -> generate one
+    if @fight.user.fight_questions.empty?
+      if question_type == "random"
+        @question = Question.all.where.not(id: used_question_ids).sample
+      else
+        @question = Question.where(question_type: question_type).where.not(id: used_question_ids).all.sample
+      end
     else
-      @question = Question.where(question_type: question_type).where.not(id: used_question_ids).all.sample
+      # 1. 60% → incorrect question
+      if incorrect_question_ids.any? && rand < 0.6
+        if question_type == "random"
+          @question = Question.find(incorrect_question_ids.sample)
+        else
+          @question = Question.where(id: incorrect_question_ids, question_type: question_type).sample
+          @question ||= Question.where(question_type: question_type).sample
+        end
+        # 2. 40% → NEW first, then CORRECT
+      else
+        if question_type == "random"
+          @question = Question.where.not(id: used_question_ids).sample
+          @question ||= Question.find(correct_question_ids.sample) if correct_question_ids.any?
+        else
+          @question = Question.where(question_type: question_type).where.not(id: used_question_ids).sample
+          @question ||= Question.where(id: correct_question_ids, question_type: question_type).sample
+        end
+      end
     end
 
+    # MUST DUPLICATE INSTANCE & REMOVE INCORRECT_ID FROM ARRAY
+    # @fight_question = FightQuestion.find_by(fight: @fight, question: @question)
     @fight_question = FightQuestion.new(fight: @fight, question: @question)
-    
+
     if @fight_question.save
       redirect_to fight_fight_question_path(@fight, @fight_question)
     else
       redirect_to fight_path(@fight), alert: 'Error creating questions'
     end
+
   end
 
   def show
@@ -38,11 +80,10 @@ class FightQuestionsController < ApplicationController
       @fight.enemy_hitpoints -= @damage_dealt
       flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
     else
-      @damage_received = 5
+      @damage_received = 10
       @fight.player_hitpoints -= @damage_received
       flash[:alert] = "不正解！ #{@damage_received}ダメージを受けた！"
     end
-
     #Fight over?
     if @fight.player_hitpoints <= 0
       @fight.status = 'active'
@@ -81,7 +122,7 @@ class FightQuestionsController < ApplicationController
     # Update the user level and exp
     @user.experience_points = @current_exp + @exp_gained
     @user.level = @user.experience_points / 100 if @current_exp > 100
-    @user.save    
+    @user.save
   end
 
   def percentage_correct

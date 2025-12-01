@@ -24,6 +24,7 @@
   flex-direction: column;
   padding: 1rem 1rem 1rem 1rem;
   gap: 0.5rem; // Space between buttons
+  overflow: hidden; // Questions menu cant become bigger
 
     form {
     flex: 1;
@@ -34,6 +35,7 @@
       flex: 1; // Make the button fill the form
     }
   }
+
 }
 
 #scene {
@@ -70,6 +72,51 @@
     background-color: $gray-600;
     border-color: $gray-500;
   }
+
+  // Correct & Incorrect for fight questions highlights
+  &:disabled {
+      background-color: #858f97;
+      border-color: #697279;
+      opacity: 0.65;
+    }
+
+    &.correct {
+      background-color: #059669;
+      border-color: #047857;
+      transform: scale(1.02);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+
+      &:disabled {
+        background-color: #059669;
+        border-color: #047857;
+        opacity: 1;
+      }
+    }
+
+    &.incorrect {
+      background-color: #b91c1c;
+      border-color: #991b1b;
+      animation: shake 0.4s ease;
+
+      &:disabled {
+        background-color: #b91c1c;
+        border-color: #991b1b;
+        opacity: 1;
+      }
+    }
+
+    &.selected {
+    border-width: 3px;
+    outline: 4px solid $accent-gold;
+    z-index: 1;
+  }
+}
+
+// Shake animation for the answer feedback
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }
 
 .btn-action{

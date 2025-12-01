@@ -1,6 +1,5 @@
 <% content_for :hide_navbar, true %>
 <div class="container-fluid vh-100 d-flex flex-column p-0">
-
   <div id="scene" class="d-flex">
     <!-- Left side: Player -->
     <div class="character-container">
@@ -11,7 +10,6 @@
         <%= render 'fights/player_sprite' %>
       </div>
     </div>
-
     <!-- Right side: Enemy -->
     <div class="character-container">
       <div class="healthbar-container">
@@ -21,14 +19,14 @@
         <%= render 'fights/enemy_sprite' %>
       </div>
     </div>
-
     <div class="textbox-container">
       <%= render 'question' %>
     </div>
   </div>
   <%# middle of the page %>
-
-  <div id="menu" class="menu d-flex flex-column">
+  <div id="menu" class="menu d-flex flex-column"
+     data-controller="answer-highlight"
+     data-answer-highlight-correct-index-value="<%= @question.correct_index %>">
     <%= render 'fight_questions' %>
   </div>
 </div>

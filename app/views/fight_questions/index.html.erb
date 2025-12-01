@@ -47,64 +47,49 @@
               <% question = fq.question %>
               <% is_correct = fq.selected_index == question.correct_index %>
               <div class="mb-2">
-                <!-- Question Header -->
-                <div class="d-flex align-items-center py-3 <%= 'border-bottom' unless index == @fight_questions.length - 1 %>"
-                       <%= "style='cursor: pointer;' data-bs-toggle='collapse' data-bs-target='#question-#{fq.id}'" unless is_correct %>>
-                  <!-- Status Icon (X or ✓) -->
-                  <div class="me-3 fs-5 <%= is_correct ? 'text-success' : 'text-danger' %>">
-                    <%= is_correct ? '✓' : '✗' %>
-                  </div>
-                  <!-- Question Text -->
-                  <div class="flex-grow-1">
-                    <div class="mb-1">
-                      <%= truncate(question.question, length: 30) %>
+                <button class="btn w-100 p-0 text-start border-0" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#question-<%= fq.id %>" 
+                    aria-expanded="false" 
+                    aria-controls="question-<%= fq.id %>">
+                  <div class="d-flex align-items-center py-3 <%= 'border-bottom' unless index == @fight_questions.length - 1 %>">
+                    <div class="me-3 fs-5 <%= is_correct ? 'text-success' : 'text-danger' %>">
+                      <%= is_correct ? '✓' : '✗' %>
                     </div>
-                    <div class="small text-muted">質問 <%= index + 1 %></div>
-                  </div>
-                  <!-- Dropdown Arrow (only for wrong answers) -->
-                  <% unless is_correct %>
+                    <div class="flex-grow-1">
+                      <div class="mb-1 text-dark">
+                        <%= truncate(question.question, length: 30) %>
+                      </div>
+                      <div class="small text-dark">質問 <%= index + 1 %></div>
+                    </div>
                     <div>▼</div>
-                  <% end %>
-                </div>
-                <!-- Expanded Content (Only for wrong answers) -->
-                <% unless is_correct %>
-                  <div class="collapse" id="question-<%= fq.id %>">
-                    <div class="card card-body bg-white mt-2">
-                      <!-- Full Question -->
-                      <div class="mb-3 text-dark">
-                        <strong>質問:</strong>
-                        <p class="mb-2"><%= question.question %></p>
-                      </div>
-                      <!-- Answer Options -->
-                      <div class="mb-2">
-                        <% question.answers.each_with_index do |answer, answer_index| %>
-                          <div class="p-2 mb-2 rounded
-                                        <%= 'bg-success bg-opacity-25 border border-success' if answer_index == question.correct_index %>
-                                        <%= 'bg-danger bg-opacity-25 border border-danger' if answer_index == fq.selected_index && answer_index != question.correct_index %>
-                                        <%= 'bg-light' if answer_index != question.correct_index && answer_index != fq.selected_index %>">
-                            <strong><%= answer_index + 1 %>.</strong> <%= answer %>
-                            <% if answer_index == fq.selected_index %>
-                              <span class="badge bg-danger ms-2">あなたの回答</span>
-                            <% end %>
-                            <% if answer_index == question.correct_index %>
-                              <span class="badge bg-success ms-2">正解</span>
-                            <% end %>
-                          </div>
-                        <% end %>
-                      </div>
+                  </div>
+                </button>
+                <div class="collapse" id="question-<%= fq.id %>">
+                  <div class="card card-body bg-white mt-2">
+                    <div class="mb-2">
+                      <% question.answers.each_with_index do |answer, answer_index| %>
+                        <div class="p-2 mb-2 rounded
+                            <%= 'bg-success bg-opacity-25 border border-success' if answer_index == question.correct_index %>
+                            <%= 'bg-danger bg-opacity-25 border border-danger' if answer_index == fq.selected_index && answer_index != question.correct_index %>
+                            <%= 'bg-light' if answer_index != question.correct_index && answer_index != fq.selected_index %>">
+                          <strong><%= answer_index + 1 %>.</strong> <%= answer %>
+                          <% if answer_index == fq.selected_index %>
+                            <span class="badge bg-danger ms-2">あなたの回答</span>
+                          <% end %>
+                          <% if answer_index == question.correct_index %>
+                            <span class="badge bg-success ms-2">正解</span>
+                          <% end %>
+                        </div>
+                      <% end %>
                     </div>
                   </div>
-                <% end %>
+                </div>
               </div>
             <% end %>
           </div>
         </div>
-        <!-- Continue Button -->
         <%= link_to map_path, class: 'btn btn-secondary w-100 py-3 fw-bold' do %>
           続き
         <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
