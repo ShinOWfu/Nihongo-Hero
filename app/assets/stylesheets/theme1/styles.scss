@@ -22,7 +22,7 @@
   background-color: $gray-800;
   display: flex;
   flex-direction: column;
-  padding: 1rem 1rem 1.5rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   gap: 0.5rem; // Space between buttons
 
   form {
@@ -53,8 +53,8 @@
   color: $gray-100;
   width: 100%;
   flex: 1; // Makes buttons grow to fill available space equally
-  font-size: 1.25rem;
-  padding: 1rem 1.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  padding: 0.5rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,6 +97,27 @@
   }
 }
 
+
+.textbox-container {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  min-height: 20%;
+  max-height: 40%;
+  font-size: clamp(1.5rem, 8vw, 3rem);
+  background-color: rgba($gray-900, 0.4);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: $gray-100;
+
+  // text alignment settings
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .healthbar-container {
   width: 100%;
   margin-bottom: 0.5rem;
@@ -109,21 +130,37 @@
   text-align: center;
 }
 
-.textbox-container {
-  position: absolute;
-  bottom: 0.5rem;
-  left: 0.5rem;
-  right: 0.5rem;
-  height: 33%;
-  font-size: clamp(0.875rem, 5vw, 1.5rem);
-  background-color: rgba($gray-900, 0.4);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: $gray-100;
+.healthbar-wrapper {
+  width: 60%; // how much of the container width the hp bar takes up
+}
 
-  // text alignment settings
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.healthbar-bg {
+  position: relative; // This makes the text position relative to the bar
+  width: 100%;
+  height: 24px;
+  background-color: rgba($gray-900, 0.6);
+  border: 2px solid rgba(rgb(186, 255, 186), 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.healthbar-fill {
+  height: 100%;
+  background: linear-gradient(to bottom, #4ade80, #167e3c);
+  transition: width 0.5s ease-out;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.healthbar-text {
+  position: absolute; // Position over the bar
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); // Center it perfectly
+  color: rgba(white, 0.6);
+  font-weight: bold;
+  font-size: clamp(0.6rem, 2vw, 1rem);
+  // text-shadow: 1px 1px 1px rgb(0, 48, 12);
+  z-index: 1; // Ensure it's on top
+  white-space: nowrap;
 }

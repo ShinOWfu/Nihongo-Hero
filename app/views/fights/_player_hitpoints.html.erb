@@ -1,1 +1,6 @@
-<%= @fight.player_hitpoints %>
+<div class="healthbar-wrapper">
+  <div class="healthbar-bg">
+    <div class="healthbar-fill" style="width: <%= (@fight.player_hitpoints.to_f / @fight.user.hitpoints * 100).round %>%"></div>
+    <span class="healthbar-text"><%= @fight.player_hitpoints %> / <%= @fight.user.hitpoints %></span>
+  </div>
+</div>
