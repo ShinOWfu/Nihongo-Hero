@@ -4,21 +4,24 @@ class FightQuestionsController < ApplicationController
     question_type = params[:question_type]
     used_question_ids = FightQuestion.pluck(:question_id).uniq
 
+    latest_fight_questions = FightQuestion.where( id: FightQuestion.group(:question_id).select('MAX(id)') )
     # get all past questions answered incorrectly in THIS fight
-    incorrect_question_ids = @fight.fight_questions  # <- this is an array
+    incorrect_question_ids = latest_fight_questions  # <- this is an array
       .select{ |fq| fq.selected_index != fq.question.correct_index }
       .map do |q|
         q.question_id
       end.uniq
+
     # get all past questions answered correctly in THIS fight
-    correct_question_ids = @fight.fight_questions   # <- this is an array
+    correct_question_ids = latest_fight_questions   # <- this is an array
       .select{ |fq| fq.selected_index == fq.question.correct_index }
       .map do |q|
         q.question_id
       end.uniq
 
+
     # no questions at start of the fight -> generate one
-    if @fight.fight_questions.empty?
+    if @fight.user.fight_questions.empty?
       if question_type == "random"
         @question = Question.all.where.not(id: used_question_ids).sample
       else
@@ -45,14 +48,16 @@ class FightQuestionsController < ApplicationController
       end
     end
 
-    @fight_question = FightQuestion.find_by(fight: @fight, question: @question)
-    @fight_question ||= FightQuestion.new(fight: @fight, question: @question)
+    # MUST DUPLICATE INSTANCE & REMOVE INCORRECT_ID FROM ARRAY
+    # @fight_question = FightQuestion.find_by(fight: @fight, question: @question)
+    @fight_question = FightQuestion.new(fight: @fight, question: @question)
 
     if @fight_question.save
       redirect_to fight_fight_question_path(@fight, @fight_question)
     else
       redirect_to fight_path(@fight), alert: 'Error creating questions'
     end
+
   end
 
   def show
@@ -70,7 +75,7 @@ class FightQuestionsController < ApplicationController
 
     #Check answer and do calculate damage
     if @fight_question.selected_index.to_i == @question.correct_index
-      @damage_dealt = 5
+      @damage_dealt = 50
       @fight.enemy_hitpoints -= @damage_dealt
       flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
     else
