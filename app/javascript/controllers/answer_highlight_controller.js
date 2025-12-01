@@ -47,7 +47,7 @@ export default class extends Controller {
     }
 
     // Set delay to be longer if answer was incorrect
-    const delay = isCorrect ? 1800 : 3000
+    const delay = isCorrect ? 3800 : 5000
 
     // Wait and then submit the form reference
     setTimeout(() => {
