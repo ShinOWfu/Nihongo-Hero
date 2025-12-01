@@ -40,7 +40,9 @@ export default class extends Controller {
     if (isCorrect) {
       // If selected answer is correct -> highlight green
       event.currentTarget.classList.add("correct", "selected");
+
       const damageEl = document.createElement("div");
+      damageEl.classList.add("damage-number");
       damageEl.textContent = `-${this.damageDealtValue}`;
       this.enemyTarget.appendChild(damageEl);
 
@@ -49,6 +51,7 @@ export default class extends Controller {
       const correctButton = this.answerTargets.find(button => button.dataset.answerIndex == this.correctIndexValue)
 
       const damageEl = document.createElement("div");
+      damageEl.classList.add("damage-number");
       damageEl.textContent = `-${this.damageReceivedValue}`;
       this.playerTarget.appendChild(damageEl);
 
