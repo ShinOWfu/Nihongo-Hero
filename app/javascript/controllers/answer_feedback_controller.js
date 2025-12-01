@@ -34,10 +34,10 @@ export default class extends Controller {
     // console.log("Damage received:", this.damageReceivedValue);
     // console.log("Player target:", this.playerTarget)
     // console.log("Enemy target:", this.enemyTarget)
-    console.log("Player HP:", this.playerHpValue);
-    console.log("Enemy HP:", this.enemyHpValue);
-    console.log("Player Max HP:", this.playerMaxHpValue);
-    console.log("Enemy Max HP:", this.enemyMaxHpValue);
+    // console.log("Player HP:", this.playerHpValue);
+    // console.log("Enemy HP:", this.enemyHpValue);
+    // console.log("Player Max HP:", this.playerMaxHpValue);
+    // console.log("Enemy Max HP:", this.enemyMaxHpValue);
 
     event.preventDefault();
 
