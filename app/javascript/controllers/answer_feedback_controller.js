@@ -2,8 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="answer-feedback"
 export default class extends Controller {
-  // Create a target on the button that the user selects
-  static targets = ["answer", "player", "enemy", "enemyHealthbar", "enemyHealthText", "playerHealthbar", "playerHealthText"]
+  // All targets needed for feedback
+  static targets = ["answer", "player", "enemy", "enemyHealthbar", "enemyHealthText", "playerHealthbar", "playerHealthText", "scene"]
   // Creates getter for @question.correct_index, @damage_dealt & @damage_received
   static values = {
   correctIndex: Number,
@@ -65,13 +65,25 @@ export default class extends Controller {
       // Update the text
       this.enemyHealthTextTarget.textContent = `${newEnemyHp}HP`
 
-      // Player lunges
-      this.playerTarget.querySelector('.player-sprite').classList.add("lunge")
+      // Get the player/enemy sprites selected from within their targets
+      const playerSprite = this.playerTarget.querySelector('.player-sprite');
+      const enemySprite = this.enemyTarget.querySelector('.enemy-sprite');
 
-      // Enemy shakes after a small delay
+      // 1- Player bumps forward
+      playerSprite.classList.add("sword-strike");
+
+      // 2- On impact flash enemy + shake screen
       setTimeout(() => {
-        this.enemyTarget.querySelector('.enemy-sprite').classList.add("shake")
-      }, 200)
+        enemySprite.classList.add("hit-flash", "hit-recoil");
+        this.sceneTarget.classList.add("screen-shake");
+      }, 190); // screen shake halfway through the bump
+
+      // 3- Clean up animation classes so they can replay next time
+      setTimeout(() => {
+        playerSprite.classList.remove("sword-strike");
+        enemySprite.classList.remove("hit-flash", "hit-recoil");
+        this.sceneTarget.classList.remove("screen-shake");
+      }, 500);
 
     } else {
       // Find correct button if the answer was wrong

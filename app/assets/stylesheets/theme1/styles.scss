@@ -291,6 +291,8 @@
   white-space: nowrap;
 }
 
+// ANIMATIONS
+
 // Shake animation for the answer feedback
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -310,29 +312,46 @@
   }
 }
 
-// Player lunges right
-@keyframes lunge {
+// Player sword attack
+@keyframes sword-strike {
   0% { transform: translateX(0); }
-  40% { transform: translateX(50px); }
+  20% { transform: translateX(-8px); }    // small wind-up
+  60% { transform: translateX(100px); }   // close the gap (adjust this!)
+  75% { transform: translateX(95px); }    // hold at impact
   100% { transform: translateX(0); }
 }
 
-// Enemy lunges left (toward player)
-@keyframes lunge-left {
+// Enemy attack
+@keyframes bump-left {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-15px); }
+}
+
+// Enemy knocked back on hit
+@keyframes hit-recoil {
   0% { transform: translateX(0); }
-  40% { transform: translateX(-40px); }
+  40% { transform: translateX(12px); }
   100% { transform: translateX(0); }
 }
 
-.lunge-left {
-  animation: lunge-left 0.5s ease-in-out;
+// Screen shake on impact
+@keyframes screen-shake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-4px, 2px); }
+  40% { transform: translate(4px, -2px); }
+  60% { transform: translate(-2px, 4px); }
+  80% { transform: translate(2px, -4px); }
 }
 
-// Shake for enemy sprite when damage dealt
-.shake {
-  animation: shake 0.4s ease;
+// Flash white on hit
+@keyframes hit-flash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(2.5); }
 }
 
-.lunge {
-  animation: lunge 0.5s ease-in-out;
-}
+// Animation classes
+.sword-strike { animation: sword-strike 0.45s ease-out; }
+.bump-left { animation: bump-left 0.2s ease-out; }
+.hit-recoil { animation: hit-recoil 0.3s ease-out; }
+.screen-shake { animation: screen-shake 0.35s ease-out; }
+.hit-flash { animation: hit-flash 0.2s ease-out; }
