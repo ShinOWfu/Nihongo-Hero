@@ -51,7 +51,6 @@ export default class extends Controller {
         } else if (this.damageMultiplierValue === 0.5) {
           damageEl.classList.add("weak");
         }
-        // if multiplier 1 no extra class, just normal red damage
         damageEl.textContent = `-${this.damageDealtValue}`;
         this.enemyTarget.appendChild(damageEl);
 
@@ -66,9 +65,9 @@ export default class extends Controller {
           effectivenessEl.classList.add("effectiveness-text", "not-effective");
           effectivenessEl.textContent = "NOT EFFECTIVE...";
           this.sceneTarget.appendChild(effectivenessEl);
-}
+        }
 
-        // Calculate HP, round to get exact number and max to make it not go below 0 for the bar and update width & text
+        // HP update
         const newEnemyHp = this.enemyHpValue - this.damageDealtValue;
         const newPercent = Math.max(0, Math.round((newEnemyHp / this.enemyMaxHpValue) * 100));
         this.enemyHealthbarTarget.style.width = `${newPercent}%`;
@@ -77,10 +76,17 @@ export default class extends Controller {
         // Visual effects
         enemySprite.classList.add("hit-flash", "hit-recoil");
         this.sceneTarget.classList.add("screen-shake");
+
+        // Death animation if HP <= 0
+        if (newEnemyHp <= 0) {
+          setTimeout(() => {
+            enemySprite.classList.add("enemy-death");
+          }, 300);
+        }
       }, 270);
 
-        // Clean up animation classes
-        setTimeout(() => {
+      // Cleanup
+      setTimeout(() => {
         playerSprite.classList.remove("sword-strike");
         enemySprite.classList.remove("hit-flash", "hit-recoil");
         this.sceneTarget.classList.remove("screen-shake");
@@ -115,6 +121,13 @@ export default class extends Controller {
         // Visual effects
         playerSprite.classList.add("hit-flash", "player-recoil");
         this.sceneTarget.classList.add("screen-shake");
+
+        // Death animation if HP <= 0
+        if (newPlayerHp <= 0) {
+          setTimeout(() => {
+            playerSprite.classList.add("player-death");
+          }, 300);
+        }
       }, 270);
 
       // 3- Cleanup
