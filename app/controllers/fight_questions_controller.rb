@@ -82,20 +82,20 @@ class FightQuestionsController < ApplicationController
     if @fight_question.selected_index.to_i == @question.correct_index
       @damage_dealt = 10 * damage_multiplier
       @fight.enemy_hitpoints -= @damage_dealt
-      flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
+      # flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
     else
       @damage_received = 10
       @fight.player_hitpoints -= @damage_received
-      flash[:alert] = "不正解！ #{@damage_received}ダメージを受けた！"
+      # flash[:alert] = "不正解！ #{@damage_received}ダメージを受けた！"
     end
     #Fight over?
     if @fight.player_hitpoints <= 0
       @fight.status = 'active'
-      flash[:alert] = "敗北...体力が0になった。"
+      # flash[:alert] = "敗北...体力が0になった。"
       redirect_to fight_fight_questions_path(@fight)
     elsif @fight.enemy_hitpoints <= 0
       @fight.status = 'completed'
-      flash[:notice] = "勝利！敵を倒した！"
+      # flash[:notice] = "勝利！敵を倒した！"
       redirect_to fight_fight_questions_path(@fight)
     else
       redirect_to fight_path(@fight)
@@ -112,29 +112,27 @@ class FightQuestionsController < ApplicationController
     @fight_questions = @fight.fight_questions.all
 
     #Update level and experience points
-    experience_points
-    #Calculate the percentage of correct questions
-    @percentage_correct = percentage_correct
-  end
-
-  def experience_points
     @current_exp = @user.experience_points
     # Allocate exp points after the fight, based on enemy hp. Maybe change this later to make more sophisticated
     @fight.status == "completed" ? @exp_gained = @fight.enemy.hitpoints : @exp_gained = 0
     # Check for player level up. Assuming each level requires 100 exp. Make better later
-    @current_exp + @exp_gained / 100 > @user.level ? @level_up = true : @level_up = false
+    (@current_exp + @exp_gained) / 100 > @user.level ? @level_up = true : @level_up = false
     # Update the user level and exp
     @user.experience_points = @current_exp + @exp_gained
     @user.level = @user.experience_points / 100 if @current_exp > 100
     @user.save
-  end
-
-  def percentage_correct
+    #Calculate the percentage of correct questions
     all_count = @fight.fight_questions.all.count
     # @question = @fight.fight_questions
     correct_count = @fight.fight_questions.joins(:question).where('fight_questions.selected_index = questions.correct_index').count
-    return percentage_correct = correct_count.to_f/all_count * 100
+    @percentage_correct = correct_count.to_f/all_count * 100
+
+    # @xp_in_current_level = @user.experience_points % 100
+    @old_exp_percent = (@user.experience_points - @exp_gained) % 100
+    @new_exp_percent = @user.experience_points % 100
+
   end
+
   private
 
   def calculateDamageMultiplier

@@ -11,24 +11,29 @@
             </h1>
           </div>
           <!-- Player Info -->
-          <div class="d-flex align-items-center mb-4">
+          <div class="d-flex align-items-center mb-4"                 
+                data-controller="exp-bar" 
+                data-exp-bar-new-exp-value="<%= @new_exp_percent %>" 
+                data-exp-bar-old-exp-value="<%= @old_exp_percent %>" 
+                data-exp-bar-level-up-value="<%= @level_up %>">
             <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center text-white" style="width: 50px; height: 50px; min-width: 50px;">
-              <span class="fw-bold fs-4"><%= @user.level %></span>
+              <span class="fw-bold fs-4" data-exp-bar-target="level"><%= @user.level %></span>
             </div>
             <div class="flex-grow-1 ms-3">
               <div class="fw-bold mb-2"><%= @user.character_name ? @user.character_name : "Nihongo Hero" %></div>
               <div class="position-relative bg-light rounded-pill" style="height: 20px;">
-                <% xp_in_current_level = @user.experience_points % 100 %>
-                <div class="position-absolute top-0 start-0 h-100 rounded-pill" style="width: <%= xp_in_current_level %>%; background: linear-gradient(to right, #4a4a4a, #8a8a8a);"></div>
+                <div class="position-absolute top-0 start-0 h-100 rounded-pill progress-bar" data-exp-bar-target="progressBar"
+                style="width: <%= @old_exp_percent %>%; background: linear-gradient(to right, #4a4a4a, #8a8a8a);">
+                </div>
                 <span class="position-absolute top-50 end-0 translate-middle-y pe-2 small fw-bold">
-                  EXP <%= @user.experience_points %> / <%= (@user.level + 1)*100 %>
+                  EXP <%= @user.experience_points %> / <%= (@user.level + 1) * 100 %>
                 </span>
               </div>
               <div class="text-end small text-muted mt-1">
-                You gained +<%= @exp_gained %>XP
+                +<%= @exp_gained %> 経験値
               </div>
               <div class="text-end small text-muted mt-1">
-                <%= "You have leveled up to level #{@user.level}!!!" if @level_up = true%>
+                <%= "レベル#{@user.level}に レベルアップしました！" if @level_up = true%>
               </div>
             </div>
           </div>
@@ -61,7 +66,15 @@
                       <div class="mb-1 text-dark">
                         <%= truncate(question.question, length: 30) %>
                       </div>
-                      <div class="small text-dark">質問 <%= index + 1 %></div>
+                      <div class="small text-dark">質問 <%= index + 1 %> - <%= 
+                          if question.question_type == "grammar"
+                            "文法"
+                          elsif question.question_type == "kanji"
+                            "漢字"
+                          else
+                            "単語"
+                          end %>
+                      </div>
                     </div>
                     <div>▼</div>
                   </div>
