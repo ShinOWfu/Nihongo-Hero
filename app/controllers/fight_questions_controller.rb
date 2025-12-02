@@ -112,7 +112,7 @@ class FightQuestionsController < ApplicationController
     # Allocate exp points after the fight, based on enemy hp. Maybe change this later to make more sophisticated
     @fight.status == "completed" ? @exp_gained = @fight.enemy.hitpoints : @exp_gained = 0
     # Check for player level up. Assuming each level requires 100 exp. Make better later
-    @current_exp + @exp_gained / 100 > @user.level ? @level_up = true : @level_up = false
+    (@current_exp + @exp_gained) / 100 > @user.level ? @level_up = true : @level_up = false
     # Update the user level and exp
     @user.experience_points = @current_exp + @exp_gained
     @user.level = @user.experience_points / 100 if @current_exp > 100
