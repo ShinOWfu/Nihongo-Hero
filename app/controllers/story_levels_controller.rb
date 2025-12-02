@@ -23,7 +23,8 @@ class StoryLevelsController < ApplicationController
       session[:level_10_notified] = true  # Prevent showing multiple times
     end
     # The code for modal on map victory is below
-    @show_victory_modal = params[:show_victory] == 'true'
+    # @show_victory_modal = params[:show_victory] == 'true'
+    @show_victory_modal = @completed_level_ids.include?(10)
 
     if @show_victory_modal
       @completed_map = StoryLevel.find_by(map_node: 10)

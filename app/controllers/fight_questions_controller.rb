@@ -80,7 +80,7 @@ class FightQuestionsController < ApplicationController
 
     #Check answer and do calculate damage
     if @fight_question.selected_index.to_i == @question.correct_index
-      @damage_dealt = 10 * damage_multiplier
+      @damage_dealt = 90 * damage_multiplier
       @fight.enemy_hitpoints -= @damage_dealt
       # flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
     else
@@ -116,8 +116,8 @@ class FightQuestionsController < ApplicationController
     #Calculate the percentage of correct questions
     @percentage_correct = percentage_correct
 
-    # Needed for routing to map with modal
     @map_completed = @fight.story_level.map_node == 10 && @fight.status == "completed"
+    # Needed for routing to map with modal
 
   end
 
