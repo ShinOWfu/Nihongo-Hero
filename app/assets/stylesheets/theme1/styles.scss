@@ -27,6 +27,11 @@
     margin-right: 4%;
     font-size: 1.5rem;
   }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(117, 218, 255, 0.3), 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .fight-list {
@@ -103,6 +108,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:hover {
+    background-color: $gray-600;
+    border-color: $gray-500;
+  }
 
   // Correct & Incorrect for fight questions highlights
   &:disabled {
@@ -470,22 +480,3 @@
 .hit-flash { animation: hit-flash 0.2s ease-out; }
 .enemy-death { animation: enemy-death 1s ease-in forwards; }
 .player-death { animation: player-death 0.8s ease-out forwards; }
-
-// Only add hover on devices that have hover capability
-@media (hover: hover) {
-  .fight-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 12px rgba(117, 218, 255, 0.3), 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .btn-primary:hover {
-    background-color: $gray-600;
-    border-color: $gray-500;
-  }
-
-  .btn-action:hover {
-    background-color: $accent-gold-dark;
-    border-color: $accent-gold;
-    color: black;
-  }
-}
