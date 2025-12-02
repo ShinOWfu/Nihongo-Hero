@@ -13,13 +13,13 @@
 .login-modal {
   position: absolute;
   left: 50%;
-  top:50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba($color: white, $alpha: .6);
   width: 80%;
   margin: 0 auto;
   color: black;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .login-header{
@@ -29,5 +29,23 @@
 
   .h2 {
    border-color: yellow;
+  }
+}
+.btn-resume {
+  width: 80%;
+  padding: 14px 24px;
+  background-color: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #2d2d44;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
   }
 }
