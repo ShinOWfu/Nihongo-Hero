@@ -26,7 +26,7 @@
                 style="width: <%= @old_exp_percent %>%; background: linear-gradient(to right, #4a4a4a, #8a8a8a);">
                 </div>
                 <span class="position-absolute top-50 end-0 translate-middle-y pe-2 small fw-bold">
-                  EXP <%= @new_exp_percent %>
+                  EXP <%= @user.experience_points %> / <%= (@user.level + 1) * 100 %>
                 </span>
               </div>
               <div class="text-end small text-muted mt-1">
