@@ -82,20 +82,20 @@ class FightQuestionsController < ApplicationController
     if @fight_question.selected_index.to_i == @question.correct_index
       @damage_dealt = 10 * damage_multiplier
       @fight.enemy_hitpoints -= @damage_dealt
-      flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
+      # flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
     else
       @damage_received = 10
       @fight.player_hitpoints -= @damage_received
-      flash[:alert] = "不正解！ #{@damage_received}ダメージを受けた！"
+      # flash[:alert] = "不正解！ #{@damage_received}ダメージを受けた！"
     end
     #Fight over?
     if @fight.player_hitpoints <= 0
       @fight.status = 'active'
-      flash[:alert] = "敗北...体力が0になった。"
+      # flash[:alert] = "敗北...体力が0になった。"
       redirect_to fight_fight_questions_path(@fight)
     elsif @fight.enemy_hitpoints <= 0
       @fight.status = 'completed'
-      flash[:notice] = "勝利！敵を倒した！"
+      # flash[:notice] = "勝利！敵を倒した！"
       redirect_to fight_fight_questions_path(@fight)
     else
       redirect_to fight_path(@fight)
