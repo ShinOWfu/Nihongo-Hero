@@ -66,6 +66,8 @@ class FightQuestionsController < ApplicationController
     @fight_question = FightQuestion.find(params[:id])
     @question = @fight_question.question
     @damage_multiplier = calculateDamageMultiplier
+    @player_damage = 10 * @damage_multiplier
+    @enemy_damage = 10
   end
 
   def update

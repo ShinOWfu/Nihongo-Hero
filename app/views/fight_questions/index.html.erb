@@ -11,10 +11,10 @@
             </h1>
           </div>
           <!-- Player Info -->
-          <div class="d-flex align-items-center mb-4"                 
-                data-controller="exp-bar" 
-                data-exp-bar-new-exp-value="<%= @new_exp_percent %>" 
-                data-exp-bar-old-exp-value="<%= @old_exp_percent %>" 
+          <div class="d-flex align-items-center mb-4"
+                data-controller="exp-bar"
+                data-exp-bar-new-exp-value="<%= @new_exp_percent %>"
+                data-exp-bar-old-exp-value="<%= @old_exp_percent %>"
                 data-exp-bar-level-up-value="<%= @level_up %>">
             <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center text-white" style="width: 50px; height: 50px; min-width: 50px;">
               <span class="fw-bold fs-4" data-exp-bar-target="level"><%= @user.level %></span>
@@ -33,7 +33,7 @@
                 +<%= @exp_gained %> 経験値
               </div>
               <div class="text-end small text-muted mt-1">
-                <%= "レベル#{@user.level}に レベルアップしました！" if @level_up = true%>
+                <%= "レベル#{@user.level}に レベルアップしました！" if @level_up == true%>
               </div>
             </div>
           </div>
@@ -52,11 +52,11 @@
               <% question = fq.question %>
               <% is_correct = fq.selected_index == question.correct_index %>
               <div class="mb-2">
-                <button class="btn w-100 p-0 text-start border-0" 
-                    type="button" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target="#question-<%= fq.id %>" 
-                    aria-expanded="false" 
+                <button class="btn w-100 p-0 text-start border-0"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#question-<%= fq.id %>"
+                    aria-expanded="false"
                     aria-controls="question-<%= fq.id %>">
                   <div class="d-flex align-items-center py-3 <%= 'border-bottom' unless index == @fight_questions.length - 1 %>">
                     <div class="me-3 fs-5 <%= is_correct ? 'text-success' : 'text-danger' %>">
@@ -66,7 +66,7 @@
                       <div class="mb-1 text-dark">
                         <%= truncate(question.question, length: 30) %>
                       </div>
-                      <div class="small text-dark">質問 <%= index + 1 %> - <%= 
+                      <div class="small text-dark">質問 <%= index + 1 %> - <%=
                           if question.question_type == "grammar"
                             "文法"
                           elsif question.question_type == "kanji"
