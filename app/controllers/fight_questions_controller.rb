@@ -112,14 +112,28 @@ class FightQuestionsController < ApplicationController
     @fight_questions = @fight.fight_questions.all
 
     #Update level and experience points
-    experience_points
+    @current_exp = @user.experience_points
+    # Allocate exp points after the fight, based on enemy hp. Maybe change this later to make more sophisticated
+    @fight.status == "completed" ? @exp_gained = @fight.enemy.hitpoints : @exp_gained = 0
+    # Check for player level up. Assuming each level requires 100 exp. Make better later
+    (@current_exp + @exp_gained) / 100 > @user.level ? @level_up = true : @level_up = false
+    # Update the user level and exp
+    @user.experience_points = @current_exp + @exp_gained
+    @user.level = @user.experience_points / 100
+    @user.save
     #Calculate the percentage of correct questions
-    @percentage_correct = percentage_correct
+    all_count = @fight.fight_questions.all.count
+    # @question = @fight.fight_questions
+    correct_count = @fight.fight_questions.joins(:question).where('fight_questions.selected_index = questions.correct_index').count
+    @percentage_correct = correct_count.to_f/all_count * 100
+
+    # @xp_in_current_level = @user.experience_points % 100
+    @old_exp_percent = (@user.experience_points - @exp_gained) % 100
+    @new_exp_percent = @user.experience_points % 100
 
     @map_completed = @fight.story_level.map_node == 10 && @fight.status == "completed"
-    # Needed for routing to map with modal
-
   end
+
 
   def experience_points
     @current_exp = @user.experience_points

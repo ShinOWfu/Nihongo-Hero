@@ -1,0 +1,41 @@
+.victory-modal {
+  color: white;
+  border-radius: 20px;
+  border: none;
+
+  .victory-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    animation: bounce 1s ease infinite;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stat-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #FFD700;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    opacity: 0.9;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}

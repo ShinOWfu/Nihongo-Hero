@@ -14,8 +14,7 @@
   <%= render 'victory_modal' %>
 <% end %>
 
-<div class="map-container" style="background-image: url('<%= asset_path(@current_level&.map_image || 'default.jpg') %>');">
-<div class="map-container" style="background-image: url('<%= asset_path('village.png') %>');">
+<div class="map-container" style="background-image: url('<%= asset_path(@current_level ? "backgrounds/#{@current_level&.map_image}" : 'default.jpg') %>');">
   <div class="map-overlay" id="map-scroll" data-controller="scroll-to-current-level">
     <div class="map-header">
       <h1 class="map-title">Your Journey</h1>

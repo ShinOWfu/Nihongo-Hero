@@ -24,13 +24,14 @@ class StoryLevelsController < ApplicationController
     end
     # The code for modal on map victory is below
     # @show_victory_modal = params[:show_victory] == 'true'
-    @show_victory_modal = @completed_level_ids.include?(10)
+    @show_victory_modal = @completed_level_ids.include?(10) && params[:show_victory] == 'true'
 
     if @show_victory_modal
       @completed_map = StoryLevel.find_by(map_node: 10)
       # Get all fights from completed map level
       @map_fights = current_user.fights.where(story_level_id: @completed_map.id, status: 'completed')
-      @total_questions = @map_fights.joins(:fight_questions).count
+      @total_questions = current_user.fight_questions.count
+      @correct_answers = current_user.fight_questions.joins(:question).where('fight_questions.selected_index = questions.correct_index').count
 
     end
 
