@@ -72,21 +72,7 @@
     </div>
   </div>
 <% end %>
-  <nav class="bottom-nav">
-    <%= link_to fights_path, class: "nav-item #{'nav-item-active' if current_page?(fights_path)}" do %>
-      <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
-      <span class="nav-label">Fight History</span>
-    <% end %>
 
-    <%= link_to map_path, class: "nav-item #{'nav-item-active' if current_page?(map_path)}" do %>
-      <span class="nav-icon"><i class="fa-solid fa-map"></i></span>
-      <span class="nav-label">My Journey</span>
-    <% end %>
-
-    <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-item #{'nav-item-active' if current_page?(destroy_user_session_path)}" do %>
-      <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
-      <span class="nav-label">My Profile</span>
-    <% end %>
-  </nav>
-
+<div style="height: 80px;" aria-hidden="true">
+  <%= render 'shared/bottom_navbar' %>
 </div>

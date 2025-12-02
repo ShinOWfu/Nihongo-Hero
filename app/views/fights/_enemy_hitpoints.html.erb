@@ -1,6 +1,7 @@
 <div class="healthbar-wrapper">
   <div class="healthbar-bg">
-    <div class="healthbar-fill" style="width: <%= (@fight.enemy_hitpoints.to_f / @fight.enemy.hitpoints * 100).round %>%"></div>
-    <span class="healthbar-text"><%= @fight.enemy_hitpoints %> / <%= @fight.enemy.hitpoints %></span>
+    <div class="healthbar-fill" data-answer-feedback-target="enemyHealthbar"
+    style="width: <%= (@fight.enemy_hitpoints.to_f / @fight.enemy.hitpoints * 100).round %>%"></div>
+    <span class="healthbar-text" data-answer-feedback-target="enemyHealthText"><%= @fight.enemy_hitpoints %>HP</span>
   </div>
 </div>

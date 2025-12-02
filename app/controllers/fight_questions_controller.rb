@@ -65,6 +65,7 @@ class FightQuestionsController < ApplicationController
     @fight = Fight.find(params[:fight_id])
     @fight_question = FightQuestion.find(params[:id])
     @question = @fight_question.question
+    @damage_multiplier = calculateDamageMultiplier
   end
 
   def update
@@ -75,13 +76,7 @@ class FightQuestionsController < ApplicationController
     @fight_question.update(selected_index: fight_question_params[:selected_index])
 
     # Calculate damage multiplier
-    if @fight.enemy.weakness == @fight_question.question.question_type
-      damage_multiplier = 2
-    elsif @fight.enemy.strength == @fight_question.question.question_type
-      damage_multiplier = 0.5
-    else
-      damage_multiplier = 1
-    end
+    damage_multiplier = calculateDamageMultiplier
 
     #Check answer and do calculate damage
     if @fight_question.selected_index.to_i == @question.correct_index
@@ -141,6 +136,17 @@ class FightQuestionsController < ApplicationController
     return percentage_correct = correct_count.to_f/all_count * 100
   end
   private
+
+  def calculateDamageMultiplier
+    if @fight.enemy.weakness == @fight_question.question.question_type
+      damage_multiplier = 2
+    elsif @fight.enemy.strength == @fight_question.question.question_type
+      damage_multiplier = 0.5
+    else
+      damage_multiplier = 1
+    end
+    return damage_multiplier
+  end
 
   def fight_question_params
     params.require(:fight_question).permit(:selected_index)
