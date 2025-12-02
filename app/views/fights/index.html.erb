@@ -1,20 +1,20 @@
 <% content_for :hide_navbar, true %>
 <h2 class="text-center my-3"> Your Fights </h2>
 <div class="container">
-  <% @fights.each_with_index do |fight, index| %>
+  <% @fights.reverse.each_with_index do |fight, index| %>
     <div class="card fight-card my-3 p-3 mx-3">
       <button class="w-100 p-0 text-start border-0 bg-transparent"type="button"data-bs-toggle="collapse"
-      data-bs-target="#fight-<%= index + 1 %>"
+      data-bs-target="#fight-<%= @fights.count - index %>"
       aria-expanded="false"
-      aria-controls="fight-<%= index + 1 %>">
+      aria-controls="fight-<%= @fights.count - index %>">
         <div class="d-flex align-items-center justify-content-between px-3">
-          <h2 class="m-0 text-white">Fight <%= "#{index + 1} : #{fight.status.capitalize}" %></h2>
+          <h2 class="m-0 text-white">Fight <%= "#{@fights.count - index} : #{fight.status.capitalize}" %></h2>
           <span class="dropdown-arrow text-white">▼</span>
         </div>
       </button>
     </div>
     <!-- Fight dropdown content -->
-    <div class="collapse ms-3" id="fight-<%= index + 1 %>">
+    <div class="collapse ms-3" id="fight-<%= @fights.count - index %>">
       <div class="p-3 border-start border-light">
         <% fight.fight_questions.each_with_index do |fq, idx| %>
           <% question = fq.question %>
