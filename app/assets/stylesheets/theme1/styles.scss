@@ -214,46 +214,58 @@
 }
 
 // Damage number stylings
+
 .damage-number {
   position: absolute;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #ec1313;
-  top: 42%; // Might need to play around with this height given the sprites change
+  top: 40%;  // Might need to play around with this height given the sprites change
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: float-up 1.7s ease-out forwards;
+  animation: float-up 3s ease-out forwards;
+  z-index: 2;  // ensure it's on top
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
 }
 
 .damage-number.critical {
   color: #ffcc00;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 .damage-number.weak {
-  color: #888888;
-  font-size: 1.5rem;
+  color: #aaaaaa;
+  font-size: 2rem;
 }
 
 // Effectiveness text popup for dmg
 .effectiveness-text {
   position: absolute;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  top: 30%;
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  animation: effectiveness-fade 1.5s ease-out forwards;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  padding: 0.5rem 3rem;
   white-space: nowrap;
+  z-index: 10;
+  animation: banner-pop 3.0s ease-out forwards;
 }
 
 .effectiveness-text.super-effective {
-  color: #ffcc00;
+  color: #fff;
+  background: linear-gradient(to right, transparent, rgba(255, 150, 0, 0.85), transparent);
+  border-top: 2px solid #ffcc00;
+  border-bottom: 2px solid #ffcc00;
+  text-shadow: 0 0 10px #ff8800;
 }
 
 .effectiveness-text.not-effective {
-  color: #888888;
+  color: #ddd;
+  background: linear-gradient(to right, transparent, rgba(80, 80, 80, 0.85), transparent);
+  border-top: 2px solid #888;
+  border-bottom: 2px solid #888;
+  text-shadow: 0 0 5px #000;
 }
 
 // Textbox container
@@ -332,9 +344,33 @@
     opacity: 1;
     transform: translate(-50%, -50%);
   }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -70%);
+  }
   100% {
     opacity: 0;
     transform: translate(-50%, -100%);
+  }
+}
+
+// Banner pop for effective/not-effective
+@keyframes banner-pop {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(1.3);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.95);
   }
 }
 

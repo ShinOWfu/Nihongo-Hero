@@ -59,13 +59,13 @@ export default class extends Controller {
         if (this.damageMultiplierValue === 2) {
           const effectivenessEl = document.createElement("div");
           effectivenessEl.classList.add("effectiveness-text", "super-effective");
-          effectivenessEl.textContent = "SUPER EFFECTIVE！";
-          this.enemyTarget.appendChild(effectivenessEl);
+          effectivenessEl.textContent = "SUPER EFFECTIVE";
+          this.sceneTarget.appendChild(effectivenessEl);
         } else if (this.damageMultiplierValue === 0.5) {
           const effectivenessEl = document.createElement("div");
           effectivenessEl.classList.add("effectiveness-text", "not-effective");
           effectivenessEl.textContent = "NOT EFFECTIVE...";
-          this.enemyTarget.appendChild(effectivenessEl);
+          this.sceneTarget.appendChild(effectivenessEl);
 }
 
         // Calculate HP, round to get exact number and max to make it not go below 0 for the bar and update width & text
@@ -126,7 +126,7 @@ export default class extends Controller {
     }
 
     // Set delay to be longer if answer was incorrect
-    const delay = isCorrect ? 1700 : 3000
+    const delay = isCorrect ? 3000 : 4000
 
     // Wait and then submit the form reference
     setTimeout(() => {
