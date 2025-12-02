@@ -126,6 +126,7 @@ class FightQuestionsController < ApplicationController
     # @xp_in_current_level = @user.experience_points % 100
     @old_exp_percent = (@user.experience_points - @exp_gained) % 100
     @new_exp_percent = @user.experience_points % 100
+
   end
 
   private

@@ -66,7 +66,15 @@
                       <div class="mb-1 text-dark">
                         <%= truncate(question.question, length: 30) %>
                       </div>
-                      <div class="small text-dark">質問 <%= index + 1 %></div>
+                      <div class="small text-dark">質問 <%= index + 1 %> - <%= 
+                          if question.question_type == "grammar"
+                            "文法"
+                          elsif question.question_type == "kanji"
+                            "漢字"
+                          else
+                            "単語"
+                          end %>
+                      </div>
                     </div>
                     <div>▼</div>
                   </div>
