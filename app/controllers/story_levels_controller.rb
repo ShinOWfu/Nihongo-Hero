@@ -32,7 +32,8 @@ class StoryLevelsController < ApplicationController
       @map_fights = current_user.fights.where(story_level_id: @completed_map.id, status: 'completed')
       @total_questions = current_user.fight_questions.count
       @correct_answers = current_user.fight_questions.joins(:question).where('fight_questions.selected_index = questions.correct_index').count
-
+      @incorrect_answers = current_user.fight_questions.joins(:question).where('fight_questions.selected_index != questions.correct_index').count
+      @accuracy = (@correct_answers.to_f/@total_questions * 100).round(2)
     end
 
   end
