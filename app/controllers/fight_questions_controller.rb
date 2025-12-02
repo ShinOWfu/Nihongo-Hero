@@ -119,7 +119,7 @@ class FightQuestionsController < ApplicationController
     (@current_exp + @exp_gained) / 100 > @user.level ? @level_up = true : @level_up = false
     # Update the user level and exp
     @user.experience_points = @current_exp + @exp_gained
-    @user.level = @user.experience_points / 100 if @current_exp > 100
+    @user.level = @user.experience_points / 100
     @user.save
     #Calculate the percentage of correct questions
     all_count = @fight.fight_questions.all.count

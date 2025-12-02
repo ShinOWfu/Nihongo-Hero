@@ -1,7 +1,7 @@
 class FightsController < ApplicationController
 
   def index
-    @fights = Fight.all
+    @fights = current_user.fights
   end
 
   def show     #I can see a list of actions at the start of the fight (attack, ability, item, retreat)
