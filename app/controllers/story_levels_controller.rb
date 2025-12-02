@@ -22,5 +22,7 @@ class StoryLevelsController < ApplicationController
       flash.now[:level_10_complete] = true
       session[:level_10_notified] = true  # Prevent showing multiple times
     end
+
   end
+
 end

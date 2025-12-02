@@ -115,6 +115,10 @@ class FightQuestionsController < ApplicationController
     experience_points
     #Calculate the percentage of correct questions
     @percentage_correct = percentage_correct
+
+    # Needed for routing to map with modal
+    @map_completed = @fight.story_level.map_node == 10 && @fight.status == "completed"
+
   end
 
   def experience_points

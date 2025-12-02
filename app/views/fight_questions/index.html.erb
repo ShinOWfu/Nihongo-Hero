@@ -47,11 +47,11 @@
               <% question = fq.question %>
               <% is_correct = fq.selected_index == question.correct_index %>
               <div class="mb-2">
-                <button class="btn w-100 p-0 text-start border-0" 
-                    type="button" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target="#question-<%= fq.id %>" 
-                    aria-expanded="false" 
+                <button class="btn w-100 p-0 text-start border-0"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#question-<%= fq.id %>"
+                    aria-expanded="false"
                     aria-controls="question-<%= fq.id %>">
                   <div class="d-flex align-items-center py-3 <%= 'border-bottom' unless index == @fight_questions.length - 1 %>">
                     <div class="me-3 fs-5 <%= is_correct ? 'text-success' : 'text-danger' %>">
@@ -90,6 +90,10 @@
             <% end %>
           </div>
         </div>
-        <%= link_to map_path, class: 'btn btn-secondary w-100 py-3 fw-bold' do %>
-          続き
-        <% end %>
+        <div class="results-action">
+          <% if @map_compeleted %>
+            <%= link_to "マップに戻る", map_path(show_victory: true), class: 'btn btn-secondary w-100 py-3 fw-bold' %>
+          <% else %>
+            <%= link_to "続き", map_path, class: 'btn btn-secondary w-100 py-3 fw-bold'%>
+          <% end %>
+        </div>
