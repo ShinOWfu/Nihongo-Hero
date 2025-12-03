@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     # Calculate how many levels the user has completed
-    # @levels_cleared = @user.fights.where(status: "completed").last.pluck(:story_level_id)
+    @levels_cleared = @user.fights.where(status: "completed").last&.story_level_id
     # Calculate the average percentage of correct answers
     all_count = @user.fight_questions.all.count
     correct_count = @user.fight_questions.joins(:question).where('fight_questions.selected_index = questions.correct_index').count
-    @avg_perc_correct = correct_count.to_f/all_count * 100
+    @avg_perc_correct = (correct_count.to_f/all_count * 100).to_i
     # Calculate the streak of how many days in a row the user has completed at least one level
     @days_streak = streak
   end
