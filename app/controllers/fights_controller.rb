@@ -47,9 +47,9 @@ class FightsController < ApplicationController
     end
 
     #Hardcoding the enemies for the story_level 9 and 10 fights
-    if @story_level.id == 9
+    if @story_level == 9
       enemy = Enemy.find(10)
-    elsif @story_level.id == 10
+    elsif @story_level == 10
       enemy = Enemy.find(9)
     else
     enemy = Enemy.all.sample
