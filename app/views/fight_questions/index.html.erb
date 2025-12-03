@@ -1,5 +1,7 @@
 <% content_for :hide_navbar, true %>
-<div class="results-page" style="background-image: url('<%= asset_path("backgrounds/#{@fight.story_level.map_image}") %>');">
+<div class="results-page" data-controller="results"
+     data-results-percentage-value="<%= @percentage_correct.to_i %>"
+     data-results-victory-value="<%= @fight.status == 'completed' %>" style="background-image: url('<%= asset_path("backgrounds/#{@fight.story_level.map_image}") %>');">
   <div class="results-container">
     <!-- Victory/Defeat Banner -->
     <div class="results-banner <%= @fight.status == 'completed' ? 'victory' : 'defeat' %>">
@@ -8,15 +10,16 @@
     <!-- Battle Summary -->
     <div class="battle-summary">
       <div class="character-display">
-        <%= image_tag "character-sprites/Samurai/player_character.png", alt: "Player", class: "result-sprite #{@fight.status != 'completed' ? 'player-defeated' : ''}" %>
+        <%= image_tag "character-sprites/Samurai/player_character.png", alt: "Player", class: "result-sprite #{@fight.status != 'completed' ? 'player-defeated' : ''}", data: { results_target: "playerSprite" } %>
         <span class="character-label"><%= @user.character_name.presence || "Hero" %></span>
       </div>
       <div class="accuracy-container">
         <svg class="accuracy-circle" viewBox="0 0 120 120">
           <circle cx="60" cy="60" r="54" fill="none" stroke="#3a3a3a" stroke-width="8"/>
           <circle cx="60" cy="60" r="54" fill="none" stroke="url(#accuracyGradient)" stroke-width="8"
-                  stroke-linecap="round" transform="rotate(-90 60 60)"
-                  style="stroke-dasharray: 339.292; stroke-dashoffset: <%= 339.292 * (1 - @percentage_correct / 100.0) %>;"/>
+        stroke-linecap="round" transform="rotate(-90 60 60)"
+        data-results-target="circle"
+        style="stroke-dasharray: 339.292;"/>
           <defs>
             <linearGradient id="accuracyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#4ade80"/>
@@ -25,9 +28,9 @@
           </defs>
         </svg>
         <div class="accuracy-text">
-          <span class="accuracy-percentage"><%= @percentage_correct.to_i %>%</span>
-          </div>
-          <div class="rank-display" data-rank="<%= case @percentage_correct.to_i
+          <span class="accuracy-percentage" data-results-target="percentage"><%= @percentage_correct.to_i %>%</span>
+        </div>
+        <div class="rank-display" data-results-target="rank" data-rank="<%= case @percentage_correct.to_i
                                                 when 100 then 'S'
                                                 when 90..99 then 'A'
                                                 when 80..89 then 'B'
@@ -35,7 +38,7 @@
                                                 when 55..69 then 'D'
                                                 else 'F'
                                                 end %>">
-            <span class="rank-letter"><%= case @percentage_correct.to_i
+          <span class="rank-letter"><%= case @percentage_correct.to_i
                                         when 100 then 'S'
                                         when 90..99 then 'A'
                                         when 80..89 then 'B'
@@ -43,81 +46,81 @@
                                         when 55..69 then 'D'
                                         else 'F'
                                         end %></span>
-          </div>
-        </div>
-        <div class="character-display">
-          <%= image_tag "enemy-images/#{@fight.enemy.sprite}", alt: "Enemy", class: "result-sprite #{@fight.status == 'completed' ? 'enemy-defeated' : 'enemy-result-sprite'}" %>
-          <span class="character-label"><%= @fight.enemy.name %></span>
         </div>
       </div>
-      <!-- EXP Section -->
-      <div class="exp-section"
+      <div class="character-display">
+        <%= image_tag "enemy-images/#{@fight.enemy.sprite}", alt: "Enemy", class: "result-sprite #{@fight.status == 'completed' ? 'enemy-defeated' : 'enemy-result-sprite'}" %>
+        <span class="character-label"><%= @fight.enemy.name %></span>
+      </div>
+    </div>
+    <!-- EXP Section -->
+    <div class="exp-section"
          data-controller="exp-bar"
          data-exp-bar-new-exp-value="<%= @new_exp_percent %>"
          data-exp-bar-old-exp-value="<%= @old_exp_percent %>"
          data-exp-bar-level-up-value="<%= @level_up %>">
-        <div class="level-badge">
-          <span data-exp-bar-target="level"><%= @user.level %></span>
-        </div>
-        <div class="exp-info">
-          <div class="exp-bar-container">
-            <div class="exp-bar-fill progress-bar" data-exp-bar-target="progressBar" style="width: <%= @old_exp_percent %>%;"></div>
-            <span class="exp-text"><%= @user.experience_points %> / <%= (@user.level + 1) * 100 %></span>
-          </div>
-          <div class="exp-gained">+<%= @exp_gained %> EXP</div>
-        </div>
+      <div class="level-badge">
+        <span data-exp-bar-target="level"><%= @user.level %></span>
       </div>
-      <!-- Question History -->
-      <div class="question-history">
-        <h3 class="history-header">質問歴史</h3>
-        <div class="history-list">
-          <% @fight_questions.each_with_index do |fq, index| %>
-            <% question = fq.question %>
-            <% is_correct = fq.selected_index == question.correct_index %>
-            <div class="history-item">
-              <button class="history-item-btn"
+      <div class="exp-info">
+        <div class="exp-bar-container">
+          <div class="exp-bar-fill progress-bar" data-exp-bar-target="progressBar" style="width: <%= @old_exp_percent %>%;"></div>
+          <span class="exp-text"><%= @user.experience_points %> / <%= (@user.level + 1) * 100 %></span>
+        </div>
+        <div class="exp-gained">+<%= @exp_gained %> EXP</div>
+      </div>
+    </div>
+    <!-- Question History -->
+    <div class="question-history">
+      <h3 class="history-header">質問歴史</h3>
+      <div class="history-list">
+        <% @fight_questions.each_with_index do |fq, index| %>
+          <% question = fq.question %>
+          <% is_correct = fq.selected_index == question.correct_index %>
+          <div class="history-item">
+            <button class="history-item-btn"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#question-<%= fq.id %>"
                     aria-expanded="false">
-                <span class="result-icon <%= is_correct ? 'correct' : 'incorrect' %>">
-                  <%= is_correct ? '✓' : '✗' %>
-                </span>
-                <div class="question-info">
-                  <div class="question-text"><%= truncate(question.question, length: 28) %></div>
-                  <div class="question-meta">Q<%= index + 1 %> - <%= case question.question_type
+              <span class="result-icon <%= is_correct ? 'correct' : 'incorrect' %>">
+                <%= is_correct ? '✓' : '✗' %>
+              </span>
+              <div class="question-info">
+                <div class="question-text"><%= truncate(question.question, length: 28) %></div>
+                <div class="question-meta">Q<%= index + 1 %> - <%= case question.question_type
                                                                   when "grammar" then "文法"
                                                                   when "kanji" then "漢字"
                                                                   else "単語"
                                                                   end %></div>
-                </div>
-                <span class="chevron">▼</span>
-              </button>
-              <div class="collapse" id="question-<%= fq.id %>">
-                <div class="question-details">
-                  <% question.answers.each_with_index do |answer, answer_index| %>
-                    <div class="answer-item <%= 'correct-answer' if answer_index == question.correct_index %> <%= 'wrong-answer' if answer_index == fq.selected_index && answer_index != question.correct_index %>">
-                      <span class="answer-text"><%= answer %></span>
-                      <span class="answer-badges">
-                        <% if answer_index == fq.selected_index %>
-                          <span class="answer-badge your-answer">YOU</span>
-                        <% end %>
-                      </span>
-                    </div>
-                  <% end %>
-                </div>
+              </div>
+              <span class="chevron">▼</span>
+            </button>
+            <div class="collapse" id="question-<%= fq.id %>">
+              <div class="question-details">
+                <% question.answers.each_with_index do |answer, answer_index| %>
+                  <div class="answer-item <%= 'correct-answer' if answer_index == question.correct_index %> <%= 'wrong-answer' if answer_index == fq.selected_index && answer_index != question.correct_index %>">
+                    <span class="answer-text"><%= answer %></span>
+                    <span class="answer-badges">
+                      <% if answer_index == fq.selected_index %>
+                        <span class="answer-badge your-answer">YOU</span>
+                      <% end %>
+                    </span>
+                  </div>
+                <% end %>
               </div>
             </div>
-          <% end %>
-        </div>
-      </div>
-      <!-- Continue Button -->
-      <div class="results-action">
-        <% if @map_completed %>
-          <%= link_to "マップに戻る", map_path(show_victory: true), class: 'continue-btn' %>
-        <% else %>
-          <%= link_to "続き", map_path, class: 'continue-btn' %>
+          </div>
         <% end %>
       </div>
     </div>
+    <!-- Continue Button -->
+    <div class="results-action">
+      <% if @map_completed %>
+        <%= link_to "マップに戻る", map_path(show_victory: true), class: 'continue-btn' %>
+      <% else %>
+        <%= link_to "続き", map_path, class: 'continue-btn' %>
+      <% end %>
+    </div>
   </div>
+</div>

@@ -5,11 +5,16 @@ export default class extends Controller {
     static targets = ["level", "progressBar"]
     static values = {newExp: Number, oldExp: Number, levelUp: Boolean}
 
-    start() {
+  connect() {
+    window.addEventListener("results:complete", () => this.start(), { once: true })
+  }
+
+  start() {
+  console.log("EXP bar start() called");
   if (this.levelUpValue) {
     // --- First fill up to 100% to show level up ---
     const newLevel = parseInt(this.levelTarget.innerText)
-    this.levelTarget.innerText = newLevel -1
+    this.levelTarget.innerText = newLevel - 1
     this.progressBarTarget.style.width = '100%';
     setTimeout(()=>{
       this.progressBarTarget.classList.remove("progress-bar")
