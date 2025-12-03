@@ -2,13 +2,16 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     # Calculate how many levels the user has completed
-    @levels_cleared = @user.fights.where(status: "completed").last.pluck(:story_level_id)
+    @levels_cleared = @user.fights.where(status: "completed").last&.story_level_id
     # Calculate the average percentage of correct answers
     all_count = @user.fight_questions.all.count
     correct_count = @user.fight_questions.joins(:question).where('fight_questions.selected_index = questions.correct_index').count
     @avg_perc_correct = correct_count.to_f/all_count * 100
     # Calculate the streak of how many days in a row the user has completed at least one level 
     @days_streak = streak
+    #Leaderboard
+    @top_5_global = User.order(level: :desc).limit(5)
+    @top_5_friends = current_user.friends.order(level: :desc).limit(5)
   end
 
   def streak
@@ -44,10 +47,6 @@ class UsersController < ApplicationController
     return current_streak
   end
 
-  def leaderboard
-    @top_5_global = User.order(level: :desc).limit(5)
-    @top_5_friends = current_user.friends.order(level: :desc).limit(5)
-  end
 end
 
 #Add a friends table to the schema

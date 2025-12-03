@@ -48,14 +48,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_03_044346) do
     t.index ["user_id"], name: "index_fights_on_user_id"
   end
 
-  create_table "friends", force: :cascade do |t|
+  create_table "friendships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "friend_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["friend_user_id"], name: "index_friends_on_friend_user_id"
-    t.index ["user_id", "friend_user_id"], name: "index_friends_on_user_id_and_friend_user_id", unique: true
-    t.index ["user_id"], name: "index_friends_on_user_id"
+    t.index ["friend_user_id"], name: "index_friendships_on_friend_user_id"
+    t.index ["user_id", "friend_user_id"], name: "index_friendships_on_user_id_and_friend_user_id", unique: true
+    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -99,6 +99,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_03_044346) do
   add_foreign_key "fights", "enemies"
   add_foreign_key "fights", "story_levels"
   add_foreign_key "fights", "users"
-  add_foreign_key "friends", "users"
-  add_foreign_key "friends", "users", column: "friend_user_id"
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_user_id"
 end

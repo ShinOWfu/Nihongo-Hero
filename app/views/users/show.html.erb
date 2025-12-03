@@ -37,7 +37,16 @@
   </div>
 
   <div id="leaderboard" class="card">
-
+    <div id="leaderboard-global">
+    <% @top_5_global.each_with_index do |user, index| %>
+        <div>
+            <span><%= index + 1 %>.</span>
+            <%# image_tag user.character_sprite %>
+            <span><%= user.character_name %></span>
+            <span>LVL <%= user.level %></span>
+        </div>
+    <% end %>
+</div>
   </div>
 
 </div>
