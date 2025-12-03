@@ -8,7 +8,6 @@
   overflow-y: auto;  // scroll inside this container
   display: flex;
   flex-direction: column;
-  background-color: $gray-900;
   padding-bottom: 80px;
 
   &::before {
