@@ -386,6 +386,7 @@ button.btn-action {
   border-radius: 0.5rem;
   color: $gray-100;
   overflow-y: auto;
+   z-index: 5;
 
   // text alignment settings
   display: flex;

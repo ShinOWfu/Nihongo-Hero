@@ -36,7 +36,7 @@ class FightsController < ApplicationController
     @fight_questions = @fight.fight_questions
   end
 
-  def create  
+  def create
     #Oliver: Update the story level to the next higher level. If this is the first fight, start at 1
     if current_user.fights.count == 0
       @story_level = 1
@@ -47,9 +47,9 @@ class FightsController < ApplicationController
     end
 
     #Hardcoding the enemies for the story_level 9 and 10 fights
-    if @story_level.id == 9
+    if @story_level == 9
       enemy = Enemy.find(10)
-    elsif @story_level.id == 10
+    elsif @story_level == 10
       enemy = Enemy.find(9)
     else
     enemy = Enemy.all.sample

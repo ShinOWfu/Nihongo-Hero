@@ -184,6 +184,15 @@
       inset 12px 12px 0 -10px $accent-gold,
       inset -12px -12px 0 -10px $accent-gold;
   }
+
+  .enemy-sprite {
+  position: relative;
+  z-index: 2;
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  }
 }
 
 .enemy-frame.defeat-frame {
@@ -192,15 +201,6 @@
   .enemy-sprite {
     filter: grayscale(30%);
   }
-}
-
-.enemy-sprite {
-  position: relative;
-  z-index: 2;
-  width: 85%;
-  height: 85%;
-  object-fit: contain;
-  image-rendering: pixelated;
 }
 
 .vanquished-stamp {
