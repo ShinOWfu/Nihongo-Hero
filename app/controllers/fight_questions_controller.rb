@@ -1,6 +1,6 @@
 class FightQuestionsController < ApplicationController
   BASE_PLAYER_DAMAGE = 50
-  BASE_ENEMY_DAMAGE = 10
+  BASE_ENEMY_DAMAGE = 20
 
   def create
     @fight = Fight.find(params[:fight_id])
