@@ -1,6 +1,6 @@
 class CreateFriends < ActiveRecord::Migration[7.1]
   def change
-    create_table :friends do |t|
+    create_table :friendships do |t|
       t.references :user, null: false, foreign_key: true, index: true
       
       t.references :friend_user, null: false, foreign_key: { to_table: :users }, index: true
@@ -8,6 +8,6 @@ class CreateFriends < ActiveRecord::Migration[7.1]
       t.timestamps
     end
     # Ensure a user cannot add the same friend twice
-    add_index :friends, [:user_id, :friend_user_id], unique: true 
+    add_index :friendships, [:user_id, :friend_user_id], unique: true 
   end
 end

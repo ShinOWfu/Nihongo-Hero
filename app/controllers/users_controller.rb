@@ -21,8 +21,7 @@ class UsersController < ApplicationController
 
     # Calculate the streak of how many days in a row the user has completed at least one level
     @days_streak = streak
-
-    #for the leaderboard
+    #Leaderboard
     @top_5_global = User.order(level: :desc).limit(5)
     @top_5_friends = current_user.friends.order(level: :desc).limit(5)
   end
@@ -60,11 +59,42 @@ class UsersController < ApplicationController
     return current_streak
   end
 
-  def leaderboard
-    @top_5_global = User.order(level: :desc).limit(5)
-    @top_5_friends = current_user.friends.order(level: :desc).limit(5)
-  end
-end
+  def add_friend
+    # The identifier (character name) is passed directly via params from the form
+    char_name = params[:identifier] 
+    friend_user = User.find_by(character_name: char_name)
 
-#Add a friends table to the schema
-#Create a form that lets you add other users as friends
+    # --- VALIDATIONS ---
+    # User not found
+    unless friend_user
+      redirect_to request.referrer || root_path, alert: "User '#{char_name}' not found."
+      return
+    end
+
+    # Cannot add self
+    if friend_user == current_user
+      redirect_to request.referrer || root_path, alert: "You cannot add yourself as a friend"
+      return
+    end
+
+    # Check for existing friendship (outgoing or incoming)
+    if current_user.friends.include?(friend_user)
+      redirect_to request.referrer || root_path, alert: "#{friend_user.character_name} is already connected with you."
+      return
+    end
+    # --- END VALIDATIONS ---
+    
+    # 2. Create the new friendship (current_user is the initiator)
+    # This uses the 'friendships' association defined in the User model.
+    @friendship = Friendship.new(user_id: current_user.id, friend_user_id: friend_user.id )
+
+    # Successful Path: Redirects back to the page the form was submitted from
+    if @friendship.save
+      redirect_to request.referrer || root_path, notice: "You are now friends with #{friend_user.character_name}!"
+    else
+      # Failure Path: Redirects back to the page the form was submitted from
+      redirect_to request.referrer || root_path, alert: "Failed to add friend: #{@friendship.errors.full_messages.to_sentence}"
+    end
+  end
+
+end
