@@ -9,7 +9,7 @@
         <!-- Page Header -->
         <div class="page-header">
           <span class="page-number">No. <%= @fights.count - index %></span>
-          <h1 class="page-title">Battle Journal</h1>
+          <h1 class="page-title">戦闘記録</h1>
           <span class="page-date"><%= fight.created_at.strftime("%Y/%m/%d") %></span>
         </div>
         <!-- Scrollable Content -->
@@ -20,34 +20,34 @@
           </div>
           <!-- Enemy Display -->
           <div class="enemy-section">
-            <div class="enemy-frame <%= stats[:victory] ? 'vanquished' : '' %>">
+            <div class="enemy-frame" style="background-image: url('<%= asset_path("backgrounds/#{fight.story_level.map_image}") %>');">
               <%= image_tag "enemy-images/#{fight.enemy.sprite}", alt: fight.enemy.name, class: "enemy-sprite" %>
-              <% if stats[:victory] %>
-                <div class="vanquished-stamp">VANQUISHED</div>
-              <% end %>
             </div>
+            <% if stats[:victory] %>
+              <div class="vanquished-stamp">討伐</div>
+            <% end %>
             <div class="enemy-name"><%= fight.enemy.name %></div>
           </div>
           <!-- Stats Row -->
           <div class="stats-row">
             <div class="stat-item">
-              <div class="stat-circle" style="--accuracy: <%= stats[:accuracy] %>">
+              <div class="stat-circle accuracy-<%= stats[:rank].downcase %>" style="--accuracy: <%= stats[:accuracy] %>">
                 <span><%= stats[:accuracy] %>%</span>
               </div>
-              <span class="stat-label">Accuracy</span>
+              <span class="stat-label">正解率</span>
             </div>
-            <div class="stat-item rank-item">
+            <div class="stat-item">
               <span class="rank-value rank-<%= stats[:rank].downcase %>"><%= stats[:rank] %></span>
-              <span class="stat-label">Rank</span>
+              <span class="stat-label">ランク</span>
             </div>
             <div class="stat-item">
               <span class="score-value"><%= stats[:correct] %>/<%= stats[:total] %></span>
-              <span class="stat-label">Score</span>
+              <span class="stat-label">得点</span>
             </div>
           </div>
           <!-- Questions Section -->
           <div class="questions-section">
-            <h2 class="section-title">Questions</h2>
+            <h2 class="section-title">質問歴史</h2>
             <% fight.fight_questions.each_with_index do |fq, q_index| %>
               <% question = fq.question %>
               <% is_correct = fq.selected_index == question.correct_index %>
