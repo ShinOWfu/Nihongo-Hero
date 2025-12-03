@@ -11,17 +11,17 @@
   <div class="card profile-card">
     <div class="profile-stats">
       <div class="stat-box">
-        <span class="stat-value">42</span>
+        <span class="stat-value"><%= @levels_cleared %></span>
         <span class="stat-label">Levels Cleared</span>
       </div>
 
       <div class="stat-box">
-        <span class="stat-value">100%</span>
+        <span class="stat-value"><%= @avg_perc_correct %></span>
         <span class="stat-label">Accuracy</span>
       </div>
 
       <div class="stat-box">
-        <span class="stat-value"> 100 </span>
+        <span class="stat-value"><%= @days_streak %></span>
         <span class="stat-label">Day Streak</span>
       </div>
     </div>
@@ -34,6 +34,10 @@
         options_for_select([["N1", "N1"], ["N2", "N2"], ["N3", "N3"]], @user.japanese_difficulty),
         class: "form-select" %>
     </div>
+  </div>
+
+  <div id="leaderboard" class="card">
+
   </div>
 
 </div>
