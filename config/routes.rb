@@ -18,5 +18,9 @@ Rails.application.routes.draw do
     resources :fight_questions, only: [:show, :create, :index]
   end
   resources :fight_questions, only: [:update]
-  resources :users, only: [:show, :update]
+  resources :users, only: [:show, :update] do
+    collection do
+      post "add_friend"
+    end
+  end
 end
