@@ -3,8 +3,15 @@
     <div class="modal-content victory-modal">
       <div class="modal-body text-center p-5">
         <div class="victory-title mb-4">
-          <%= image_tag "character-sprites/Samurai/player_character.png", alt: "Player Character", class: "player-sprite" %>
-          <%= image_tag "enemy-images/dead_shroom.png", alt: "dead-shroom", class: "player-sprite dead-shroom" %>
+          <div class="villagers-container">
+          <%= image_tag "villagers/man.png", alt: "man", class: "villager" %>
+          <%= image_tag "villagers/oldman.png", alt: "oldman", class: "villager" %>
+          <%= image_tag "villagers/woman.png", alt: "woman", class: "villager" %>
+          <%= image_tag "villagers/boy.png", alt: "boy", class: "villager" %>
+          <%= image_tag "villagers/pig.png", alt: "pig", class: "villager" %>
+          <%= image_tag "villagers/cat.png", alt: "cat", class: "villager" %>
+          </div>
+          <%= image_tag "character-sprites/Samurai/player_character.png", alt: "Player Character", class: "victory-player-sprite" %>
         </div>
 
         <div class="victory-stats mb-4">
