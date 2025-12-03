@@ -8,33 +8,33 @@
         </div>
 
         <div class="victory-stats mb-4">
-          <h3>Congratulations!</h3>
-          <p class="lead">Map 1 : Conquered</p>
+          <h3>おめでとう!</h3>
+          <p class="lead">マップ 1 :  完了</p>
 
           <div class="stats-grid mt-4">
             <div class="stat-item">
               <div class="stat-value"><%= @total_questions %></div>
-              <div class="stat-label">Questions Answered</div>
+              <div class="stat-label">問題</div>
             </div>
 
             <div class="stat-item">
               <div class="stat-value"><%= @correct_answers %></div>
-              <div class="stat-label">Correct Answers</div>
+              <div class="stat-label">正解</div>
             </div>
 
             <div class="stat-item">
               <div class="stat-value"><%= @accuracy %>%</div>
-              <div class="stat-label">Accuracy</div>
+              <div class="stat-label">正解率</div>
             </div>
 
             <div class="stat-item">
               <div class="stat-value"><%= @incorrect_answers %></div>
-              <div class="stat-label">Incorrect Answers</div>
+              <div class="stat-label">不正解</div>
             </div>
           </div>
         </div>
 
-        <%= link_to "Start Next Map →", map_path, class: "btn btn-victory btn-lg px-5 py-3 fw-bold" %>
+        <%= link_to "次のマップ →", map_path, class: "btn btn-victory btn-lg px-5 py-3 fw-bold" %>
       </div>
     </div>
   </div>
