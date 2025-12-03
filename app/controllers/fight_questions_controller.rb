@@ -1,4 +1,7 @@
 class FightQuestionsController < ApplicationController
+  BASE_PLAYER_DAMAGE = 50
+  BASE_ENEMY_DAMAGE = 10
+
   def create
     @fight = Fight.find(params[:fight_id])
     question_type = params[:question_type]
@@ -65,9 +68,9 @@ class FightQuestionsController < ApplicationController
     @fight = Fight.find(params[:fight_id])
     @fight_question = FightQuestion.find(params[:id])
     @question = @fight_question.question
-    @damage_multiplier = calculateDamageMultiplier
-    @player_damage = 10 * @damage_multiplier
-    @enemy_damage = 10
+    @damage_multiplier = calculate_damage_multiplier
+    @player_damage = BASE_PLAYER_DAMAGE * @damage_multiplier
+    @enemy_damage = BASE_ENEMY_DAMAGE
   end
 
   def update
@@ -78,15 +81,15 @@ class FightQuestionsController < ApplicationController
     @fight_question.update(selected_index: fight_question_params[:selected_index])
 
     # Calculate damage multiplier
-    damage_multiplier = calculateDamageMultiplier
+    damage_multiplier = calculate_damage_multiplier
 
     #Check answer and do calculate damage
     if @fight_question.selected_index.to_i == @question.correct_index
-      @damage_dealt = 50 * damage_multiplier
+      @damage_dealt = BASE_PLAYER_DAMAGE * damage_multiplier
       @fight.enemy_hitpoints -= @damage_dealt
       # flash[:notice] = "正解！ 敵に#{@damage_dealt}ダメージ！"
     else
-      @damage_received = 10
+      @damage_received = BASE_ENEMY_DAMAGE
       @fight.player_hitpoints -= @damage_received
       # flash[:alert] = "不正解！ #{@damage_received}ダメージを受けた！"
     end
@@ -161,7 +164,7 @@ class FightQuestionsController < ApplicationController
 
   private
 
-  def calculateDamageMultiplier
+  def calculate_damage_multiplier
     if @fight.enemy.weakness == @fight_question.question.question_type
       damage_multiplier = 2
     elsif @fight.enemy.strength == @fight_question.question.question_type
