@@ -108,6 +108,8 @@ export default class extends Controller {
 
       // 1- Enemy lunges toward player
       enemySprite.classList.add("enemy-strike");
+      this.audio = new Audio("/assets/damage.mp3");
+      this.audio.play();
 
       setTimeout(() => {
         // Damage number
