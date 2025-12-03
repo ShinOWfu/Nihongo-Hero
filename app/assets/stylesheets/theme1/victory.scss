@@ -108,11 +108,10 @@
   margin-bottom: 2rem !important;
 
   .victory-player-sprite {
-    height: 1vh;
+    height: 13vh;
     max-width: 100px;
     object-fit: contain;
-    animation: bounceIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-               float 3s ease-in-out infinite 0.7s;
+    animation: none;
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
     z-index: 2;
     position: relative;
@@ -136,7 +135,7 @@
     max-height: 70px;
     object-fit: contain;
     animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards,
-               gentleFloat 4s ease-in-out infinite;
+             villagerBounce 2.5s ease-in-out infinite;
     filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
     image-rendering: pixelated;
 
