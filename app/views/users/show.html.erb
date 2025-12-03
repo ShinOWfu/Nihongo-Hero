@@ -35,20 +35,36 @@
         class: "form-select" %>
     </div>
   </div>
+  
+<div id="leaderboard" class="card profile-card">
+  <h3 class="leaderboard-title">Leaderboard</h3>
 
-  <div class="card profile-card">
-    <div id="leaderboard-global">
-    <% @top_5_global.each_with_index do |user, index| %>
-        <div>
-            <div><%= index + 1 %>.</div>
-            <%# image_tag user.character_sprite %>
-            <div><%= user.character_name %></div>
-            <div>LVL <%= user.level %></div>
-        </div>
-      <% end %>
-    </div>
+  <div class="leaderboard-toggle">
+    <button class="toggle-btn active" data-target="global">Global</button>
+    <button class="toggle-btn" data-target="friends">Friends</button>
   </div>
 
+  <div id="leaderboard-global" class="leaderboard-list">
+    <% @top_5_global.each_with_index do |user, index| %>
+      <div class="leaderboard-row">
+        <span class="leaderboard-rank"><%= index + 1 %></span>
+        <span class="leaderboard-name"><%= user.character_name %></span>
+        <span class="leaderboard-level">LVL <%= user.level %></span>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="leaderboard-friends" class="leaderboard-list" style="display: none;">
+    <% @top_5_friends.each_with_index do |user, index| %>
+      <div class="leaderboard-row">
+        <span class="leaderboard-rank"><%= index + 1 %></span>
+        <span class="leaderboard-name"><%= user.character_name %></span>
+        <span class="leaderboard-level">LVL <%= user.level %></span>
+      </div>
+    <% end %>
+  </div>
+</div>
+  
   <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-inner mb-8">
     <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Connect with other Heroes</h3>
     
@@ -72,6 +88,9 @@
     </p>
 </div>
 
+<div class="card profile-card">
+  <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-action" %>
 </div>
 
+</div>
 <%= render 'shared/bottom_navbar' %>
