@@ -63,7 +63,7 @@
     "strength": "words"
   },
   {
-    "name": "NECROMANCER",
+    "name": "ネクロマンサー",
     "hitpoints": 120,
     "sprite": "necromancer.png",
     "weakness": "nothing",

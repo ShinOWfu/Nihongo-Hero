@@ -1,69 +1,106 @@
 <% content_for :hide_navbar, true %>
-<h2 class="text-center my-3"><strong>Your Fights</strong></h2>
-<div class="fight-index-page container">
-  <% @fights.reverse.each_with_index do |fight, index| %>
-    <div class="card fight-card my-3 p-3 mx-3">
-      <button class="w-100 p-0 text-start border-0 bg-transparent"type="button"data-bs-toggle="collapse"
-      data-bs-target="#fight-<%= @fights.count - index %>"
-      aria-expanded="false"
-      aria-controls="fight-<%= @fights.count - index %>">
-        <div class="d-flex align-items-center justify-content-between px-3">
-          <h2 class="m-0 text-white">Fight <%= "#{@fights.count - index} : #{fight.status.capitalize}" %></h2>
-          <span class="dropdown-arrow text-white">▼</span>
+<div class="battle-journal" data-controller="battle-journal">
+  <!-- Pages Container -->
+  <div class="journal-pages" data-battle-journal-target="pagesContainer">
+    <% @fights.each_with_index do |fight, index| %>
+      <% stats = @fight_stats[fight.id] %>
+      <!-- Single Page -->
+      <div class="journal-page" data-battle-journal-target="page" data-fight-id="<%= fight.id %>">
+        <!-- Page Header -->
+        <div class="page-header">
+          <span class="page-number">No. <%= @fights.count - index %></span>
+          <h1 class="page-title">戦闘記録</h1>
+          <span class="page-date"><%= fight.created_at.strftime("%Y/%m/%d") %></span>
         </div>
-      </button>
-    </div>
-    <!-- Fight dropdown content -->
-    <div class="collapse ms-3" id="fight-<%= @fights.count - index %>">
-      <div class="p-3 border-start border-light">
-        <% fight.fight_questions.each_with_index do |fq, idx| %>
-          <% question = fq.question %>
-          <% is_correct = fq.selected_index == question.correct_index %>
-          <!-- Nested question dropdown -->
-          <button class="btn w-100 p-0 text-start border-0"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#question-<%= fq.id %>"
-          aria-expanded="false"
-          aria-controls="question-<%= fq.id %>">
-            <div class="d-flex align-items-center py-2 border-bottom">
-              <div class="me-3 <%= is_correct ? 'text-success' : 'text-danger' %> fs-5">
-                <%= is_correct ? '✓' : '✗' %>
-              </div>
-              <div>
-                <div class="text-light">
-                  <%= truncate(question.question, length: 40) %>
-                </div>
-                <div class="small text-secondary">Question <%= idx + 1 %></div>
-              </div>
-              <div class="ms-auto">▼</div>
+        <!-- Scrollable Content -->
+        <div class="page-scroll">
+          <!-- Victory/Defeat Banner -->
+          <div class="page-banner <%= stats[:victory] ? 'victory' : 'defeat' %>">
+            <span><%= stats[:victory] ? '勝利' : '敗北' %></span>
+          </div>
+          <!-- Enemy Display -->
+          <div class="enemy-section">
+            <div class="enemy-frame" style="background-image: url('<%= asset_path("backgrounds/#{fight.story_level.map_image}") %>');">
+              <%= image_tag "enemy-images/#{fight.enemy.sprite}", alt: fight.enemy.name, class: "enemy-sprite" %>
             </div>
-          </button>
-          <!-- Nested question details -->
-          <div class="collapse" id="question-<%= fq.id %>">
-            <div class="card card-body bg-dark mt-2">
-              <% question.answers.each_with_index do |answer, a_index| %>
-                <div class="p-2 mb-1 rounded
-                <%= 'bg-success bg-opacity-25 border border-success' if a_index == question.correct_index %>
-                <%= 'bg-danger bg-opacity-25 border border-danger' if a_index == fq.selected_index && a_index != question.correct_index %>
-                <%= 'bg-secondary bg-opacity-25' if a_index != question.correct_index && a_index != fq.selected_index %>">
-                  <strong><%= a_index + 1 %>.</strong> <%= answer %>
-                  <% if a_index == fq.selected_index %>
-                    <span class="badge bg-danger ms-2">あなたの回答</span>
-                  <% end %>
-                  <% if a_index == question.correct_index %>
-                    <span class="badge bg-success ms-2">正解</span>
-                  <% end %>
-                </div>
-              <% end %>
+            <% if stats[:victory] %>
+              <div class="vanquished-stamp">討伐</div>
+            <% end %>
+            <div class="enemy-name"><%= fight.enemy.name %></div>
+          </div>
+          <!-- Stats Row -->
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-circle accuracy-<%= stats[:rank].downcase %>" style="--accuracy: <%= stats[:accuracy] %>">
+                <span><%= stats[:accuracy] %>%</span>
+              </div>
+              <span class="stat-label">正解率</span>
+            </div>
+            <div class="stat-item">
+              <span class="rank-value rank-<%= stats[:rank].downcase %>"><%= stats[:rank] %></span>
+              <span class="stat-label">ランク</span>
+            </div>
+            <div class="stat-item">
+              <span class="score-value"><%= stats[:correct] %>/<%= stats[:total] %></span>
+              <span class="stat-label">得点</span>
             </div>
           </div>
-        <% end %>
+          <!-- Questions Section -->
+          <div class="questions-section">
+            <h2 class="section-title">質問歴史</h2>
+            <% fight.fight_questions.each_with_index do |fq, q_index| %>
+              <% question = fq.question %>
+              <% is_correct = fq.selected_index == question.correct_index %>
+              <div class="question-card">
+                <div class="question-header">
+                  <span class="q-number">Q<%= q_index + 1 %></span>
+                  <span class="q-result <%= is_correct ? 'correct' : 'incorrect' %>">
+                    <%= is_correct ? '✓' : '✗' %>
+                  </span>
+                  <span class="q-type"><%= case question.question_type
+                                          when "grammar" then "文法"
+                                          when "kanji" then "漢字"
+                                          else "単語"
+                                          end %></span>
+                </div>
+                <div class="question-text"><%= question.question %></div>
+                <div class="answers-list">
+                  <% question.answers.each_with_index do |answer, a_index| %>
+                    <div class="answer-row
+                <%= 'correct-answer' if a_index == question.correct_index %>
+                <%= 'wrong-answer' if a_index == fq.selected_index && a_index != question.correct_index %>">
+                      <span class="answer-text"><%= answer %></span>
+                      <% if a_index == fq.selected_index %>
+                        <span class="answer-badge <%= a_index == question.correct_index ? 'correct' : 'selected' %>">選択</span>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
-  <% end %>
-  <div style="height: 80px;" aria-hidden="true">
-    <%= render 'shared/bottom_navbar' %>
+    <% end %>
+    <!-- Empty State -->
+    <% if @fights.empty? %>
+      <div class="journal-page empty-page">
+        <div class="page-scroll">
+          <h1 class="page-title">Battle Journal</h1>
+          <div class="empty-message">
+            <p>まだ戦闘記録がありません</p>
+            <p>冒険を始めよう！</p>
+            <%= link_to "マップへ", map_path, class: "btn btn-action" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-
+  <!-- Page Dots -->
+  <div class="page-dots" data-battle-journal-target="pageDots">
+    <% @fights.each_with_index do |fight, index| %>
+      <span class="dot <%= 'active' if index == 0 %>" data-page="<%= index %>" data-action="click->battle-journal#goToPage"></span>
+    <% end %>
   </div>
+  <%= render 'shared/bottom_navbar' %>
+</div>

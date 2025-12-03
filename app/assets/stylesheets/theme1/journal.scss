@@ -1,0 +1,600 @@
+// ============================================
+// BATTLE JOURNAL
+// ============================================
+
+// ============================================
+// MAIN CONTAINER
+// ============================================
+
+.battle-journal {
+  min-height: 100dvh;
+  background: $gray-900;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  padding-bottom: 0;
+}
+
+// ============================================
+// PAGES CONTAINER
+// ============================================
+
+.journal-pages {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1rem;
+
+  // Hide scrollbar
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// ============================================
+// SINGLE PAGE (card)
+// ============================================
+
+.journal-page {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+
+  background: $gray-800;
+  border: 1px solid $gray-700;
+  border-radius: $border-radius;
+
+  max-height: calc(100dvh - 120px);
+  margin-bottom: 0.5rem;
+}
+
+// ============================================
+// PAGE HEADER
+// ============================================
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid $gray-700;
+  background: rgba($gray-900, 0.5);
+  border-radius: $border-radius $border-radius 0 0;
+}
+
+.page-number {
+  font-size: 0.85rem;
+  color: $gray-400;
+  font-weight: 500;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $accent-gold;
+  margin: 0;
+}
+
+.page-date {
+  font-size: 0.85rem;
+  color: $gray-500;
+}
+
+// ============================================
+// SCROLLABLE CONTENT
+// ============================================
+
+.page-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+// ============================================
+// VICTORY/DEFEAT BANNER
+// ============================================
+
+.page-banner {
+  text-align: center;
+  padding: 0.75rem 1.75rem;
+  margin: 0 -1rem 1rem -1rem;
+
+  span {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+  }
+
+  &.victory {
+    background: linear-gradient(to right, transparent, rgba(34, 197, 94, 0.9), transparent);
+    border-top: 2px solid #4ade80;
+    border-bottom: 2px solid #4ade80;
+    span {
+      color: #fff;
+      text-shadow:
+        0 0 10px #22c55e,
+        0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &.defeat {
+    background: linear-gradient(to right, transparent, rgba(220, 38, 38, 0.9), transparent);
+    border-top: 2px solid #f87171;
+    border-bottom: 2px solid #f87171;
+    span {
+      color: #fff;
+      text-shadow:
+        0 0 10px #dc2626,
+        0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+// ============================================
+// ENEMY SECTION
+// ============================================
+
+.enemy-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.enemy-frame {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid $gray-500;
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  // Background image (set via inline style)
+  background-size: cover;
+  background-position: center;
+
+  // Dark overlay so sprite pops
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+
+  // Gold corner decorations
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: $border-radius;
+    z-index: 3;
+    pointer-events: none;
+    box-shadow:
+      inset 12px 12px 0 -10px $accent-gold,
+      inset -12px -12px 0 -10px $accent-gold;
+  }
+}
+
+.enemy-frame.defeat-frame {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+
+  .enemy-sprite {
+    filter: grayscale(30%);
+  }
+}
+
+.enemy-sprite {
+  position: relative;
+  z-index: 2;
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.vanquished-stamp {
+  position: relative;
+  margin-top: -12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f87171;
+  background: $gray-800;
+  padding: 0.3rem 1rem;
+  border: 2px solid #dc2626;
+  border-radius: 4px;
+  letter-spacing: 2px;
+  transform: rotate(-3deg);
+  z-index: 5;
+}
+
+.enemy-name {
+  margin-top: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $gray-100;
+}
+
+// ============================================
+// STATS ROW
+// ============================================
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1.25rem 1rem;
+  margin: 1.25rem 0;
+  background: $gray-900;
+  border: 1px solid $gray-600;
+  border-radius: $border-radius;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: $gray-400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+// Accuracy circle
+.stat-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  // Default red (F - lowest)
+  background: conic-gradient(
+    #f87171 calc(var(--accuracy) * 1%),
+    $gray-600 calc(var(--accuracy) * 1%)
+  );
+
+  // S - gold (100%)
+  &.accuracy-s {
+    background: conic-gradient(
+      #ffd700 calc(var(--accuracy) * 1%),
+      $gray-600 calc(var(--accuracy) * 1%)
+    );
+  }
+
+  // A - green (80-99%)
+  &.accuracy-a {
+    background: conic-gradient(
+      #22c55e calc(var(--accuracy) * 1%),
+      $gray-600 calc(var(--accuracy) * 1%)
+    );
+  }
+
+  // B - blue (60-79%)
+  &.accuracy-b {
+    background: conic-gradient(
+      #3b82f6 calc(var(--accuracy) * 1%),
+      $gray-600 calc(var(--accuracy) * 1%)
+    );
+  }
+
+  // C - amber (40-59%)
+  &.accuracy-c {
+    background: conic-gradient(
+      #eab308 calc(var(--accuracy) * 1%),
+      $gray-600 calc(var(--accuracy) * 1%)
+    );
+  }
+
+  // D - orange (20-39%)
+  &.accuracy-d {
+    background: conic-gradient(
+      #f97316 calc(var(--accuracy) * 1%),
+      $gray-600 calc(var(--accuracy) * 1%)
+    );
+  }
+
+  // F - red (0-19%) - default, no class needed
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    background: $gray-900;
+    border-radius: 50%;
+  }
+
+  span {
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $gray-100;
+  }
+}
+
+// Rank
+.rank-value {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.rank-s { color: $accent-gold; text-shadow: 0 0 8px $accent-gold-glow; }
+  &.rank-a { color: #4ade80; }
+  &.rank-b { color: #60a5fa; }
+  &.rank-c { color: #c084fc; }
+  &.rank-d { color: #fb923c; }
+  &.rank-f { color: #f87171; }
+}
+
+// Score
+.score-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $gray-100;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ============================================
+// QUESTIONS SECTION
+// ============================================
+
+.questions-section {
+  margin-top: 1rem;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $gray-100;
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid $gray-700;
+  text-align: center;
+}
+
+// ============================================
+// QUESTION CARD
+// ============================================
+
+.question-card {
+  background: $gray-900;
+  border: 1px solid $gray-600;
+  border-radius: $border-radius-sm;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.q-number {
+  font-size: 1rem;
+  font-weight: 700;
+  color: $gray-100;
+}
+
+.q-result {
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  &.correct { color: #4ade80; }
+  &.incorrect { color: #f87171; }
+}
+
+.q-type {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: $gray-400;
+  background: $gray-700;
+  padding: 0.15rem 0.5rem;
+  border-radius: $border-radius-sm;
+}
+
+.question-text {
+  font-size: 1rem;
+  color: $gray-100;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+// ============================================
+// ANSWERS LIST
+// ============================================
+
+.answers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.answer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: $border-radius-sm;
+  background: $gray-800;
+  color: $gray-200;
+  font-size: 0.95rem;
+
+  &.correct-answer {
+    background: rgba(34, 197, 94, 0.25);
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    color: #86efac;
+  }
+
+  &.wrong-answer {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+  }
+}
+
+.answer-badge {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: $border-radius-sm;
+  font-weight: 700;
+
+  &.correct {
+    background: #16a34a;
+    color: white;
+  }
+
+  &.selected {
+    background: #dc2626;
+    color: white;
+  }
+}
+
+// ============================================
+// PAGE DOTS
+// ============================================
+
+.page-dots {
+  position: fixed;
+  bottom: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba($gray-800, 0.95);
+  border-radius: 20px;
+  border: 1px solid $gray-700;
+  z-index: 20;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $gray-600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: $gray-400;
+    }
+
+    &.active {
+      background: $accent-gold;
+      transform: scale(1.4);
+    }
+  }
+}
+
+// ============================================
+// EMPTY STATE
+// ============================================
+
+.empty-page {
+  .page-scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .empty-message {
+    margin-top: 3rem;
+
+    p {
+      font-size: 1.2rem;
+      color: $gray-400;
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: 380px) {
+  .page-title {
+    font-size: 1.3rem;
+  }
+
+  .enemy-frame {
+    width: 160px;
+    height: 160px;
+
+    &::after {
+      box-shadow:
+        inset 10px 10px 0 -8px $accent-gold,
+        inset -10px -10px 0 -8px $accent-gold;
+    }
+
+    &.victory-frame {
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+  }
+  }
+
+  .vanquished-stamp {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .enemy-name {
+    font-size: 1.3rem;
+  }
+
+  .stat-circle {
+    width: 55px;
+    height: 55px;
+
+    &::before {
+      width: 42px;
+      height: 42px;
+    }
+
+    span {
+      font-size: 0.9rem;
+    }
+  }
+
+  .rank-value {
+    font-size: 2.25rem;
+    height: 55px;
+  }
+
+  .score-value {
+    font-size: 1.5rem;
+    height: 55px;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+}
