@@ -59,14 +59,14 @@
     "name": "鬼の王",
     "hitpoints": 100,
     "sprite": "demon_boss.png",
-    "weakness": "nothing",
+    "weakness": "kanji",
     "strength": "words"
   },
   {
     "name": "ネクロマンサー",
-    "hitpoints": 120,
+    "hitpoints": 50,
     "sprite": "necromancer.png",
     "weakness": "nothing",
-    "strength": "words"
+    "strength": "grammar"
   }
 ]

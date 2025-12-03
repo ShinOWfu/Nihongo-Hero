@@ -51,3 +51,20 @@ enemies_data.each do |enemy|
   )
 end
 puts 'Generated enemies!'
+
+# users seeds
+puts 'Generating users'
+user_file_path = Rails.root.join('db', 'seeds', 'users.json')
+users_data = JSON.parse(File.read(user_file_path))
+users_data.each do |user|
+  User.create(
+    email: user["email"],
+    password: "123456",
+    password_confirmation: "123456",
+    character_name: user['character_name'],
+    experience_points: user['experience_points'],
+    level: user['level']
+  )
+
+end
+puts 'Generated users!'

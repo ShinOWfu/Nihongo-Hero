@@ -22,36 +22,51 @@ class FightQuestionsController < ApplicationController
       .map do |q|
         q.question_id
       end.uniq
-
-
-    # no questions at start of the fight -> generate one
-    if @fight.user.fight_questions.empty?
-      if question_type == "random"
-        @question = Question.all.where.not(id: used_question_ids).sample
+    
+    # HARDCODING the questions for fight 9 and 10. Remove after Pitch
+    if @fight.story_level.id == 9
+      if @fight.fight_questions.length == 0
+        @question = Question.find(19)
       else
-        @question = Question.where(question_type: question_type).where.not(id: used_question_ids).all.sample
+        @question = Question.find(4)
+      end
+    elsif @fight.story_level.id == 10
+      if @fight.fight_questions.length == 0
+        @question = Question.find(19)
+      elsif @fight.fight_questions.length == 1
+        @question = Question.find(3)
+      else
+        @question = Question.find(12)
       end
     else
-      # 1. 60% → incorrect question
-      if incorrect_question_ids.any? && rand < 0.6
-        if question_type == "random"
-          @question = Question.find(incorrect_question_ids.sample)
-        else
-          @question = Question.where(id: incorrect_question_ids, question_type: question_type).sample
-          @question ||= Question.where(question_type: question_type).sample
-        end
-        # 2. 40% → NEW first, then CORRECT
-      else
-        if question_type == "random"
-          @question = Question.where.not(id: used_question_ids).sample
-          @question ||= Question.find(correct_question_ids.sample) if correct_question_ids.any?
-        else
-          @question = Question.where(question_type: question_type).where.not(id: used_question_ids).sample
-          @question ||= Question.where(id: correct_question_ids, question_type: question_type).sample
-        end
-      end
+          # no questions at start of the fight -> generate one
+          if @fight.user.fight_questions.empty?
+            if question_type == "random"
+              @question = Question.all.where.not(id: used_question_ids).sample
+            else
+              @question = Question.where(question_type: question_type).where.not(id: used_question_ids).all.sample
+            end
+          else
+            # 1. 60% → incorrect question
+            if incorrect_question_ids.any? && rand < 0.6
+              if question_type == "random"
+                @question = Question.find(incorrect_question_ids.sample)
+              else
+                @question = Question.where(id: incorrect_question_ids, question_type: question_type).sample
+                @question ||= Question.where(question_type: question_type).sample
+              end
+              # 2. 40% → NEW first, then CORRECT
+            else
+              if question_type == "random"
+                @question = Question.where.not(id: used_question_ids).sample
+                @question ||= Question.find(correct_question_ids.sample) if correct_question_ids.any?
+              else
+                @question = Question.where(question_type: question_type).where.not(id: used_question_ids).sample
+                @question ||= Question.where(id: correct_question_ids, question_type: question_type).sample
+              end
+            end
+          end
     end
-
     # MUST DUPLICATE INSTANCE & REMOVE INCORRECT_ID FROM ARRAY
     # @fight_question = FightQuestion.find_by(fight: @fight, question: @question)
     @fight_question = FightQuestion.new(fight: @fight, question: @question)

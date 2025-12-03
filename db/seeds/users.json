@@ -1,0 +1,30 @@
+[
+  {
+    "email": "test@test",
+    "encrypted_password": "123456",
+    "character_name": "Taro",
+    "experience_points": "1450",
+    "level": "14"
+  },
+  {
+    "email": "test@test2",
+    "encrypted_password": "123456",
+    "character_name": "NanoBanana",
+    "experience_points": "2730",
+    "level": "27"
+  },
+  {
+    "email": "test@test3",
+    "encrypted_password": "123456",
+    "character_name": "Leo",
+    "experience_points": "8100",
+    "level": "81"
+  },
+  {
+    "email": "test@test4",
+    "encrypted_password": "123456",
+    "character_name": "Jonathan",
+    "experience_points": "980",
+    "level": "9"
+  }
+]
