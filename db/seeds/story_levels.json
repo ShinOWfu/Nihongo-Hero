@@ -1,52 +1,52 @@
 [
   {
-    "story_content": "あなたは小さな村に到着しました。村人たちが困っている様子です。「最近、森に怪しい影が現れるんです」と村長が言いました。",
+    "story_content": "小さな村に到着。村人が怯えている。「山から怪しい影が来るんです...助けてください」",
     "map_image": "tree.png",
     "map_node": 1
   },
   {
-    "story_content": "森の入口に着きました。木々の間から不思議な音が聞こえてきます。あなたは勇気を出して、森の中に進むことにしました。",
+    "story_content": "森の崖に着いた。村人の話では、山への道はこの先にあるらしい。進むしかない。",
     "map_image": "forest_cliff.png",
     "map_node": 2
   },
   {
-    "story_content": "森の奥で古い神社を見つけました。鳥居の前に、光る石が置いてあります。「これは何だろう？」と思いながら、石を拾い上げました。",
+    "story_content": "湖畔で古い橋を見つけた。壊れかけているが、渡るしかない。向こう岸に何かが見える...",
     "map_image": "forest_shore.png",
     "map_node": 3
   },
   {
-    "story_content": "突然、霧が立ち込めてきました。前が見えません。「誰かいるのか？」と声をかけると、霧の中から影が近づいてきます。",
+    "story_content": "森が急に暗くなった。木々の間から影が近づいてくる。「誰だ！」",
     "map_image": "dark_forest.png",
     "map_node": 4
   },
   {
-    "story_content": "山の麓に到着しました。ここから頂上までの道のりは険しそうです。でも、村を救うためには進むしかありません。",
+    "story_content": "丘の上に出た。ついに山が見えた！でも、まだ遠い。日が暮れる前に進まないと。",
     "map_image": "hilltop_tree.png",
     "map_node": 5
   },
   {
-    "story_content": "山道の途中で、古い石碑を見つけました。そこには不思議な文字が刻まれています。「この文字は...古代の言葉だ！」",
-    "map_image": "tree.png",
+    "story_content": "夕暮れの平原を走る。山が近づいてきた。村人たちの顔が頭に浮かぶ。必ず守る。",
+    "map_image": "sunset_plains.png",
     "map_node": 6
   },
   {
-    "story_content": "洞窟の入口に着きました。中から冷たい風が吹いてきます。村人の話では、この洞窟に秘密が隠されているそうです。",
-    "map_image": "tree.png",
+    "story_content": "山道を登り始めた。空気が冷たい。上から不気味な気配を感じる...",
+    "map_image": "mountains.png",
     "map_node": 7
   },
   {
-    "story_content": "洞窟の奥で、大きな扉を発見しました。扉には複雑な模様が描かれています。「ここを開ければ、謎が解けるかもしれない」",
-    "map_image": "tree.png",
+    "story_content": "高原に出た。頂上まであと少し。ここまで来たら、もう戻れない。",
+    "map_image": "plains_2.png",
     "map_node": 8
   },
   {
-    "story_content": "扉の向こうには、広い部屋がありました。部屋の中央に、光り輝く剣が立っています。「これが伝説の剣なのか...」",
-    "map_image": "tree.png",
+    "story_content": "最後の崖。険しいが、頂上が見える。影の正体がそこにいる。覚悟を決めろ。",
+    "map_image": "cliff_with_rocks.png",
     "map_node": 9
   },
   {
-    "story_content": "ついに最後の戦いの時が来ました。村を脅かす存在がここにいます。あなたは剣を握りしめ、決意を固めました。「必ず、村を守る！」",
-    "map_image": "tree.png",
+    "story_content": "オーロラが輝く頂上。影の主が待っていた。「村を脅かすのはお前か！」最後の戦いだ！",
+    "map_image": "aurora_mountains.png",
     "map_node": 10
   }
 ]

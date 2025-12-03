@@ -108,7 +108,7 @@
   margin-bottom: 2rem;
 
   .player-sprite {
-    height: 30vh;
+    height: 20vh;
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
@@ -117,7 +117,7 @@
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
 
     &.dead-shroom {
-      height: 25vh;
+      height: 18vh;
       max-height: 100px;
       animation: popIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s backwards,
                  shake 0.3s ease-in-out 0.9s;
