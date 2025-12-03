@@ -98,6 +98,9 @@
 .btn-victory{
   background-color: $accent-gold;
   color: black;
+  &:hover {
+    background-color: $accent-gold-glow;
+  }
 }
 
 .btn-primary {
