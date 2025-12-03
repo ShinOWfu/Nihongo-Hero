@@ -35,7 +35,7 @@
         class: "form-select" %>
     </div>
   </div>
-  
+
 <div id="leaderboard" class="card profile-card">
   <h3 class="leaderboard-title">Leaderboard</h3>
 
@@ -64,28 +64,24 @@
     <% end %>
   </div>
 </div>
-  
-  <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-inner mb-8">
-    <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Connect with other Heroes</h3>
-    
-    <%# Using form_with with direct URL targeting the controller action %>
-    <%= form_with(url: add_friend_users_path, method: :post, local: true, class: "flex flex-col sm:flex-row gap-3") do |form| %>
-      
-      <%# Input field for the friend's identifier (Character Name) %>
-      <%= form.text_field :identifier, 
-          placeholder: "Enter hero's Character Name", 
-          required: true, 
-          class: "flex-1 p-3 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 transition-colors w-full shadow-sm text-gray-700" %>
-      
-      <%# Submission button %>
-      <%= form.button "Add Hero", 
-          type: 'submit', 
-          class: "bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:bg-blue-700 transition-colors flex items-center justify-center whitespace-nowrap transform active:scale-95" %>
-    <% end %>
-    
-    <p class="text-sm text-gray-500 mt-3 italic">
-        Find a user's exact character name (case sensitive) to add them.
-    </p>
+
+<div class="card profile-card">
+  <h3>Connect with other Heroes</h3>
+
+  <%= form_with(url: add_friend_users_path, method: :post, local: true, style: "display: flex; flex-direction: row; gap: 0.75rem; align-items: center;") do |form| %>
+    <%= form.text_field :identifier,
+        placeholder: "Enter Character Name",
+        required: true,
+        style: "flex: 1; padding: 0.75rem; background-color: #374151; border: 1px solid #4b5563; border-radius: 0.5rem; color: #f3f4f6;" %>
+
+    <%= form.button "Add Hero",
+        type: 'submit',
+        style: "padding: 0.75rem 1.5rem; background-color: #d4af37; color: #111827; font-weight: bold; border: none; border-radius: 0.5rem; cursor: pointer; white-space: nowrap;" %>
+  <% end %>
+
+  <p style="font-size: 0.875rem; color: #9ca3af; margin-top: 0.75rem; font-style: italic;">
+    Find a user's exact character name (case sensitive) to add them.
+  </p>
 </div>
 
 <div class="card profile-card">

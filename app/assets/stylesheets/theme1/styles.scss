@@ -16,6 +16,13 @@
     margin-right: 1rem;
     margin-bottom: 1rem;
     padding: 1rem;
+
+    &h3 {
+      font-size: clamp(1.3rem, 4vw, 3rem);
+      font-weight: bold;
+      color: $accent-gold
+
+    }
   }
 
   label {
