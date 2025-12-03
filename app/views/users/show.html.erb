@@ -36,17 +36,17 @@
     </div>
   </div>
 
-  <div id="leaderboard" class="card">
+  <div class="card profile-card">
     <div id="leaderboard-global">
     <% @top_5_global.each_with_index do |user, index| %>
         <div>
-            <span><%= index + 1 %>.</span>
+            <div><%= index + 1 %>.</div>
             <%# image_tag user.character_sprite %>
-            <span><%= user.character_name %></span>
-            <span>LVL <%= user.level %></span>
+            <div><%= user.character_name %></div>
+            <div>LVL <%= user.level %></div>
         </div>
-    <% end %>
-</div>
+      <% end %>
+    </div>
   </div>
 
 
