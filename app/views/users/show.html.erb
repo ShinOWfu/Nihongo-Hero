@@ -1,6 +1,6 @@
 <% content_for :hide_navbar, true %>
 
-<div class="profile-page">
+<div class="profile-page container">
 
   <div class="profile-sprite-outer">
     <div class="profile-sprite-holder">
@@ -12,17 +12,17 @@
     <div class="profile-stats">
       <div class="stat-box">
         <span class="stat-value"><%= @levels_cleared %></span>
-        <span class="stat-label">Levels Cleared</span>
+        <span class="stat-label">Levels<br>Cleared</span>
       </div>
 
       <div class="stat-box">
-        <span class="stat-value"><%= @avg_perc_correct %></span>
-        <span class="stat-label">Accuracy</span>
+        <span class="stat-value"><%= @avg_perc_correct %>%</span>
+        <span class="stat-label">Question<br>Accuracy</span>
       </div>
 
       <div class="stat-box">
         <span class="stat-value"><%= @days_streak %></span>
-        <span class="stat-label">Day Streak</span>
+        <span class="stat-label">Day<br>Streak</span>
       </div>
     </div>
   </div>
@@ -36,12 +36,11 @@
     </div>
   </div>
 
-  <div id="leaderboard" class="card">
+  <div id="leaderboard" class="card" style="height=: 80px;">
 
   </div>
 
+
 </div>
 
-<div class="bottom-navbar" style="height: 80px;" aria-hidden="true">
-  <%= render 'shared/bottom_navbar' %>
-</div>
+<%= render 'shared/bottom_navbar' %>

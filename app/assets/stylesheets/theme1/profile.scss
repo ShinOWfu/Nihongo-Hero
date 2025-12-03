@@ -5,9 +5,26 @@
 
 .profile-page {
   height: 100vh;
+  overflow-y: auto;  // scroll inside this container
   display: flex;
   flex-direction: column;
-  background-image: "crane_pattern.jpg";
+  background-color: $gray-900;
+  padding-bottom: 80px;
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("crane_pattern.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+    filter: contrast(3);
+  }
 }
 
 .profile-sprite-outer {
@@ -41,22 +58,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: $gray-700;
-  border: 2px solid $accent-gold-glow;
+  background-color: $gray-600;
+  border: 4px solid $accent-gold-glow;
   border-radius: 0.5rem;
   padding: 0.5rem;
   aspect-ratio: 1;
   position: relative;
+  max-height: 20rem;
 }
 
 .stat-value {
-  font-size: clamp(1.7rem, 4vw, 1.5rem);  // Scales with viewport
+  font-size: clamp(1.7rem, 4vw, 3rem);  // Scales with viewport
   font-weight: bold;
   color: $accent-gold;
 }
 
 .stat-label {
-  font-size: clamp(1rem, 2vw, 0.75rem);  // Scales with viewport
+  font-size: clamp(1rem, 4vw, 3rem);  // Scales with viewport
   color: $gray-300;
   text-align: center;
   font-weight: bold;
