@@ -90,3 +90,19 @@
 
 </div>
 <%= render 'shared/bottom_navbar' %>
+
+
+<script>
+document.addEventListener('turbo:load', () => {
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.dataset.target;
+      document.getElementById('leaderboard-global').style.display = target === 'global' ? 'block' : 'none';
+      document.getElementById('leaderboard-friends').style.display = target === 'friends' ? 'block' : 'none';
+    });
+  });
+});
+</script>
