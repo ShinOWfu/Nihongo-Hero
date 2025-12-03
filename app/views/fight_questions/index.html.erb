@@ -1,5 +1,5 @@
 <% content_for :hide_navbar, true %>
-<div class="results-page">
+<div class="results-page" style="background-image: url('<%= asset_path("backgrounds/#{@fight.story_level.map_image}") %>');">
   <div class="results-container">
     <!-- Victory/Defeat Banner -->
     <div class="results-banner <%= @fight.status == 'completed' ? 'victory' : 'defeat' %>">
@@ -7,12 +7,10 @@
     </div>
     <!-- Battle Summary -->
     <div class="battle-summary">
-      <!-- Player -->
       <div class="character-display">
         <%= image_tag "character-sprites/Samurai/player_character.png", alt: "Player", class: "result-sprite #{@fight.status != 'completed' ? 'player-defeated' : ''}" %>
-        <span class="character-label"><%= @user.character_name.presence || "Nihongo Hero" %></span>
+        <span class="character-label"><%= @user.character_name.presence || "Hero" %></span>
       </div>
-      <!-- Accuracy Circle -->
       <div class="accuracy-container">
         <svg class="accuracy-circle" viewBox="0 0 120 120">
           <circle cx="60" cy="60" r="54" fill="none" stroke="#3a3a3a" stroke-width="8"/>
@@ -30,13 +28,13 @@
           <span class="accuracy-percentage"><%= @percentage_correct.to_i %>%</span>
           </div>
           <div class="rank-display" data-rank="<%= case @percentage_correct.to_i
-                                                  when 100 then 'S'
-                                                  when 90..99 then 'A'
-                                                  when 80..89 then 'B'
-                                                  when 70..79 then 'C'
-                                                  when 55..69 then 'D'
-                                                  else 'F'
-                                                  end %>">
+                                                when 100 then 'S'
+                                                when 90..99 then 'A'
+                                                when 80..89 then 'B'
+                                                when 70..79 then 'C'
+                                                when 55..69 then 'D'
+                                                else 'F'
+                                                end %>">
             <span class="rank-letter"><%= case @percentage_correct.to_i
                                         when 100 then 'S'
                                         when 90..99 then 'A'
@@ -47,7 +45,6 @@
                                         end %></span>
           </div>
         </div>
-        <!-- Enemy -->
         <div class="character-display">
           <%= image_tag "enemy-images/#{@fight.enemy.sprite}", alt: "Enemy", class: "result-sprite #{@fight.status == 'completed' ? 'enemy-defeated' : 'enemy-result-sprite'}" %>
           <span class="character-label"><%= @fight.enemy.name %></span>
@@ -65,7 +62,7 @@
         <div class="exp-info">
           <div class="exp-bar-container">
             <div class="exp-bar-fill" data-exp-bar-target="progressBar" style="width: <%= @old_exp_percent %>%;"></div>
-            <span class="exp-text">EXP <%= @user.experience_points %> / <%= (@user.level + 1) * 100 %></span>
+            <span class="exp-text"><%= @user.experience_points %> / <%= (@user.level + 1) * 100 %></span>
           </div>
           <div class="exp-gained">+<%= @exp_gained %> EXP</div>
         </div>
@@ -82,34 +79,34 @@
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#question-<%= fq.id %>"
-                    aria-expanded="false"
-                    aria-controls="question-<%= fq.id %>">
-                <div class="result-icon <%= is_correct ? 'correct' : 'incorrect' %>">
+                    aria-expanded="false">
+                <span class="result-icon <%= is_correct ? 'correct' : 'incorrect' %>">
                   <%= is_correct ? '✓' : '✗' %>
-                </div>
+                </span>
                 <div class="question-info">
-                  <div class="question-text">
-                    <%= truncate(question.question, length: 30) %>
-                  </div>
-                  <div class="question-meta">質問 <%= index + 1 %> - <%= case question.question_type
-                                                                      when "grammar" then "文法"
-                                                                      when "kanji" then "漢字"
-                                                                      else "単語"
-                                                                      end %></div>
+                  <div class="question-text"><%= truncate(question.question, length: 28) %></div>
+                  <div class="question-meta">Q<%= index + 1 %> - <%= case question.question_type
+                                                                  when "grammar" then "文法"
+                                                                  when "kanji" then "漢字"
+                                                                  else "単語"
+                                                                  end %></div>
                 </div>
-                <div class="chevron">▼</div>
+                <span class="chevron">▼</span>
               </button>
               <div class="collapse" id="question-<%= fq.id %>">
                 <div class="question-details">
                   <% question.answers.each_with_index do |answer, answer_index| %>
                     <div class="answer-item <%= 'correct-answer' if answer_index == question.correct_index %> <%= 'wrong-answer' if answer_index == fq.selected_index && answer_index != question.correct_index %>">
-                      <strong><%= answer_index + 1 %>.</strong> <%= answer %>
-                      <% if answer_index == fq.selected_index %>
-                        <span class="answer-badge your-answer">YOU</span>
-                      <% end %>
-                      <% if answer_index == question.correct_index %>
-                        <span class="answer-badge correct">正解</span>
-                      <% end %>
+                      <span class="answer-number"><%= answer_index + 1 %>.</span>
+                      <span class="answer-text"><%= answer %></span>
+                      <span class="answer-badges">
+                        <% if answer_index == fq.selected_index %>
+                          <span class="answer-badge your-answer">YOU</span>
+                        <% end %>
+                        <% if answer_index == question.correct_index %>
+                          <span class="answer-badge correct">正解</span>
+                        <% end %>
+                      </span>
                     </div>
                   <% end %>
                 </div>

@@ -3,20 +3,39 @@
 // Page wrapper
 .results-page {
   min-height: 100dvh;
-  background: linear-gradient(180deg, $gray-900 0%, $gray-800 100%);
   padding: 1rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+  }
 }
 
 .results-container {
   max-width: 500px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  padding: 0 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 // Victory/Defeat Banner
 .results-banner {
   text-align: center;
   padding: 1rem 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 
   h1 {
     font-size: 2.5rem;
@@ -29,7 +48,6 @@
     background: linear-gradient(to right, transparent, rgba(34, 197, 94, 0.85), transparent);
     border-top: 2px solid #4ade80;
     border-bottom: 2px solid #4ade80;
-    border-radius: 0;
     h1 {
       color: #fff;
       text-shadow: 0 0 10px #22c55e;
@@ -40,7 +58,6 @@
     background: linear-gradient(to right, transparent, rgba(220, 38, 38, 0.85), transparent);
     border-top: 2px solid #f87171;
     border-bottom: 2px solid #f87171;
-    border-radius: 0;
     h1 {
       color: #fff;
       text-shadow: 0 0 10px #dc2626;
@@ -48,16 +65,16 @@
   }
 }
 
-// Battle Summary (Player | Accuracy | Enemy)
+// Battle Summary
 .battle-summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 1rem;
-  background: $gray-800;
-  border: 1px solid $gray-700;
+  padding: 1rem;
+  background: rgba($gray-800, 0.85);
+  border: 1px solid rgba($gray-700, 0.5);
   border-radius: 12px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .character-display {
@@ -69,8 +86,8 @@
 }
 
 .result-sprite {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
   image-rendering: pixelated;
 }
@@ -92,7 +109,7 @@
 }
 
 .character-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: $gray-300;
   text-align: center;
 }
@@ -100,8 +117,8 @@
 // Accuracy Circle
 .accuracy-container {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   flex-shrink: 0;
 }
 
@@ -119,15 +136,14 @@
 }
 
 .accuracy-percentage {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: $accent-gold;
 }
 
-// Rank Display
 .rank-display {
   position: absolute;
-  bottom: -12px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -135,7 +151,7 @@
 }
 
 .rank-letter {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 900;
 }
 
@@ -150,18 +166,19 @@
 .exp-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  background: $gray-800;
-  border: 1px solid $gray-700;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  background: rgba($gray-800, 0.85);
+  border: 1px solid rgba($gray-700, 0.5);
   border-radius: 12px;
-  padding: 0.50rem 1rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .level-badge {
-  width: 50px;
-  height: 50px;
-  min-width: 50px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  font-size: 1.25rem;
   border-radius: 50%;
   background: linear-gradient(135deg, #1a3a2e, #0d2620);
   border: 2px solid #22c55e;
@@ -170,28 +187,19 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 1.5rem;
   box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
 }
 
 .exp-info {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.character-name {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: $gray-100;
+  min-width: 0;
 }
 
 .exp-bar-container {
   position: relative;
-  height: 16px;
+  height: 14px;
   background: $gray-700;
-  border-radius: 8px;
+  border-radius: 7px;
   overflow: hidden;
 }
 
@@ -200,7 +208,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 7px;
   background: linear-gradient(to right, #22c55e, #4ade80);
   transition: width 1s ease-out;
 }
@@ -210,32 +218,32 @@
   top: 50%;
   right: 0.5rem;
   transform: translateY(-50%);
-  font-size: 0.625rem;
+  font-size: 0.5rem;
   font-weight: bold;
   color: $gray-100;
 }
 
 .exp-gained {
   text-align: right;
-  font-size: 0.625rem;
+  font-size: 0.6rem;
   color: #4ade80;
   margin-top: 0.125rem;
 }
 
 .level-up-text {
   text-align: right;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: $accent-gold;
-  margin-top: 0.25rem;
+  margin-top: 0.125rem;
 }
 
 // Question History
 .question-history {
-  background: $gray-800;
-  border: 1px solid $gray-700;
+  background: rgba($gray-800, 0.85);
+  border: 1px solid rgba($gray-700, 0.5);
   border-radius: 12px;
   padding: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .history-header {
@@ -272,10 +280,6 @@
   font-size: 1.25rem;
   font-weight: bold;
   margin-right: 0.75rem;
-  width: auto;
-  height: auto;
-  background: none;
-  border-radius: 0;
 
   &.correct {
     color: #4ade80;
@@ -288,46 +292,48 @@
 
 .question-info {
   flex-grow: 1;
+  min-width: 0;
 }
 
 .question-text {
   color: $gray-100;
   margin-bottom: 0.25rem;
+  font-size: 0.875rem;
 }
 
 .question-meta {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: $gray-400;
 }
 
 .chevron {
-  color: $gray-400;
+  color: $gray-500;
+  font-size: 0.75rem;
   transition: transform 0.3s;
-  font-size: 1.25rem;
 }
 
 .history-item-btn[aria-expanded="true"] .chevron {
   transform: rotate(180deg);
 }
 
-// Question Details (expanded)
+// Question Details
 .question-details {
-  background: $gray-900;
+  background: rgba($gray-900, 0.9);
   border-radius: 8px;
-  padding: 0.75rem;
+  padding: 0.5rem;
   margin-bottom: 0.75rem;
 }
 
 .answer-item {
-  padding: 0.5rem 0.75rem;
-  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
   border-radius: 6px;
   background: $gray-800;
   color: $gray-200;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
 
   &:last-child {
     margin-bottom: 0;
@@ -344,17 +350,26 @@
   }
 }
 
-.answer-content {
+.answer-number {
+  font-weight: bold;
+  min-width: 1.25rem;
+}
+
+.answer-text {
   flex-grow: 1;
 }
 
+.answer-badges {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
 .answer-badge {
-  display: inline-block;
-  padding: 0.125rem 0.5rem;
+  padding: 0.125rem 0.4rem;
   border-radius: 4px;
-  font-size: 0.625rem;
+  font-size: 0.55rem;
   font-weight: bold;
-  margin-left: 0.5rem;
 
   &.correct {
     background: #22c55e;
@@ -376,8 +391,36 @@
   border: none;
   border-radius: 12px;
   color: #052e16;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
+}
+
+// Mobile adjustments
+@media (max-width: 380px) {
+  .result-sprite {
+    width: 50px;
+    height: 50px;
+  }
+
+  .accuracy-container {
+    width: 70px;
+    height: 70px;
+  }
+
+  .accuracy-percentage {
+    font-size: 0.9rem;
+  }
+
+  .rank-letter {
+    font-size: 1rem;
+  }
+
+  .level-badge {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    font-size: 1rem;
+  }
 }
