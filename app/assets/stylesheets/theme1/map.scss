@@ -143,6 +143,11 @@
     0 10px 20px rgba(0, 0, 0, 0.6),
     0 0 40px rgba($accent-gold, 0.5);
   border-width: 4px;
+
+  &::after {
+    transform: translateX(-50%) scale(0.926);
+    height: 62px;
+  }
 }
 
 // Hide connector on last completed
@@ -274,6 +279,62 @@
   font-weight: 700;
   white-space: nowrap;
   letter-spacing: 2px;
+}
+
+// ===== COMPLETED STORY BUBBLE =====
+
+.completed-story-bubble {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 16px);
+  transform: translateY(-50%) scale(0);
+  transform-origin: left center;
+  background: rgba($gray-900, 0.95);
+  border: 2px solid $accent-gold;
+  border-radius: $border-radius;
+  padding: 10px 14px;
+  width: 110px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  pointer-events: none;
+
+  // Triangle pointer (pointing left)
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-right-color: $accent-gold;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-right-color: rgba($gray-900, 0.95);
+    z-index: 1;
+  }
+}
+
+.completed-story-bubble--visible {
+  transform: translateY(-50%) scale(1);
+  opacity: 1;
+}
+
+.completed-story-bubble-content {
+  color: $gray-200;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+  writing-mode: horizontal-tb;  // force horizontal text for japanese txt
 }
 
 // ===== FINAL LEVEL (Level 10) =====
@@ -428,21 +489,21 @@
   background: rgba($gray-900, 0.9);
   border: 2px solid $accent-gold;
   border-radius: $border-radius;
-  padding: 14px 18px;
-  max-width: 260px;
+  padding: 10px 14px;
+  max-width: 220px;
   backdrop-filter: blur(10px);
   box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.3),
     0 0 15px rgba($accent-gold, 0.15);
-  margin-top: 20px;
+  margin-top: 16px;
   position: relative;
   z-index: 3;
 }
 
 .story-bubble-content {
   color: $gray-100;
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-size: 0.8rem;
+  line-height: 1.5;
   text-align: center;
 }
 

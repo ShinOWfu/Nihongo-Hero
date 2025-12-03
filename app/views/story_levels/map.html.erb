@@ -36,9 +36,10 @@
         <div class="level-row">
           <% if is_completed %>
             <div class="level-node node-completed <%= 'node-final' if is_final %>"
-                 data-controller="completed-level"
-                 data-action="click->completed-level#focus"
-              data-completed-level-background-value="<%= asset_path("backgrounds/#{level.map_image}") %>">
+       data-controller="completed-level"
+       data-action="click->completed-level#focus"
+              data-completed-level-background-value="<%= asset_path("backgrounds/#{level.map_image}") %>"
+              data-completed-level-story-value="<%= level.story_content %>">
               <span class="node-icon">
                 <% if is_final %>
                   <i class="fa-solid fa-torii-gate"></i>
@@ -47,6 +48,11 @@
                 <% end %>
               </span>
               <span class="node-label"><%= is_final ? 'Complete' : level.id %></span>
+              <div class="completed-story-bubble" data-completed-level-target="storyBubble">
+                <div class="completed-story-bubble-content">
+                  <%= level.story_content %>
+                </div>
+              </div>
             </div>
           <% elsif is_current %>
             <div class="current-level-wrapper" data-scroll-to-current-level-target="current">
