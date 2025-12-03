@@ -1,6 +1,6 @@
 <% content_for :hide_navbar, true %>
 <h2 class="text-center my-3"><strong>Your Fights</strong></h2>
-<div class="container">
+<div class="fight-index-page container">
   <% @fights.reverse.each_with_index do |fight, index| %>
     <div class="card fight-card my-3 p-3 mx-3">
       <button class="w-100 p-0 text-start border-0 bg-transparent"type="button"data-bs-toggle="collapse"
@@ -64,4 +64,6 @@
   <% end %>
   <div style="height: 80px;" aria-hidden="true">
     <%= render 'shared/bottom_navbar' %>
+  </div>
+
   </div>

@@ -56,7 +56,7 @@
   align-items: center;
   position: relative;
   padding: 20px 0 40px;
-  gap: 20px;
+  gap: 50px;
 }
 
 // The connecting trail line (gray - locked portion)
@@ -86,8 +86,8 @@
 // ===== LEVEL NODES =====
 
 .level-node {
-  width: 90px;
-  height: 90px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -99,12 +99,12 @@
 }
 
 .node-icon {
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   line-height: 1;
 }
 
 .node-label {
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 700;
   margin-top: 4px;
 }
@@ -113,6 +113,7 @@
 
 .node-completed {
   background: linear-gradient(145deg, $gray-700, $gray-800);
+  cursor: pointer;
   box-shadow:
     0 5px 0 $gray-900,
     0 8px 15px rgba(0, 0, 0, 0.5);
@@ -127,11 +128,25 @@
     left: 50%;
     transform: translateX(-50%);
     width: 12px;
-    height: 28px;
+    height: 56px;
     background: $accent-gold;
     border-radius: 6px;
     z-index: -1;
     box-shadow: 0 0 10px rgba($accent-gold, 0.3);
+  }
+}
+
+.node-completed--focused {
+  transform: scale(1.08);
+  box-shadow:
+    0 6px 0 $gray-900,
+    0 10px 20px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba($accent-gold, 0.5);
+  border-width: 4px;
+
+  &::after {
+    transform: translateX(-50%) scale(0.926);
+    height: 62px;
   }
 }
 
@@ -140,17 +155,36 @@
   display: none;
 }
 
+// ===== PLAYER SPRITE =====
+
+.map-player-sprite {
+  position: absolute;
+  right: calc(90%);
+  top: 80px;
+  transform: translateY(-50%);
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+  animation: map-player-idle 2s ease-in-out infinite;
+}
+
+@keyframes map-player-idle {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-50%) scale(1.05); }
+}
+
 // Completed final level
 .node-completed.node-final {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
 
   .node-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .node-label {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -159,41 +193,165 @@
 // ===== LOCKED NODE =====
 
 .node-locked {
-  width: 80px;
-  height: 80px;
+  position: relative;
+  width: 120px;
+  height: 120px;
   background: rgba($gray-700, 0.6);
   box-shadow:
     0 4px 0 $gray-800,
     0 6px 12px rgba(0, 0, 0, 0.4);
   color: $gray-500;
   backdrop-filter: blur(4px);
+  cursor: pointer;
 
   .node-icon {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     opacity: 0.5;
   }
 
   .node-label {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     opacity: 0.5;
   }
+
+  &:active {
+    transform: translateY(3px);
+    box-shadow:
+      0 1px 0 $gray-800,
+      0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// ===== MYSTERY BUBBLE =====
+
+.mystery-bubble {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 16px);
+  transform: translateY(-50%) scale(0);
+  transform-origin: right center;
+  background: rgba($gray-900, 0.95);
+  border: 2px solid $gray-500;
+  border-radius: $border-radius;
+  padding: 10px 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  pointer-events: none;
+
+  // Triangle pointer
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-left-color: $gray-500;
+  }
+
+  // Inner triangle (to match background)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left-color: rgba($gray-900, 0.95);
+    z-index: 1;
+  }
+}
+
+.mystery-bubble--visible {
+  transform: translateY(-50%) scale(1);
+  opacity: 1;
+}
+
+.mystery-bubble-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: $gray-400;
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 2px;
+}
+
+// ===== COMPLETED STORY BUBBLE =====
+
+.completed-story-bubble {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 16px);
+  transform: translateY(-50%) scale(0);
+  transform-origin: left center;
+  background: rgba($gray-900, 0.95);
+  border: 2px solid $accent-gold;
+  border-radius: $border-radius;
+  padding: 10px 14px;
+  width: 110px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  pointer-events: none;
+
+  // Triangle pointer (pointing left)
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-right-color: $accent-gold;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-right-color: rgba($gray-900, 0.95);
+    z-index: 1;
+  }
+}
+
+.completed-story-bubble--visible {
+  transform: translateY(-50%) scale(1);
+  opacity: 1;
+}
+
+.completed-story-bubble-content {
+  color: $gray-200;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+  writing-mode: horizontal-tb;  // force horizontal text for japanese txt
 }
 
 // ===== FINAL LEVEL (Level 10) =====
 
 .node-final {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   justify-content: center;
   gap: 4px;
 }
 
 .node-final .node-icon {
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
 
 .node-final .node-label {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -252,8 +410,8 @@
   &::after {
     content: '';
     position: absolute;
-    top: 40px;
-    bottom: -28px;
+    top: 50px;
+    bottom: -56px;
     left: 50%;
     transform: translateX(-50%);
     width: 12px;
@@ -267,8 +425,8 @@
 // ===== CURRENT NODE =====
 
 .node-current {
-  width: 105px;
-  height: 105px;
+  width: 160px;
+  height: 160px;
   background: linear-gradient(145deg, lighten($accent-gold, 8%), $accent-gold);
   box-shadow:
     0 8px 0 $accent-gold-dark,
@@ -282,11 +440,11 @@
   z-index: 3;
 
   .node-icon {
-    font-size: 1.8rem;
+    font-size: 2.8rem;
   }
 
   .node-label {
-    font-size: 1.1rem;
+    font-size: 1.6rem;
   }
 
   &:active {
@@ -310,11 +468,11 @@
 
 // Current final level
 .node-current.node-current-final {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
 
   .node-icon {
-    font-size: 2.5rem;
+    font-size: 3.2rem;
   }
 
   .node-label {
@@ -331,21 +489,21 @@
   background: rgba($gray-900, 0.9);
   border: 2px solid $accent-gold;
   border-radius: $border-radius;
-  padding: 14px 18px;
-  max-width: 260px;
+  padding: 10px 14px;
+  max-width: 220px;
   backdrop-filter: blur(10px);
   box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.3),
     0 0 15px rgba($accent-gold, 0.15);
-  margin-top: 20px;
+  margin-top: 16px;
   position: relative;
   z-index: 3;
 }
 
 .story-bubble-content {
   color: $gray-100;
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-size: 0.8rem;
+  line-height: 1.5;
   text-align: center;
 }
 
@@ -356,7 +514,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  min-height: 80px;
+  padding-bottom: env(safe-area-inset-bottom);
   background: $gray-800;
   display: flex;
   justify-content: space-around;

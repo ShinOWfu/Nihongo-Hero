@@ -1,6 +1,5 @@
 <!-- app/views/story_levels/map.html.erb -->
 <% content_for :hide_navbar, true %>
-
 <% if flash[:level_10_complete] %>
   <div class="toast-notification">
     <div class="toast-body">
@@ -8,13 +7,13 @@
     </div>
   </div>
 <% end %>
-
 <%# Victory modal %>
 <% if @show_victory_modal %>
   <%= render 'victory_modal' %>
 <% end %>
-
-<div class="map-container" style="background-image: url('<%= asset_path(@current_level ? "backgrounds/#{@current_level&.map_image}" : 'default.jpg') %>');">
+<div class="map-container"
+     id="map-container"
+     style="background-image: url('<%= asset_path(@current_level ? "backgrounds/#{@current_level&.map_image}" : 'default.jpg') %>');">
   <div class="map-overlay" id="map-scroll" data-controller="scroll-to-current-level">
     <div class="map-header">
       <h1 class="map-title">Your Journey</h1>
@@ -26,7 +25,6 @@
         <% end %>
       </p>
     </div>
-
     <div class="level-path">
       <% @story_levels.reverse_each do |level| %>
         <%
@@ -35,10 +33,13 @@
           is_locked    = level.id > @accessible_level_id
           is_final     = level.id == 10
         %>
-
         <div class="level-row">
           <% if is_completed %>
-            <div class="level-node node-completed <%= 'node-final' if is_final %>">
+            <div class="level-node node-completed <%= 'node-final' if is_final %>"
+       data-controller="completed-level"
+       data-action="click->completed-level#focus"
+              data-completed-level-background-value="<%= asset_path("backgrounds/#{level.map_image}") %>"
+              data-completed-level-story-value="<%= level.story_content %>">
               <span class="node-icon">
                 <% if is_final %>
                   <i class="fa-solid fa-torii-gate"></i>
@@ -47,9 +48,15 @@
                 <% end %>
               </span>
               <span class="node-label"><%= is_final ? 'Complete' : level.id %></span>
+              <div class="completed-story-bubble" data-completed-level-target="storyBubble">
+                <div class="completed-story-bubble-content">
+                  <%= level.story_content %>
+                </div>
+              </div>
             </div>
           <% elsif is_current %>
             <div class="current-level-wrapper" data-scroll-to-current-level-target="current">
+              <%= image_tag "character-sprites/Samurai/player_character.png", alt: "Your character", class: "map-player-sprite" %>
               <%= button_to fights_path, method: :post, class: "level-node node-current #{'node-current-final' if is_final}" do %>
                 <span class="node-icon">
                   <% if is_final %>
@@ -60,7 +67,6 @@
                 </span>
                 <span class="node-label"><%= is_final ? 'Final' : level.id %></span>
               <% end %>
-
               <div class="story-bubble">
                 <div class="story-bubble-content">
                   <%= @current_level&.story_content %>
@@ -68,22 +74,31 @@
               </div>
             </div>
           <% else %>
-            <% if is_final %>
-              <div class="level-node node-locked node-final <%= 'node-final-close' if @accessible_level_id >= 7 %>">
-                <span class="node-icon"><i class="fa-solid fa-torii-gate"></i></span>
+            <div class="level-node node-locked <%= 'node-final' if is_final %> <%= 'node-final-close' if is_final && @accessible_level_id >= 7 %>"
+                 data-controller="mystery-bubble"
+                 data-action="click->mystery-bubble#show">
+              <span class="node-icon">
+                <% if is_final %>
+                  <i class="fa-solid fa-torii-gate"></i>
+                <% else %>
+                  <i class="fa-solid fa-lock"></i>
+                <% end %>
+              </span>
+              <% if is_final %>
                 <span class="node-icon-lock"><i class="fa-solid fa-lock"></i></span>
-              </div>
-            <% else %>
-              <div class="level-node node-locked">
-                <span class="node-icon"><i class="fa-solid fa-lock"></i></span>
+              <% else %>
                 <span class="node-label"><%= level.id %></span>
+              <% end %>
+              <div class="mystery-bubble" data-mystery-bubble-target="bubble">
+                <div class="mystery-bubble-content">
+                  <span>? ? ?</span>
+                </div>
               </div>
-            <% end %>
+            </div>
           <% end %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
-
 <%= render 'shared/bottom_navbar' %>
