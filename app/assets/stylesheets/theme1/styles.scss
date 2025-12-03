@@ -110,9 +110,17 @@
   overflow: hidden;
 }
 
+.btn-victory{
+  background-color: $accent-gold;
+  color: black;
+  &:hover {
+    background-color: $accent-gold-glow;
+  }
+}
+
 .btn-primary {
   background-color: $gray-700;
-  border-width: 4px;
+  border-width: 4px !important;
   border-style: solid;
   border-color: $gray-500;
   color: $gray-100;
@@ -212,11 +220,19 @@
   gap: 0rem;
 }
 
-.sprite-container {
-  // flex: 1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  .sprite-container {
+    // flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    .player-sprite {
+      height: 20vh;
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      padding-bottom: 0rem;
+    }
 
   .player-sprite {
     height: 20vh;
@@ -226,6 +242,11 @@
     padding-bottom: 0rem;
     image-rendering: pixelated;
   }
+      &.dead-shroom {
+        height: 30vh; // or whatever size you want
+        max-height: 100%;
+        max-width: 100%;
+      }
 
   .enemy-sprite {
     height: 20vh;

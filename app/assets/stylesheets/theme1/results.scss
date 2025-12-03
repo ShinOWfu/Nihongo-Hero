@@ -1,0 +1,449 @@
+// Results Page Styles
+
+// Page wrapper
+.results-page {
+  min-height: 100dvh;
+  padding: 1rem 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+  }
+}
+
+.results-container {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+// Victory/Defeat Banner
+.results-banner {
+  text-align: center;
+  padding: 0.75rem 1.75rem;
+  margin: 0 -1rem 0.75rem -1rem;
+
+  h1 {
+    font-size: 3.75rem;
+    font-weight: 900;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  &.victory {
+    background: linear-gradient(to right, transparent, rgba(34, 197, 94, 0.85), transparent);
+    border-top: 2px solid #4ade80;
+    border-bottom: 2px solid #4ade80;
+    h1 {
+      color: #fff;
+      text-shadow: 0 0 10px #22c55e;
+    }
+  }
+
+  &.defeat {
+    background: linear-gradient(to right, transparent, rgba(220, 38, 38, 0.85), transparent);
+    border-top: 2px solid #f87171;
+    border-bottom: 2px solid #f87171;
+    h1 {
+      color: #fff;
+      text-shadow: 0 0 10px #dc2626;
+    }
+  }
+}
+
+// Battle Summary
+.battle-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba($gray-800, 0.85);
+  border: 1px solid rgba($gray-700, 0.5);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.character-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.result-sprite {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.enemy-result-sprite {
+  transform: translateX(2px) translateY(5px);
+}
+
+.enemy-defeated {
+  transform: rotate(-270deg) translateX(10px) translateY(-6px);
+  opacity: 0.7;
+  filter: grayscale(20%);
+}
+
+.player-defeated {
+  transform: rotate(270deg) translateX(-16px) translateY(4px);
+  opacity: 0.7;
+  filter: grayscale(20%);
+}
+
+.character-label {
+  font-size: 0.7rem;
+  color: $gray-300;
+  text-align: center;
+}
+
+// Accuracy Circle
+.accuracy-container {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+}
+
+.accuracy-circle {
+  width: 100%;
+  height: 100%;
+}
+
+.accuracy-text {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.accuracy-percentage {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: $accent-gold;
+}
+
+.rank-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &.rank-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.rank-letter {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-shadow:
+    2px 2px 0 rgba(0,0,0,0.5),
+    -1px -1px 0 rgba(0,0,0,0.3);
+}
+
+.rank-display[data-rank="S"] .rank-letter { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
+.rank-display[data-rank="A"] .rank-letter { color: #22c55e; }
+.rank-display[data-rank="B"] .rank-letter { color: #3b82f6; }
+.rank-display[data-rank="C"] .rank-letter { color: #eab308; }
+.rank-display[data-rank="D"] .rank-letter { color: #f97316; }
+.rank-display[data-rank="F"] .rank-letter { color: #f87171; }
+
+// EXP Section
+.exp-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  background: rgba($gray-800, 0.85);
+  border: 1px solid rgba($gray-700, 0.5);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+}
+
+.level-badge {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3a2a1a, #201a10);
+  border: 2px solid $accent-gold;
+  color: $accent-gold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 0 8px $accent-gold-glow;
+}
+
+.exp-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.exp-bar-container {
+  position: relative;
+  height: 20px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  border: 1px solid $gray-600;
+}
+
+.exp-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 7px;
+  background: linear-gradient(to right, #15803d, #16a34a, #22c55e);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.exp-text {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  font-size: 0.5rem;
+  font-weight: bold;
+  font-size: 0.65rem;
+  color: $gray-100;
+}
+
+.exp-gained {
+  text-align: right;
+  font-size: 0.75rem;
+  color: $accent-gold;
+  margin-top: 0.125rem;
+}
+
+.level-up-text {
+  text-align: right;
+  font-size: 0.75rem;
+  color: $accent-gold;
+  margin-top: 0.125rem;
+}
+
+// Question History
+.question-history {
+  background: rgba($gray-800, 0.85);
+  border: 1px solid rgba($gray-700, 0.5);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.history-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $gray-100;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid $gray-700;
+  text-align: center;
+}
+
+.history-item {
+  border-bottom: 1px solid $gray-700;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.history-item-btn {
+  width: 100%;
+  padding: 0.75rem 0;
+  background: none;
+  border: none;
+  color: $gray-100;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+}
+
+.result-icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 0.75rem;
+
+  &.correct {
+    color: #4ade80;
+  }
+
+  &.incorrect {
+    color: #f87171;
+  }
+}
+
+.question-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.question-text {
+  color: $gray-100;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.question-meta {
+  font-size: 0.8rem;
+  color: $gray-400;
+}
+
+.chevron {
+  color: $gray-500;
+  font-size: 0.75rem;
+  transition: transform 0.3s;
+}
+
+.history-item-btn[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+// Question Details
+.question-details {
+  background: rgba($gray-900, 0.9);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.answer-item {
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  border-radius: 6px;
+  background: $gray-800;
+  color: $gray-200;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  justify-content: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.correct-answer {
+    background: #14532d;
+    color: #ffffff;
+  }
+
+  &.wrong-answer {
+    background: rgba(220, 38, 38, 0.4);
+    color: #ffffff;
+  }
+}
+
+.answer-text {
+  text-align: 1;
+}
+
+.answer-badges {
+  display: flex;
+  position: absolute;
+  gap: 0.25rem;
+  right: 0.75rem;
+}
+
+.answer-badge {
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+
+  &.correct {
+    background: #22c55e;
+    color: #052e16;
+  }
+
+  &.your-answer {
+    background: $gray-500;
+    color: $gray-100;
+  }
+}
+
+// Continue Button
+.continue-btn {
+  display: block;
+  width: 100%;
+  padding: 1.25rem;
+  font-size: 1.25rem;
+  background: linear-gradient(135deg, #f0c31e, #d4a817);
+  border: 2px solid $accent-gold-glow;
+  border-radius: 12px;
+  color: $gray-900;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+// Animations
+@keyframes celebrate {
+  0% { transform: translateY(0); }
+  15% { transform: translateY(-8px); }
+  30% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+.result-sprite.celebrate {
+  animation: celebrate 1s ease-out 4;
+}
+
+// Mobile adjustments
+@media (max-width: 380px) {
+  .result-sprite {
+    width: 50px;
+    height: 50px;
+  }
+
+  .accuracy-container {
+    width: 70px;
+    height: 70px;
+  }
+
+  .accuracy-percentage {
+    font-size: 0.9rem;
+  }
+
+  .rank-letter {
+    font-size: 1rem;
+  }
+
+  .level-badge {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,242 @@
+// Keyframe Animations
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-30px);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  70% {
+    transform: scale(1.15) rotate(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+}
+
+// Modal Styling
+.victory-modal {
+  border: 3px solid #fbbf24;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(251, 191, 36, 0.3);
+  animation: fadeInModal 0.5s ease-out;
+
+  .modal-body {
+    background: transparent;
+  }
+}
+
+// Victory Title Section (Sprites)
+.victory-title {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2rem;
+  min-height: 200px;
+  margin-bottom: 2rem;
+
+  .player-sprite {
+    height: 30vh;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    animation: bounceIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+               float 3s ease-in-out infinite 0.7s;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+
+    &.dead-shroom {
+      height: 25vh;
+      max-height: 100px;
+      animation: popIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s backwards,
+                 shake 0.3s ease-in-out 0.9s;
+      filter: grayscale(30%) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+      opacity: 0.85;
+      image-rendering: pixelated;
+    }
+  }
+}
+
+// Victory Stats Section
+.victory-stats {
+  animation: slideInDown 0.6s ease-out 0.3s backwards;
+
+  h3 {
+    color: #fbbf24;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+    margin-bottom: 0.5rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .lead {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+}
+
+// Stats Grid
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+
+  .stat-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(251, 191, 36, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem 1rem;
+    transition: all 0.3s ease;
+    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: rgba(251, 191, 36, 0.6);
+      box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #fbbf24, #fff, #fbbf24);
+      background-size: 200% auto;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+// Button
+.btn-victory {
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  box-shadow: 0 10px 20px rgba(249, 115, 22, 0.4);
+  transition: all 0.3s ease;
+  animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.9s backwards;
+  background-color: $accent-gold;
+  color: black;
+
+  &:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 15px 20px rgba(249, 115, 22, 0.6);
+    background-color: $accent-gold-glow;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Responsive adjustments (sprites maintain original size)
+@media (max-width: 768px) {
+  .victory-title {
+    gap: 1rem;
+    // Remove sprite size overrides - they'll use the base 30vh and 25vh
+  }
+
+  .victory-stats h3 {
+    font-size: 2rem;
+  }
+
+  .stats-grid {
+    gap: 1rem;
+
+    .stat-item {
+      padding: 1rem 0.5rem;
+
+      .stat-value {
+        font-size: 2.5rem;
+      }
+
+      .stat-label {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

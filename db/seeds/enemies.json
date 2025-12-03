@@ -7,30 +7,65 @@
     "strength": "nothing"
   },
   {
+    "name": "カエルさん",
+    "hitpoints": 40,
+    "sprite": "frog.png",
+    "weakness": "grammar",
+    "strength": "nothing"
+  },
+  {
     "name": "スケルトン",
     "hitpoints": 40,
     "sprite": "skeleton.png",
-    "weakness": "grammar",
+    "weakness": "nothing",
     "strength": "words"
   },
   {
-    "name": "侍",
+    "name": "ミノタウロス",
+    "hitpoints": 50,
+    "sprite": "minotaur.png",
+    "weakness": "kanji",
+    "strength": "grammar"
+  },
+  {
+    "name": "キュクロプス",
     "hitpoints": 60,
+    "sprite": "cyclops.png",
+    "weakness": "grammar",
+    "strength": "kanji"
+  },
+  {
+    "name": "侍",
+    "hitpoints": 70,
     "sprite": "samurai.png",
     "weakness": "words",
     "strength": "kanji"
   },
   {
     "name": "ヴァンパイア",
-    "hitpoints": 70,
+    "hitpoints": 80,
     "sprite": "vampire.png",
     "weakness": "nothing",
+    "strength": "grammar"
+  },
+  {
+    "name": "ドンペングイニー",
+    "hitpoints": 90,
+    "sprite": "penguin.png",
+    "weakness": "words",
     "strength": "grammar"
   },
   {
     "name": "鬼の王",
     "hitpoints": 100,
     "sprite": "demon_boss.png",
+    "weakness": "nothing",
+    "strength": "words"
+  },
+  {
+    "name": "NECROMANCER",
+    "hitpoints": 120,
+    "sprite": "necromancer.png",
     "weakness": "nothing",
     "strength": "words"
   }
