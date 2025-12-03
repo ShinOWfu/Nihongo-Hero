@@ -186,6 +186,14 @@
   }
 }
 
+.enemy-frame.defeat-frame {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+
+  .enemy-sprite {
+    filter: grayscale(30%);
+  }
+}
+
 .enemy-sprite {
   position: relative;
   z-index: 2;
@@ -366,6 +374,7 @@
   margin: 0 0 0.75rem 0;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid $gray-700;
+  text-align: center;
 }
 
 // ============================================
@@ -545,11 +554,16 @@
         inset 10px 10px 0 -8px $accent-gold,
         inset -10px -10px 0 -8px $accent-gold;
     }
+
+    &.victory-frame {
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+  }
   }
 
   .vanquished-stamp {
     font-size: 0.85rem;
     padding: 0.25rem 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   }
 
   .enemy-name {
