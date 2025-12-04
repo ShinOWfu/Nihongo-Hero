@@ -64,9 +64,9 @@
   },
   {
     "name": "ネクロマンサー",
-    "hitpoints": 90,
+    "hitpoints": 50,
     "sprite": "necromancer.png",
     "weakness": "nothing",
-    "strength": "grammar"
+    "strength": "nothing"
   }
 ]

@@ -104,7 +104,7 @@ end
     password_confirmation: "123456",
     level: 5,
     experience_points: 580,
-    character_name: "Bob",
+    character_name: "Bobby",
   )
 
 story_levels_array = StoryLevel.all  
@@ -123,12 +123,12 @@ for index in (1..8) do
 end
   #Bob3
   user = User.create(
-    email: "user@test3",
+    email: "bob@user3",
     password: "123456",
     password_confirmation: "123456",
     level: 5,
     experience_points: 580,
-    character_name: "Bob",
+    character_name: "Alice",
   )
 
 story_levels_array = StoryLevel.all  
@@ -147,12 +147,12 @@ for index in (1..8) do
 end
   #Bob4
   user = User.create(
-    email: "user@test4",
+    email: "bob@user4",
     password: "123456",
     password_confirmation: "123456",
     level: 5,
     experience_points: 580,
-    character_name: "Bob",
+    character_name: "Peter",
   )
 
 story_levels_array = StoryLevel.all  
@@ -171,12 +171,12 @@ for index in (1..8) do
 end
   #Bob5
   user = User.create(
-    email: "user@test5",
+    email: "bob@user5",
     password: "123456",
     password_confirmation: "123456",
     level: 5,
     experience_points: 580,
-    character_name: "Bob",
+    character_name: "Betty",
   )
 
 story_levels_array = StoryLevel.all  
