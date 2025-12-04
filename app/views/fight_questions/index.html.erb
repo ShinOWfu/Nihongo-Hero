@@ -1,6 +1,7 @@
 <% content_for :hide_navbar, true %>
 <div class="results-page" data-controller="results"
      data-results-percentage-value="<%= @percentage_correct.to_i %>"
+     data-results-completed-value="<%= @map_completed%>"
      data-results-victory-value="<%= @fight.status == 'completed' %>" style="background-image: url('<%= asset_path("backgrounds/#{@fight.story_level.map_image}") %>');">
   <div class="results-container">
     <!-- Victory/Defeat Banner -->

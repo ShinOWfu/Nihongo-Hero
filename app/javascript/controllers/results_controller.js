@@ -2,19 +2,20 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["circle", "percentage", "rank", "playerSprite"]
-  static values = { percentage: Number, victory: Boolean }
+  static values = { percentage: Number, victory: Boolean, completed: Boolean }
 
   connect() {
-    if (this.victoryValue) {
-      this.audio = new Audio("/audio/results-victory.mp3");
-      this.audio.play();
-    } else {
-      this.audio = new Audio("/audio/results-death.mp3");
-      this.audio.play();
+    if (this.completedValue){
+      if (this.victoryValue) {
+        this.audio = new Audio("/audio/results-victory.mp3");
+        this.audio.play();
+      } else {
+        this.audio = new Audio("/audio/results-death.mp3");
+        this.audio.play();
+      }
+      setTimeout(() => this.animateCircle(), 300)
     }
-    setTimeout(() => this.animateCircle(), 300)
   }
-
   disconnect() {
     if (this.audio) {
       this.audio.pause();
