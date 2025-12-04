@@ -67,17 +67,20 @@
 }
 
 .stat-value {
-  font-size: clamp(1.7rem, 4vw, 3rem);  // Scales with viewport
+  font-size: clamp(2rem, 5vw, 4rem);  // Scales with viewport
   font-weight: bold;
   color: $accent-gold;
+  line-height: 1.2;
 }
 
 .stat-label {
-  font-size: clamp(1rem, 4vw, 3rem);  // Scales with viewport
+  font-size: clamp(0.75rem, 2vw, 0.9rem);  // Scales with viewport
   color: $gray-300;
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
+  white-space: nowrap;
 }
+
 
 .leaderboard-title {
   color: $accent-gold;

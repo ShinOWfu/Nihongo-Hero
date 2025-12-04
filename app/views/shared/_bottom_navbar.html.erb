@@ -1,14 +1,14 @@
 <nav class="bottom-nav">
   <%= link_to fights_path, class: "nav-item #{'nav-item-active' if current_page?(fights_path)}" do %>
     <span class="nav-icon"><i class="fa-solid fa-fan"></i></span>
-    <span class="nav-label">Battle Journal</span>
+    <span class="nav-label">ジャーナル</span>
   <% end %>
   <%= link_to map_path, class: "nav-item #{'nav-item-active' if current_page?(map_path)}" do %>
     <span class="nav-icon"><i class="fa-solid fa-map"></i></span>
-    <span class="nav-label">My Journey</span>
+    <span class="nav-label">マップ</span>
   <% end %>
   <%= link_to user_path(current_user), class: "nav-item #{'nav-item-active' if current_page?(user_path(current_user))}" do %>
     <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
-    <span class="nav-label">My Profile</span>
+    <span class="nav-label">プロフィール</span>
   <% end %>
 </nav>
