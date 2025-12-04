@@ -85,7 +85,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_03_044346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "character_name"
-    t.integer "hitpoints", default: 100
+    t.integer "hitpoints", default: 60
     t.integer "experience_points", default: 0
     t.integer "level", default: 0
     t.integer "japanese_difficulty"
