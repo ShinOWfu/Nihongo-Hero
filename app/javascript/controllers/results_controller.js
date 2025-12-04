@@ -6,10 +6,10 @@ export default class extends Controller {
 
   connect() {
     if (this.victoryValue) {
-      this.audio = new Audio("/assets/results-victory.mp3");
+      this.audio = new Audio("/audio/results-victory.mp3");
       this.audio.play();
     } else {
-      this.audio = new Audio("/assets/results-death.mp3");
+      this.audio = new Audio("/audio/results-death.mp3");
       this.audio.play();
     }
     setTimeout(() => this.animateCircle(), 300)
