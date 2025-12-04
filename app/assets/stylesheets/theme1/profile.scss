@@ -100,13 +100,13 @@
 
 .sprite-box {
   width: 90px;
-  height: 90px;
   background: $gray-900;
   border: 2px solid $gray-600;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  aspect-ratio: 1;
 }
 
 .status-sprite {
@@ -131,7 +131,7 @@
 .stat-item {
   background: $gray-900;
   border: 1px solid $gray-600;
-  padding: 0.4rem;
+  padding: 0.3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -257,6 +257,14 @@
   font-style: italic;
 }
 
+.leaderboard-divider {
+  text-align: center;
+  color: $gray-500;
+  padding: 0.25rem 0;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
 // ============================================
 // ADD FRIEND FORM
 // ============================================
@@ -336,12 +344,60 @@
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px dashed $gray-600;
+
+  &.no-border {
+    border-bottom: none;
+    margin-bottom: 1rem;
+  }
 }
 
 .setting-label {
   color: $gray-300;
   font-weight: 700;
   font-size: 0.95rem;
+}
+
+// Toggle switch
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  display: inline-block;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  &:checked + .toggle-slider {
+    background: $accent-gold;
+  }
+
+  &:checked + .toggle-slider::before {
+    transform: translateX(24px);
+  }
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: $gray-600;
+  border-radius: 26px;
+  transition: 0.2s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background: $gray-100;
+    border-radius: 50%;
+    transition: 0.2s;
+  }
 }
 
 .rpg-select {

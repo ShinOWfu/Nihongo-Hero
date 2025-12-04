@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = current_user
-    @global_rank = User.where('level > ?', @user.level).count + 1
+    @global_rank = User.where('level > ? OR (level = ? AND id < ?)', @user.level, @user.level, @user.id).count + 1
 
     # Calculate how many levels the user has completed
     if @user.fights.where(status: "completed").last&.story_level_id
