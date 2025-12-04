@@ -3,7 +3,7 @@
 <% if flash[:level_10_complete] %>
   <div class="toast-notification">
     <div class="toast-body">
-      <i class="fa-solid fa-trophy"></i> Last level Completed!
+      <i class="fa-solid fa-trophy"></i> 最後のレベルクリア!
     </div>
   </div>
 <% end %>
@@ -16,10 +16,10 @@
      style="background-image: url('<%= asset_path(@current_level ? "backgrounds/#{@current_level&.map_image}" : 'default.jpg') %>');">
   <div class="map-overlay" id="map-scroll" data-controller="scroll-to-current-level">
     <div class="map-header">
-      <h1 class="map-title">Your Journey</h1>
+      <h1 class="map-title">あなたの旅路</h1>
       <p class="map-subtitle">
         <% if @all_complete %>
-          All Levels Complete! <i class="fa-solid fa-crown"></i>
+          全レベルクリア! <i class="fa-solid fa-crown"></i>
         <% else %>
           Level <%= @accessible_level_id %>
         <% end %>
