@@ -1,5 +1,5 @@
 <%= @question.question %>
-<% if @data && @data["mp3StreamingUrl"] %>
+<% if @question_audio && @question_audio["mp3StreamingUrl"] %>
   <button class="audio-btn" data-action="click->audio#toggle" data-audio-target="button">
     <i class="fa-solid fa-volume-high"></i>
   </button>
