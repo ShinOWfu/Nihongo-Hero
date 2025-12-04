@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
     # Get the users global rank and friends rank exact number
     @global_rank = User.where('level > ? OR (level = ? AND id < ?)', @user.level, @user.level, @user.id).count + 1
-    @friends_with_user = (current_user.friends.to_a + [current_user]).sort_by { |u| -u.level }
+    @friends_with_user = (current_user.friends.to_a | [current_user]).sort_by { |u| [-u.level, u.id] }
     @friends_rank = @friends_with_user.index(current_user) + 1
     @top_5_friends = @friends_with_user.first(5)
     @top_5_global = User.order(level: :desc).limit(5)
