@@ -10,16 +10,16 @@
   background: $gray-900;
   position: relative;
 
-  // Subtle grid pattern background
   &::before {
     content: '';
     position: fixed;
     inset: 0;
-    background:
-      linear-gradient(90deg, transparent 49%, rgba($accent-gold, 0.02) 50%, transparent 51%),
-      linear-gradient(0deg, transparent 49%, rgba($accent-gold, 0.02) 50%, transparent 51%);
-    background-size: 20px 20px;
+    background-image: url("crane_pattern.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
     z-index: 0;
+    filter: contrast(3);
     pointer-events: none;
   }
 }
@@ -62,10 +62,10 @@
 
 .window-header {
   background: $gray-600;
-  color: $gray-100;
-  padding: 0.6rem 1rem;
+  color: white;
+  padding: 0.9rem 1.1rem;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,6 +73,10 @@
 
   &.centered {
     justify-content: center;
+  }
+
+  i {
+    margin-right: 0.5rem;
   }
 }
 
@@ -83,22 +87,21 @@
 }
 
 .character-name {
-  font-size: clamp(1rem, 4vw, 1.2rem);
+  font-size: clamp(1.3rem, 6vw, 1.6rem);
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 60%;
+  max-width: 65%;
 }
 
 .header-level {
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  opacity: 0.9;
 }
 
 .window-content {
-  padding: 1rem;
+  padding: 1.25rem;
 }
 
 // ============================================
@@ -113,20 +116,23 @@
 }
 
 .sprite-box {
-  width: 90px;
-  background: $gray-900;
-  border: 2px solid $gray-600;
+  width: 100px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, $gray-800 0%, $gray-900 100%);
+  border: 3px solid $accent-gold;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   aspect-ratio: 1;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6), 0 0 10px $accent-gold-glow;
 }
 
 .status-sprite {
   height: 95%;
   width: auto;
+  max-width: 90%;
   image-rendering: pixelated;
+  object-fit: contain;
 }
 
 // ============================================
@@ -155,21 +161,38 @@
 }
 
 .stat-item .stat-label {
-  color: $gray-400;
-  font-size: 0.55rem;
-  margin-bottom: 0.1rem;
+  color: $gray-200;
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+
+  i {
+    font-size: 0.9rem;
+  }
 }
 
 .stat-item .stat-value {
   color: $accent-gold;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 
-.stat-item.streak .stat-value {
-  color: #f97316;
+.stat-item.streak {
+  .stat-label {
+    color: #f97316;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+
+    i {
+      font-size: 0.7rem;
+    }
+  }
+
+  .stat-value {
+    color: #f97316;
+  }
 }
 
 // ============================================
@@ -183,12 +206,12 @@
 
 .toggle-btn {
   flex: 1;
-  padding: 0.75rem;
+  padding: 0.9rem;
   border: none;
   background: $gray-700;
-  color: $gray-400;
+  color: $gray-300;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.15s ease;
   border-right: 1px solid $gray-600;
@@ -211,13 +234,13 @@
 }
 
 .leaderboard-list {
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 .leaderboard-row {
   display: flex;
   align-items: center;
-  padding: 0.6rem 0.75rem;
+  padding: 0.9rem 1rem;
   border-bottom: 1px solid $gray-700;
   transition: background 0.15s ease;
 
@@ -226,9 +249,9 @@
   }
 
   &.is-user {
-    background: rgba($accent-gold, 0.1);
+    background: rgba($accent-gold, 0.15);
     border-radius: 4px;
-    margin: 0.25rem 0;
+    margin: 0.3rem 0;
 
     .leaderboard-name {
       color: $accent-gold;
@@ -238,10 +261,10 @@
 }
 
 .leaderboard-rank {
-  width: 2rem;
+  width: 2.5rem;
   font-weight: 700;
-  font-size: 1rem;
-  color: $gray-400;
+  font-size: 1.3rem;
+  color: $gray-300;
 
   &.rank-1 { color: #ffd700; }
   &.rank-2 { color: #c0c0c0; }
@@ -250,8 +273,8 @@
 
 .leaderboard-name {
   flex: 1;
-  color: $gray-100;
-  font-size: 0.9rem;
+  color: white;
+  font-size: 1.15rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -259,24 +282,25 @@
 }
 
 .leaderboard-level {
-  color: $gray-400;
-  font-size: 0.8rem;
+  color: $gray-300;
+  font-size: 1rem;
   flex-shrink: 0;
 }
 
 .empty-state {
-  padding: 1.5rem;
+  padding: 2rem;
   text-align: center;
-  color: $gray-500;
+  color: $gray-400;
   font-style: italic;
+  font-size: 1.1rem;
 }
 
 .leaderboard-divider {
   text-align: center;
   color: $gray-500;
-  padding: 0.25rem 0;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
+  padding: 0.4rem 0;
+  font-size: 1rem;
+  letter-spacing: 3px;
 }
 
 // ============================================
@@ -295,17 +319,17 @@
 
 .rpg-input {
   flex: 1;
-  padding: 0.65rem 0.75rem;
+  padding: 0.85rem 1rem;
   background: $gray-900;
   border: 2px solid $gray-600;
   border-radius: 4px;
-  color: $gray-100;
+  color: white;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   transition: border-color 0.15s ease;
 
   &::placeholder {
-    color: $gray-500;
+    color: $gray-400;
   }
 
   &:focus {
@@ -315,14 +339,14 @@
 }
 
 .rpg-btn {
-  padding: 0.65rem 1rem;
+  padding: 0.85rem 1.2rem;
   background: $accent-gold;
   border: 2px solid $accent-gold-dark;
   border-radius: 4px;
   color: $gray-900;
   font-family: inherit;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.15s ease;
@@ -355,87 +379,126 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.1rem;
   border-bottom: 1px dashed $gray-600;
 
   &.no-border {
     border-bottom: none;
-    margin-bottom: 1rem;
+    margin-bottom: 1.1rem;
   }
 }
 
 .setting-label {
-  color: $gray-300;
+  color: white;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 
   i {
     color: $accent-gold;
   }
 }
 
-// Toggle switch
-.toggle-switch {
-  position: relative;
-  width: 50px;
-  height: 26px;
-  display: inline-block;
+// Compact settings row
+.settings-row-compact {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.toggle-input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 
-  &:checked + .toggle-slider {
-    background: $accent-gold;
-  }
-
-  &:checked + .toggle-slider::before {
-    transform: translateX(24px);
+  i {
+    color: $accent-gold;
+    font-size: 1rem;
   }
 }
 
-.toggle-slider {
-  position: absolute;
-  cursor: pointer;
-  inset: 0;
-  background: $gray-600;
-  border-radius: 26px;
-  transition: 0.2s;
-
-  &::before {
-    content: '';
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    left: 3px;
-    bottom: 3px;
-    background: $gray-100;
-    border-radius: 50%;
-    transition: 0.2s;
-  }
-}
-
-.rpg-select {
-  padding: 0.5rem 2rem 0.5rem 0.75rem;
+.rpg-select-small {
+  padding: 0.4rem 1.5rem 0.4rem 0.5rem;
   background: $gray-900;
   border: 2px solid $gray-600;
   border-radius: 4px;
   color: $accent-gold;
   font-family: inherit;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.85rem;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23f0c31e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%23f0c31e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 0.75rem center;
+  background-position: right 0.4rem center;
 
   &:focus {
     outline: none;
     border-color: $accent-gold;
+  }
+}
+
+.sound-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  color: $gray-500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &.active {
+    border-color: $accent-gold;
+    color: $accent-gold;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.rpg-select {
+  padding: 0.7rem 2.4rem 0.7rem 1rem;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  border-radius: 4px;
+  color: $accent-gold;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1.15rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23f0c31e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-gold;
+  }
+}
+
+.sound-toggle {
+  width: 52px;
+  height: 42px;
+  border-radius: 6px;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  color: $gray-400;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &.active {
+    border-color: $accent-gold;
+    color: $accent-gold;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }
 
@@ -444,16 +507,16 @@
   justify-content: center;
 }
 
-.logout-btn {
+.action-btn {
   width: 100%;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.2rem;
   background: $gray-900;
   border: 2px solid $gray-600;
   border-radius: 4px;
-  color: $gray-300;
+  color: white;
   font-family: inherit;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.15s ease;
 
@@ -461,16 +524,17 @@
     margin-right: 0.5rem;
   }
 
-  @media (hover: hover) {
-    &:hover {
-      border-color: #dc2626;
-      color: #f87171;
-      background: rgba(220, 38, 38, 0.1);
-    }
-  }
-
   &:active {
     transform: scale(0.98);
+  }
+
+  &.logout {
+    @media (hover: hover) {
+      &:hover {
+        border-color: $accent-gold;
+        color: $accent-gold;
+      }
+    }
   }
 }
 
@@ -480,25 +544,24 @@
 
 @media (max-width: 380px) {
   .sprite-box {
-    width: 80px;
-    height: 80px;
+    width: 85px;
   }
 
   .character-name {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
   }
 
   .stat-item .stat-value {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
   }
 
   .stat-item .stat-label {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
   }
 
   .stats-left,
   .stats-right {
-    max-width: 100px;
+    max-width: 105px;
   }
 
   .form-row {

@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
   def show
     @user = current_user
+
+    # Get the users global rank and friends rank exact number
     @global_rank = User.where('level > ? OR (level = ? AND id < ?)', @user.level, @user.level, @user.id).count + 1
+    @friends_rank = current_user.friends.where('level > ?', current_user.level).count + 1
 
     # Calculate how many levels the user has completed
     if @user.fights.where(status: "completed").last&.story_level_id
