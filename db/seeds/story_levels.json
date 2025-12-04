@@ -48,5 +48,205 @@
     "story_content": "オーロラが輝く頂上。影の主が待っていた。「村を脅かすのはお前か！」最後の戦いだ！",
     "map_image": "aurora_mountains.png",
     "map_node": 10
+  },
+  {
+    "story_content": "山頂が崩れ、深い地下空洞へと落下してしまった。湿った空気と闇が包み込む。「ここから地上へ戻れるのか...？」新たな冒険が始まる。",
+    "map_image": "forest_cliff.png",
+    "map_node": 11
+  },
+  {
+    "story_content": "薄暗い洞窟を進む。壁には青白く光る苔が生えており、わずかな明かりを頼りに歩く。",
+    "map_image": "dark_forest.png",
+    "map_node": 12
+  },
+  {
+    "story_content": "地底湖に出た。静まり返った水面の下を巨大な魚影が横切る。刺激しないように慎重に進もう。",
+    "map_image": "forest_shore.png",
+    "map_node": 13
+  },
+  {
+    "story_content": "古代の遺跡を発見した。壁画には、この地下深くに眠る「守護者」の伝説が描かれている。",
+    "map_image": "cliff_with_rocks.png",
+    "map_node": 14
+  },
+  {
+    "story_content": "崩れかけた石橋を渡る。下は底が見えないほどの奈落だ。石が崩れ落ちる音が反響する。",
+    "map_image": "mountains.png",
+    "map_node": 15
+  },
+  {
+    "story_content": "迷路のような坑道。トロッコのレールが錆びついている。風の流れる方向へ進めば出口があるはずだ。",
+    "map_image": "tree.png",
+    "map_node": 16
+  },
+  {
+    "story_content": "巨大な水晶の部屋。光が乱反射して美しいが、鋭い水晶が道を塞いでいる。剣で切り開きながら進む。",
+    "map_image": "aurora_mountains.png",
+    "map_node": 17
+  },
+  {
+    "story_content": "遺跡の最深部、巨大な扉の前に着いた。重々しい扉の隙間から、機械が動くような音が聞こえる。",
+    "map_image": "cliff_with_rocks.png",
+    "map_node": 18
+  },
+  {
+    "story_content": "扉が開く。そこは広大な円形闘技場だった。中央に何かが鎮座している。気配が完全に変わった。",
+    "map_image": "plains_2.png",
+    "map_node": 19
+  },
+  {
+    "story_content": "【BOSS】古代の守護ゴーレムが起動した！「侵入者排除...」巨大な拳が振り下ろされる。地下からの脱出を賭けた戦いだ！",
+    "map_image": "mountains.png",
+    "map_node": 20
+  },
+  {
+    "story_content": "ゴーレムの背後にあった転送装置が作動し、灼熱の世界へ飛ばされた！溶岩が川のように流れている。",
+    "map_image": "sunset_plains.png",
+    "map_node": 21
+  },
+  {
+    "story_content": "熱波で息をするのも苦しい。黒曜石の道を進むが、足を踏み外せばマグマの海だ。",
+    "map_image": "dark_forest.png",
+    "map_node": 22
+  },
+  {
+    "story_content": "炎の精霊たちが飛び交うエリア。彼らは敵意を持っているようだ。炎の弾を避けながら走る。",
+    "map_image": "sunset_plains.png",
+    "map_node": 23
+  },
+  {
+    "story_content": "巨大な鉄の扉があるが、熱くて触れない。近くにあるバルブを回して、蒸気で冷却する必要がありそうだ。",
+    "map_image": "cliff_with_rocks.png",
+    "map_node": 24
+  },
+  {
+    "story_content": "古代の鍛冶場に出た。ここではかつて魔法の武具が作られていたようだ。まだ炉の火は消えていない。",
+    "map_image": "forest_cliff.png",
+    "map_node": 25
+  },
+  {
+    "story_content": "溶岩の滝が行く手を阻む。岩から岩へジャンプして渡るしかない。一瞬の躊躇が命取りになる。",
+    "map_image": "forest_shore.png",
+    "map_node": 26
+  },
+  {
+    "story_content": "道が狭くなり、周囲の温度がさらに上がる。地面が揺れている...何かが地下から近づいてくる。",
+    "map_image": "plains_2.png",
+    "map_node": 27
+  },
+  {
+    "story_content": "火山の火口付近に出た。空は噴煙で黒く染まっている。頂上に巨大な影が見える。",
+    "map_image": "mountains.png",
+    "map_node": 28
+  },
+  {
+    "story_content": "最後の登り坂。硫黄の匂いが鼻をつく。頂上の広場で待ち受ける主の咆哮が聞こえた。",
+    "map_image": "hilltop_tree.png",
+    "map_node": 29
+  },
+  {
+    "story_content": "【BOSS】溶岩の中から紅蓮のドラゴンが現れた！「我が眠りを妨げるのは誰だ！」炎のブレスをかいくぐり、逆鱗を貫け！",
+    "map_image": "sunset_plains.png",
+    "map_node": 30
+  },
+  {
+    "story_content": "ドラゴンの巣を抜けると、気温が急激に下がった。目の前には極寒の雪原が広がっている。急激な変化に体が震える。",
+    "map_image": "plains_2.png",
+    "map_node": 31
+  },
+  {
+    "story_content": "猛吹雪で視界が悪い。足跡がすぐに消えてしまう。遠くに見える塔の明かりだけが頼りだ。",
+    "map_image": "aurora_mountains.png",
+    "map_node": 32
+  },
+  {
+    "story_content": "凍った湖の上を歩く。氷がピシピシと鳴る。氷の下から冷たい視線を感じる...",
+    "map_image": "forest_shore.png",
+    "map_node": 33
+  },
+  {
+    "story_content": "雪に埋もれた村の跡地。住人は皆、氷像に変えられている。「なんて残酷な...」",
+    "map_image": "tree.png",
+    "map_node": 34
+  },
+  {
+    "story_content": "氷の洞窟を抜ける。つららが剣のように垂れ下がっている。頭上に注意しながら進む。",
+    "map_image": "cliff_with_rocks.png",
+    "map_node": 35
+  },
+  {
+    "story_content": "白銀の森。木々も凍りついている。雪の妖精が現れ、先へ進むなと警告してきた。",
+    "map_image": "tree.png",
+    "map_node": 36
+  },
+  {
+    "story_content": "巨大な氷の城門に到着した。門番は氷で作られた騎士たちだ。突破するしかない。",
+    "map_image": "mountains.png",
+    "map_node": 37
+  },
+  {
+    "story_content": "城内の大広間。床は鏡のように磨かれた氷。滑りやすく、戦うには不利な場所だ。",
+    "map_image": "forest_shore.png",
+    "map_node": 38
+  },
+  {
+    "story_content": "螺旋階段を上り、玉座の間へ。冷気が強まり、まつ毛まで凍りそうだ。元凶はそこにいる。",
+    "map_image": "hilltop_tree.png",
+    "map_node": 39
+  },
+  {
+    "story_content": "【BOSS】氷の女王が冷徹な瞳で見下ろす。「永遠の冬の一部になりなさい」絶対零度の魔法に立ち向かえ！",
+    "map_image": "aurora_mountains.png",
+    "map_node": 40
+  },
+  {
+    "story_content": "女王を倒すと世界が割れた。現実が歪み、色のない「虚無」の次元へと迷い込んでしまった。",
+    "map_image": "dark_forest.png",
+    "map_node": 41
+  },
+  {
+    "story_content": "浮遊する岩を飛び移りながら進む。下には何もない。落ちれば永遠に彷徨うことになる。",
+    "map_image": "cliff_with_rocks.png",
+    "map_node": 42
+  },
+  {
+    "story_content": "歪んだ記憶の回廊。懐かしい故郷の景色が見えるが、どこかおかしい。これは幻覚だ。",
+    "map_image": "tree.png",
+    "map_node": 43
+  },
+  {
+    "story_content": "影のような怪物が襲ってくる。実体がないため剣がすり抜ける。心の光で斬るしかない。",
+    "map_image": "dark_forest.png",
+    "map_node": 44
+  },
+  {
+    "story_content": "時間が不規則に流れる場所。急に早くなったり遅くなったりする。感覚を研ぎ澄ませ。",
+    "map_image": "sunset_plains.png",
+    "map_node": 45
+  },
+  {
+    "story_content": "重力が逆転した部屋。天井を歩いて進む。平衡感覚が狂いそうだ。",
+    "map_image": "forest_cliff.png",
+    "map_node": 46
+  },
+  {
+    "story_content": "何も聞こえない「静寂の回廊」。自分の心臓の音だけがうるさく響く。精神が試されている。",
+    "map_image": "plains_2.png",
+    "map_node": 47
+  },
+  {
+    "story_content": "世界の中心核が見えてきた。黒い太陽のような球体が脈打っている。あれが全ての異変の原因か。",
+    "map_image": "mountains.png",
+    "map_node": 48
+  },
+  {
+    "story_content": "最終決戦の場へ続く光の橋。仲間たちの声、旅の記憶が背中を押してくれる。恐れはない。",
+    "map_image": "aurora_mountains.png",
+    "map_node": 49
+  },
+  {
+    "story_content": "【FINAL BOSS】虚無の魔神が姿を現す！「全てを無に帰そう」世界の存亡をかけた最後の一撃を放て！",
+    "map_image": "aurora_mountains.png",
+    "map_node": 50
   }
 ]
