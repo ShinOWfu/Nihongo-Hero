@@ -2,11 +2,19 @@ class UsersController < ApplicationController
   def show
     @user = current_user
 
-    # Get the users global rank and friends rank exact number
+    # Global rank: count users with higher level, OR same level but earlier signup (lower id = joined first)
     @global_rank = User.where('level > ? OR (level = ? AND id < ?)', @user.level, @user.level, @user.id).count + 1
+
+    # Combine friends + yourself into one array (| removes duplicates), sorted by level desc, then id as tiebreaker
     @friends_with_user = (current_user.friends.to_a | [current_user]).sort_by { |u| [-u.level, u.id] }
+
+    # Find your position in the friends leaderboard
     @friends_rank = @friends_with_user.index(current_user) + 1
+
+    # Grab the top 5 from the friends + you array for display
     @top_5_friends = @friends_with_user.first(5)
+
+    # Top 5 players globally, ordered by level (highest first)
     @top_5_global = User.order(level: :desc).limit(5)
 
     # Calculate how many levels the user has completed
