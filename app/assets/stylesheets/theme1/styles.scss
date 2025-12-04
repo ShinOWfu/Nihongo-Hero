@@ -233,8 +233,8 @@ button.btn-action {
   color: $gray-200;
   width: 100%;
   flex: 1;
-  font-size: clamp(2rem, 4vw, 2rem);
-  padding: 0.5rem 1.5rem;
+  font-size: clamp(1.7rem, 4vw, 2rem);
+  padding: 0.5rem 1.5rem 0.5rem 3rem; // Changed: increased left padding from 1.5rem to 5rem
   display: flex;
   align-items: center;
   justify-content: center;
@@ -267,8 +267,9 @@ button.btn-action {
   .btn-icon {
     position: absolute;
     left: 1.5rem;
-    width: 3rem;
+    width: 3.4rem;
     text-align: center;
+    margin-right: 2rem;
   }
 }
 
