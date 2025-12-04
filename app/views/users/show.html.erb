@@ -1,5 +1,7 @@
 <% content_for :hide_navbar, true %>
 <div class="profile-page">
+  <!-- Page Title -->
+  <h1 class="page-title">プロフィール</h1>
   <!-- Status Window - Main character info -->
   <div class="status-window">
     <div class="window-header">
@@ -39,7 +41,7 @@
   </div>
   <!-- Leaderboard Window -->
   <div class="rpg-window">
-    <div class="window-header">
+    <div class="window-header centered">
       <span>ランキング</span>
     </div>
     <div class="leaderboard-toggle">
@@ -72,6 +74,14 @@
             <span class="leaderboard-level">LVL <%= user.level %></span>
           </div>
         <% end %>
+        <% unless @top_5_friends.include?(current_user) %>
+          <div class="leaderboard-divider">...</div>
+          <div class="leaderboard-row is-user">
+            <span class="leaderboard-rank"><%= @friends_rank %></span>
+            <span class="leaderboard-name"><%= current_user.character_name %></span>
+            <span class="leaderboard-level">LVL <%= current_user.level %></span>
+          </div>
+        <% end %>
       <% else %>
         <div class="empty-state">
           <span>フレンドがいません</span>
@@ -81,7 +91,7 @@
   </div>
   <!-- Add Friend Window -->
   <div class="rpg-window">
-    <div class="window-header">
+    <div class="window-header centered">
       <span>フレンド追加</span>
     </div>
     <div class="window-content">
@@ -101,7 +111,7 @@
   </div>
   <!-- Settings Window -->
   <div class="rpg-window">
-    <div class="window-header">
+    <div class="window-header centered">
       <span>設定</span>
     </div>
     <div class="window-content">
