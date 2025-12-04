@@ -319,6 +319,13 @@ button.btn-action {
     padding-bottom: 2rem;
     image-rendering: pixelated;
   }
+
+  .enemy-demon-boss {
+    height: 34vh !important;
+    max-width: none !important; // Let it actually grow to fill 40vh height
+    max-height: 100%;
+    padding-bottom: 3rem !important;
+  }
 }
 
 // Damage number stylings

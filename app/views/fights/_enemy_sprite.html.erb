@@ -1,1 +1,1 @@
-<%= image_tag "enemy-images/#{@fight.enemy.sprite}", alt: "Player Character", class: "enemy-sprite" %>
+<%= image_tag "enemy-images/#{@fight.enemy.sprite}", alt: "Player Character", class: "enemy-sprite enemy-#{@fight.enemy.sprite.delete_suffix('.png').gsub('_', '-')}" %>

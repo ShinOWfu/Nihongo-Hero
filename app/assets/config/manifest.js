@@ -3,15 +3,21 @@
 // Link main files
 //= link application.js
 //= link application.css
+//= link_directory ../stylesheets .css
+//= link_tree ../../javascript .js
+//= link_tree ../../../vendor/javascript .js
+//= link popper.js
+//= link bootstrap.min.js
+
 
 // Link all files inside the images folder and its subdirectories.
 //= link_tree ../images
 
 // Link the PWA manifest
-//= link manifest.json 
+//= link manifest.json
 
 // Existing controller link
-//= link controllers/answer_feedback_controller.js 
+//= link controllers/answer_feedback_controller.js
 
 //= link controllers/application.js
 
