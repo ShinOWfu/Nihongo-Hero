@@ -72,3 +72,28 @@ puts 'Generated users!'
 User.where(experience_points: nil).update_all(experience_points: 0)
 User.where(level: nil).update_all(level: 0)
 User.where(hitpoints: nil).update_all(hitpoints: 60)
+
+# User for Pitch. Delete after pitch
+user = User.create(
+    email: "user@test",
+    password: "123456",
+    password_confirmation: "123456",
+    level: 5,
+    experience_points: 580,
+    character_name: "Bob",
+  )
+
+story_levels_array = StoryLevel.all  
+for index in (1..8) do
+  fight = Fight.create(
+    user: user,
+    story_level: story_levels_array.find{|story_level| story_level.map_node == index},
+    status: "completed",
+    enemy: Enemy.all.sample
+  )
+  FightQuestion.create(
+    fight: fight,
+    question: Question.all.sample,
+    selected_index: rand(0..3)
+  )
+end
