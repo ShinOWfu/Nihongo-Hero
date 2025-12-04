@@ -1,0 +1,42 @@
+// app/assets/config/manifest.json.erb
+{
+  // A short, friendly name for the app when installed on the user's home screen.
+  "short_name": "Nihongo Hero", 
+  
+  // The full name of the application.
+  "name": "Nihongo Hero: Level Up Your Japanese",
+  
+  // The URL loaded when the app is launched from the installed icon.
+  "start_url": "/",
+  
+  // Defines the set of URLs that the browser considers to be within your app.
+  "scope": "/",
+  
+  // What the browser should display when the app is launched. 
+  // 'standalone' is the standard for app-like behavior (hiding the browser UI).
+  "display": "standalone",
+  
+  // A brief description of your app. Good for SEO and app stores.
+  "description": "Level up your Japanese the fun way! Daily quizzes, vocabulary, and grammar challenges to make you a Nihongo Hero.",
+  
+  // The default color of the page. Used as the background color for a splash screen 
+  // until the app's CSS loads. Using a color that matches your brand is best.
+  "background_color": "#F0F0F0", // Recommended: Use a light, brand-appropriate color
+  
+  // Defines the color of the toolbar/status bar of the installed app.
+  "theme_color": "#FF6F00", // Recommended: Use your primary brand color (e.g., orange/red)
+  
+  // An array of icon objects. Keep your existing ERB logic for dynamic pathing.
+  "icons": [
+    <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
+    <% files.each_with_index do |file, index| %>
+      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      {
+        "src": "<%= image_path "icons/#{file}" %>",
+        "sizes": "<%= match && match[:size] %>",
+        "type": "image/png",
+        "purpose": "any" // Indicates the icon can be used for any purpose (splash screen, home screen)
+      }<%= "," unless (files.size - 1) == index %>
+    <% end %>
+  ]
+}

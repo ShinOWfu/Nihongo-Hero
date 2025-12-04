@@ -8,6 +8,7 @@
     <%= favicon_link_tag 'favicon.png' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
       <title><%= meta_title %></title>
       <meta name="description" content="<%= meta_description %>">
 
@@ -24,6 +25,8 @@
       <meta name="twitter:description" content="<%= meta_description %>">
       <meta name="twitter:creator" content="<%= DEFAULT_META["twitter_account"] %>">
       <meta name="twitter:image:src" content="<%= meta_image %>">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="mobile-web-app-capable" content="yes">
   </head>
   <body>
     <% unless content_for?(:hide_navbar) %>
