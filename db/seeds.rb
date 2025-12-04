@@ -68,3 +68,7 @@ users_data.each do |user|
 
 end
 puts 'Generated users!'
+ # Update existing users with nil values
+User.where(experience_points: nil).update_all(experience_points: 0)
+User.where(level: nil).update_all(level: 0)
+User.where(hitpoints: nil).update_all(hitpoints: 60)
