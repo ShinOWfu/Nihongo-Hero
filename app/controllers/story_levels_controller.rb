@@ -7,7 +7,7 @@ class StoryLevelsController < ApplicationController
 
     @completed_level_ids = current_user.fights.where(status: 'completed').pluck(:story_level_id)
     if @completed_level_ids.count > 0
-      @accessible_level_id = @completed_level_ids.last + 1
+      @accessible_level_id = @completed_level_ids.max + 1
     else
       @accessible_level_id = 1
     end

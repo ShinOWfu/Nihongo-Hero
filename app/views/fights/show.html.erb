@@ -1,7 +1,5 @@
 <% content_for :hide_navbar, true %>
-
 <div class="container-fluid vh-100 d-flex flex-column p-0">
-
   <%# scene div %>
   <div id="scene" class="d-flex" style="background-image: url('<%= asset_path("backgrounds/#{@fight.story_level.map_image}") %>');">
     <!-- Left side: Player -->
@@ -13,7 +11,6 @@
         <%= render 'player_sprite' %>
       </div>
     </div>
-
     <!-- Right side: Enemy -->
     <div class="character-container">
       <div class="healthbar-container">
@@ -23,16 +20,12 @@
         <%= render 'enemy_sprite' %>
       </div>
     </div>
-
     <div class="textbox-container">
       <%= render 'textbox_contents' %>
     </div>
   </div>
-
   <%# middle of the page %>
-
   <div id="menu" class="menu d-flex flex-column">
     <%= render 'menu_contents' %>
   </div>
-
 </div>

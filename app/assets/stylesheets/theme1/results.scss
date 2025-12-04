@@ -406,6 +406,20 @@
   text-align: center;
   text-decoration: none;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      background: linear-gradient(135deg, #d4a817, #f0c31e);
+      transform: translateY(-2px);
+    }
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  }
 }
 
 // Animations

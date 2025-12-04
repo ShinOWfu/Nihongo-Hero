@@ -46,7 +46,14 @@ class FightsController < ApplicationController
       @story_level = current_user.fights.last.story_level_id
     end
 
+    #Hardcoding the enemies for the story_level 9 and 10 fights
+    if @story_level == 9
+      enemy = Enemy.find(10)
+    elsif @story_level == 10
+      enemy = Enemy.find(9)
+    else
     enemy = Enemy.all.sample
+    end
     @fight = Fight.new(
       status: 'active',   #Fights are either active or completed
       user: current_user,

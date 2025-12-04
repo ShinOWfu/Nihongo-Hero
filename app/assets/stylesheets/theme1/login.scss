@@ -43,9 +43,11 @@
   cursor: pointer;
   transition: all 0.2s;
 
-  &:hover {
-    background-color: #2d2d44;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
+  @media (hover: hover) {
+    &:hover {
+      background-color: #2d2d44;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
+    }
   }
 }

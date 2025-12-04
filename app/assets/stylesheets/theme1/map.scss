@@ -536,9 +536,11 @@
   color: $gray-400;
   transition: color 0.2s ease;
 
-  &:hover {
-    color: $gray-200;
-    text-decoration: none;
+  @media (hover: hover) {
+    &:hover {
+      color: $gray-200;
+      text-decoration: none;
+    }
   }
 }
 

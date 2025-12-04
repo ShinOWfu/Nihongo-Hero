@@ -1,19 +1,16 @@
-<%= button_to fight_fight_questions_path(@fight), params: { question_type: "random" }, data: { turbo_method: :post }, class: "btn btn-action" do %>
+<%= button_to fight_fight_questions_path(@fight), params: { question_type: "random" }, data: { turbo_method: :post }, class: "btn-action" do %>
   <i class="fa-solid fa-dice-five btn-icon"></i>
   <span class="btn-text">ランダム攻撃</span>
 <% end %>
-
-<%= button_to fight_fight_questions_path(@fight), params: { question_type: "kanji" }, data: { turbo_method: :post }, class: "btn btn-action" do %>
+<%= button_to fight_fight_questions_path(@fight), params: { question_type: "kanji" }, data: { turbo_method: :post }, class: "btn-action" do %>
   <i class="fa-solid fa-paintbrush btn-icon"></i>
   <span class="btn-text">漢字マジック</span>
 <% end %>
-
-<%= button_to fight_fight_questions_path(@fight), params: { question_type: "words" }, data: { turbo_method: :post }, class: "btn btn-action" do %>
+<%= button_to fight_fight_questions_path(@fight), params: { question_type: "words" }, data: { turbo_method: :post }, class: "btn-action" do %>
   <i class="fa-solid fa-message btn-icon"></i>
   <span class="btn-text">単語マホウ</span>
 <% end %>
-
-<%= button_to fight_fight_questions_path(@fight), params: { question_type: "grammar" }, data: { turbo_method: :post }, class: "btn btn-action" do %>
+<%= button_to fight_fight_questions_path(@fight), params: { question_type: "grammar" }, data: { turbo_method: :post }, class: "btn-action" do %>
   <i class="fa-solid fa-book btn-icon"></i>
   <span class="btn-text">文法シュリケン</span>
 <% end %>

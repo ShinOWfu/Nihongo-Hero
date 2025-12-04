@@ -216,7 +216,7 @@
   gap: 1.5rem;
   margin-top: 2rem;
 
-  .stat-item {
+    .stat-item {
     background: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(251, 191, 36, 0.3);
     border-radius: 15px;
@@ -224,10 +224,12 @@
     transition: all 0.3s ease;
     animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
 
-    &:hover {
-      transform: translateY(-5px);
-      border-color: rgba(251, 191, 36, 0.6);
-      box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-5px);
+        border-color: rgba(251, 191, 36, 0.6);
+        box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+      }
     }
 
     .stat-value {
@@ -252,7 +254,7 @@
 }
 
 // Button
-.btn-victory {
+.btn-results-victory {
   border: none;
   border-radius: 50px;
   font-size: 1.2rem;
@@ -261,11 +263,14 @@
   animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.9s backwards;
   background-color: $accent-gold;
   color: black;
+  cursor: pointer;
 
-  &:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 15px 20px rgba(249, 115, 22, 0.6);
-    background-color: $accent-gold-glow;
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 15px 20px rgba(249, 115, 22, 0.6);
+      background-color: $accent-gold-glow;
+    }
   }
 
   &:active {
