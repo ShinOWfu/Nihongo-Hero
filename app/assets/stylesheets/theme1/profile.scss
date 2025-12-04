@@ -128,7 +128,7 @@
 }
 
 .status-sprite {
-  height: 95%;
+  height: 90%;
   width: auto;
   max-width: 90%;
   image-rendering: pixelated;
@@ -297,10 +297,11 @@
 
 .leaderboard-divider {
   text-align: center;
-  color: $gray-500;
-  padding: 0.4rem 0;
-  font-size: 1rem;
-  letter-spacing: 3px;
+  color: $gray-300;
+  padding: 0.5rem 0;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  font-weight: bold;
 }
 
 // ============================================

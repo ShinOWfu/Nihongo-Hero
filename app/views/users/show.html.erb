@@ -1,5 +1,5 @@
 <% content_for :hide_navbar, true %>
-<div class="profile-page">
+<div class="profile-page" data-controller="profile">
   <!-- Status Window - Main character info -->
   <div class="status-window">
     <div class="window-header">
@@ -43,10 +43,10 @@
       <span><i class="fa-solid fa-trophy"></i> ランキング</span>
     </div>
     <div class="leaderboard-toggle">
-      <button class="toggle-btn active" data-target="global"><i class="fa-solid fa-globe"></i></button>
-      <button class="toggle-btn" data-target="friends"><i class="fa-solid fa-user-group"></i></button>
+      <button class="toggle-btn active" data-target="global" data-profile-target="toggleBtn" data-action="click->profile#switchTab"><i class="fa-solid fa-globe"></i></button>
+      <button class="toggle-btn" data-target="friends" data-profile-target="toggleBtn" data-action="click->profile#switchTab"><i class="fa-solid fa-user-group"></i></button>
     </div>
-    <div id="leaderboard-global" class="leaderboard-list">
+    <div id="leaderboard-global" class="leaderboard-list" data-profile-target="globalList">
       <% @top_5_global.each_with_index do |user, index| %>
         <div class="leaderboard-row <%= 'is-user' if user.id == current_user.id %>">
           <span class="leaderboard-rank rank-<%= index + 1 %>"><%= index + 1 %></span>
@@ -54,8 +54,8 @@
           <span class="leaderboard-level">LVL <%= user.level %></span>
         </div>
       <% end %>
-      <% unless @top_5_global.include?(current_user) %>
-        <div class="leaderboard-divider">...</div>
+      <% unless @top_5_global.map(&:id).include?(current_user.id) %>
+        <div class="leaderboard-divider">• • •</div>
         <div class="leaderboard-row is-user">
           <span class="leaderboard-rank"><%= @global_rank %></span>
           <span class="leaderboard-name"><%= current_user.character_name %></span>
@@ -63,8 +63,8 @@
         </div>
       <% end %>
     </div>
-    <div id="leaderboard-friends" class="leaderboard-list" style="display: none;">
-      <% if @top_5_friends.any? %>
+    <div id="leaderboard-friends" class="leaderboard-list" style="display: none;" data-profile-target="friendsList">
+      <% if current_user.friends.any? %>
         <% @top_5_friends.each_with_index do |user, index| %>
           <div class="leaderboard-row <%= 'is-user' if user.id == current_user.id %>">
             <span class="leaderboard-rank rank-<%= index + 1 %>"><%= index + 1 %></span>
@@ -72,8 +72,8 @@
             <span class="leaderboard-level">LVL <%= user.level %></span>
           </div>
         <% end %>
-        <% unless @top_5_friends.include?(current_user) %>
-          <div class="leaderboard-divider">...</div>
+        <% unless @top_5_friends.map(&:id).include?(current_user.id) %>
+          <div class="leaderboard-divider">• • •</div>
           <div class="leaderboard-row is-user">
             <span class="leaderboard-rank"><%= @friends_rank %></span>
             <span class="leaderboard-name"><%= current_user.character_name %></span>
@@ -122,14 +122,14 @@
       <div class="setting-row">
         <label class="setting-label">音声</label>
         <select class="rpg-select">
-          <option>女性</option>
           <option>男性</option>
+          <option>女性</option>
         </select>
       </div>
       <div class="setting-row no-border">
         <label class="setting-label">効果音</label>
-        <button class="sound-toggle active" type="button">
-          <i class="fa-solid fa-volume-high"></i>
+        <button class="sound-toggle active" type="button" data-action="click->profile#toggleSound">
+          <i class="fa-solid fa-volume-high" data-profile-target="soundIcon"></i>
         </button>
       </div>
       <div class="logout-row">
@@ -141,32 +141,3 @@
   </div>
 </div>
 <%= render 'shared/bottom_navbar' %>
-<script>
-  document.addEventListener('turbo:load', () => {
-    document.querySelectorAll('.toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const target = btn.dataset.target;
-        document.getElementById('leaderboard-global').style.display = target === 'global' ? 'block' : 'none';
-        document.getElementById('leaderboard-friends').style.display = target === 'friends' ? 'block' : 'none';
-      });
-    });
-
-    // Sound toggle
-    document.querySelectorAll('.sound-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
-        const icon = btn.querySelector('i');
-        if (btn.classList.contains('active')) {
-          icon.classList.remove('fa-volume-xmark');
-          icon.classList.add('fa-volume-high');
-        } else {
-          icon.classList.remove('fa-volume-high');
-          icon.classList.add('fa-volume-xmark');
-        }
-      });
-    });
-  });
-</script>
