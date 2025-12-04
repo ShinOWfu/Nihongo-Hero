@@ -40,7 +40,7 @@ export default class extends Controller {
 
       // 1- Player bumps forward
       playerSprite.classList.add("sword-strike");
-      this.audio = new Audio("/assets/slash.mp3");
+      this.audio = new Audio("/audio/slash.mp3");
       this.audio.play();
 
       // On impact:
@@ -82,7 +82,7 @@ export default class extends Controller {
         // Death animation if HP <= 0
         if (newEnemyHp <= 0) {
           setTimeout(() => {
-            // this.audio = new Audio("/assets/results-victory.mp3");
+            // this.audio = new Audio("/audio/results-victory.mp3");
             // this.audio.play();
             enemySprite.classList.add("enemy-death");
           }, 300);
@@ -108,7 +108,7 @@ export default class extends Controller {
 
       // 1- Enemy lunges toward player
       enemySprite.classList.add("enemy-strike");
-      this.audio = new Audio("/assets/damage.mp3");
+      this.audio = new Audio("/audio/damage.mp3");
       this.audio.play();
 
       setTimeout(() => {
@@ -131,7 +131,7 @@ export default class extends Controller {
         // Death animation if HP <= 0
         if (newPlayerHp <= 0) {
           setTimeout(() => {
-            // this.audio = new Audio("/assets/results-death.mp3");
+            // this.audio = new Audio("/audio/results-death.mp3");
             // this.audio.play();
             playerSprite.classList.add("player-death");
           }, 300);
