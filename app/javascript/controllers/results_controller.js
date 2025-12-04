@@ -5,17 +5,21 @@ export default class extends Controller {
   static values = { percentage: Number, victory: Boolean, completed: Boolean }
 
   connect() {
-    if (this.completedValue){
-      if (this.victoryValue) {
-        this.audio = new Audio("/audio/results-victory.mp3");
-        this.audio.play();
-      } else {
-        this.audio = new Audio("/audio/results-death.mp3");
-        this.audio.play();
-      }
-      setTimeout(() => this.animateCircle(), 300)
+    // Victory audio only for level 10 win
+    if (this.completedValue && this.victoryValue) {
+      this.audio = new Audio("/audio/results-victory.mp3");
+      this.audio.play();
     }
+    // Death audio - every loss? or only level 10?
+    else if (!this.victoryValue) {
+      this.audio = new Audio("/audio/results-death.mp3");
+      this.audio.play();
+    }
+
+    // Always animate (moved outside the if)
+    setTimeout(() => this.animateCircle(), 300)
   }
+
   disconnect() {
     if (this.audio) {
       this.audio.pause();
