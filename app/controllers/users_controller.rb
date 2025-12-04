@@ -2,6 +2,21 @@ class UsersController < ApplicationController
   def show
     @user = current_user
 
+    # Global rank: count users with higher level, OR same level but earlier signup (lower id = joined first)
+    @global_rank = User.where('level > ? OR (level = ? AND id < ?)', @user.level, @user.level, @user.id).count + 1
+
+    # Combine friends + yourself into one array (| removes duplicates), sorted by level desc, then id as tiebreaker
+    @friends_with_user = (current_user.friends.to_a | [current_user]).sort_by { |u| [-u.level, u.id] }
+
+    # Find your position in the friends leaderboard
+    @friends_rank = @friends_with_user.index(current_user) + 1
+
+    # Grab the top 5 from the friends + you array for display
+    @top_5_friends = @friends_with_user.first(5)
+
+    # Top 5 players globally, ordered by level (highest first)
+    @top_5_global = User.order(level: :desc).limit(5)
+
     # Calculate how many levels the user has completed
     if @user.fights.where(status: "completed").last&.story_level_id
       @levels_cleared = @user.fights.where(status: "completed").last&.story_level_id
@@ -21,9 +36,6 @@ class UsersController < ApplicationController
 
     # Calculate the streak of how many days in a row the user has completed at least one level
     @days_streak = streak
-    #Leaderboard
-    @top_5_global = User.order(level: :desc).limit(5)
-    @top_5_friends = current_user.friends.order(level: :desc).limit(5)
   end
 
   def streak
@@ -61,7 +73,7 @@ class UsersController < ApplicationController
 
   def add_friend
     # The identifier (character name) is passed directly via params from the form
-    char_name = params[:identifier] 
+    char_name = params[:identifier]
     friend_user = User.find_by(character_name: char_name)
 
     # --- VALIDATIONS ---
@@ -79,11 +91,11 @@ class UsersController < ApplicationController
 
     # Check for existing friendship (outgoing or incoming)
     if current_user.friends.include?(friend_user)
-      redirect_to request.referrer || root_path, alert: "#{friend_user.character_name} is already connected with you."
+      redirect_to request.referrer || root_path, alert: "#{friend_user.character_name} is already a friend."
       return
     end
     # --- END VALIDATIONS ---
-    
+
     # 2. Create the new friendship (current_user is the initiator)
     # This uses the 'friendships' association defined in the User model.
     @friendship = Friendship.new(user_id: current_user.id, friend_user_id: friend_user.id )

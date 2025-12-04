@@ -1,106 +1,143 @@
 <% content_for :hide_navbar, true %>
-
-<div class="profile-page container">
-
-  <div class="profile-sprite-outer">
-    <div class="profile-sprite-holder">
-      <%= image_tag "character-sprites/Samurai/player_character.png", class: "profile-sprite" %>
+<div class="profile-page" data-controller="profile">
+  <!-- Status Window - Main character info -->
+  <div class="status-window">
+    <div class="window-header">
+      <span class="character-name"><%= @user.character_name %></span>
+      <span class="header-level">LVL <%= @user.level %></span>
+    </div>
+    <div class="window-content">
+      <div class="character-row">
+        <!-- Stats Left -->
+        <div class="stats-left">
+          <div class="stat-item">
+            <span class="stat-label">LVL クリア</span>
+            <span class="stat-value"><%= @levels_cleared %></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">正答率</span>
+            <span class="stat-value"><%= @avg_perc_correct %>%</span>
+          </div>
+        </div>
+        <!-- Sprite -->
+        <div class="sprite-box">
+          <%= image_tag "character-sprites/Samurai/player_character.png", class: "status-sprite" %>
+        </div>
+        <!-- Stats Right -->
+        <div class="stats-right">
+          <div class="stat-item streak">
+            <span class="stat-label"><i class="fa-solid fa-fire"></i> 連続</span>
+            <span class="stat-value"><%= @days_streak %>日</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label"><i class="fa-solid fa-globe"></i></span>
+            <span class="stat-value">#<%= @global_rank %></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="card profile-card">
-    <div class="profile-stats">
-      <div class="stat-box">
-        <span class="stat-value"><%= @levels_cleared %></span>
-        <span class="stat-label">クリア</span>
+  <!-- Leaderboard Window -->
+  <div class="rpg-window">
+    <div class="window-header centered">
+      <span><i class="fa-solid fa-trophy"></i> ランキング</span>
+    </div>
+    <div class="leaderboard-toggle">
+      <button class="toggle-btn active" data-target="global" data-profile-target="toggleBtn" data-action="click->profile#switchTab"><i class="fa-solid fa-globe"></i></button>
+      <button class="toggle-btn" data-target="friends" data-profile-target="toggleBtn" data-action="click->profile#switchTab"><i class="fa-solid fa-user-group"></i></button>
+    </div>
+    <div id="leaderboard-global" class="leaderboard-list" data-profile-target="globalList">
+      <% @top_5_global.each_with_index do |user, index| %>
+        <div class="leaderboard-row <%= 'is-user' if user.id == current_user.id %>">
+          <span class="leaderboard-rank rank-<%= index + 1 %>"><%= index + 1 %></span>
+          <span class="leaderboard-name"><%= user.character_name %></span>
+          <span class="leaderboard-level">LVL <%= user.level %></span>
+        </div>
+      <% end %>
+      <% unless @top_5_global.map(&:id).include?(current_user.id) %>
+        <div class="leaderboard-divider">• • •</div>
+        <div class="leaderboard-row is-user">
+          <span class="leaderboard-rank"><%= @global_rank %></span>
+          <span class="leaderboard-name"><%= current_user.character_name %></span>
+          <span class="leaderboard-level">LVL <%= current_user.level %></span>
+        </div>
+      <% end %>
+    </div>
+    <div id="leaderboard-friends" class="leaderboard-list" style="display: none;" data-profile-target="friendsList">
+      <% if current_user.friends.any? %>
+        <% @top_5_friends.each_with_index do |user, index| %>
+          <div class="leaderboard-row <%= 'is-user' if user.id == current_user.id %>">
+            <span class="leaderboard-rank rank-<%= index + 1 %>"><%= index + 1 %></span>
+            <span class="leaderboard-name"><%= user.character_name %></span>
+            <span class="leaderboard-level">LVL <%= user.level %></span>
+          </div>
+        <% end %>
+        <% unless @top_5_friends.map(&:id).include?(current_user.id) %>
+          <div class="leaderboard-divider">• • •</div>
+          <div class="leaderboard-row is-user">
+            <span class="leaderboard-rank"><%= @friends_rank %></span>
+            <span class="leaderboard-name"><%= current_user.character_name %></span>
+            <span class="leaderboard-level">LVL <%= current_user.level %></span>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="empty-state">
+          <span>フレンドがいません</span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <!-- Add Friend Window -->
+  <div class="rpg-window">
+    <div class="window-header centered">
+      <span><i class="fa-solid fa-user-plus"></i> 友達追加</span>
+    </div>
+    <div class="window-content">
+      <%= form_with(url: add_friend_users_path, method: :post, local: true, class: "friend-form") do |form| %>
+        <div class="form-row">
+          <%= form.text_field :identifier,
+              placeholder: "キャラクター名",
+              required: true,
+              autocomplete: "off",
+              class: "rpg-input" %>
+          <%= form.button type: 'submit', class: "rpg-btn" do %>
+            <i class="fa-solid fa-plus"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <!-- Settings Window -->
+  <div class="rpg-window">
+    <div class="window-header centered">
+      <span><i class="fa-solid fa-gear"></i> 設定</span>
+    </div>
+    <div class="window-content">
+      <div class="setting-row">
+        <label class="setting-label">難易度</label>
+        <%= select_tag :difficulty,
+            options_for_select([["N1", "N1"], ["N2", "N2"], ["N3", "N3"]], @user.japanese_difficulty),
+            class: "rpg-select" %>
       </div>
-
-      <div class="stat-box">
-        <span class="stat-value"><%= @avg_perc_correct %>%</span>
-        <span class="stat-label">正答率</span>
+      <div class="setting-row">
+        <label class="setting-label">音声</label>
+        <select class="rpg-select">
+          <option>男性</option>
+          <option>女性</option>
+        </select>
       </div>
-
-      <div class="stat-box">
-        <span class="stat-value"><%= @days_streak %></span>
-        <span class="stat-label">連続日数</span>
+      <div class="setting-row no-border">
+        <label class="setting-label">効果音</label>
+        <button class="sound-toggle active" type="button" data-action="click->profile#toggleSound">
+          <i class="fa-solid fa-volume-high" data-profile-target="soundIcon"></i>
+        </button>
+      </div>
+      <div class="logout-row">
+        <%= button_to destroy_user_session_path, method: :delete, class: "action-btn logout" do %>
+          <i class="fa-solid fa-door-open"></i> ログアウト
+        <% end %>
       </div>
     </div>
   </div>
-
-  <div class="card profile-card">
-    <div class="difficulty">
-      <label class="profile-title" for="jlpt-level">難易度</label>
-      <%= select_tag :difficulty,
-        options_for_select([["N1", "N1"], ["N2", "N2"], ["N3", "N3"]], @user.japanese_difficulty),
-        class: "form-select" %>
-    </div>
-  </div>
-
-<div id="leaderboard" class="card profile-card">
-  <div class="leaderboard-title">ランキング</div>
-  <div class="leaderboard-toggle">
-    <button class="toggle-btn active" data-target="global">グローバル</button>
-    <button class="toggle-btn" data-target="friends">フレンド</button>
-  </div>
-
-  <div id="leaderboard-global" class="leaderboard-list">
-    <% @top_5_global.each_with_index do |user, index| %>
-      <div class="leaderboard-row">
-        <span class="leaderboard-rank"><%= index + 1 %></span>
-        <span class="leaderboard-name"><%= user.character_name %></span>
-        <span class="leaderboard-level">LVL <%= user.level %></span>
-      </div>
-    <% end %>
-  </div>
-
-  <div id="leaderboard-friends" class="leaderboard-list" style="display: none;">
-    <% @top_5_friends.each_with_index do |user, index| %>
-      <div class="leaderboard-row">
-        <span class="leaderboard-rank"><%= index + 1 %></span>
-        <span class="leaderboard-name"><%= user.character_name %></span>
-        <span class="leaderboard-level">LVL <%= user.level %></span>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="card profile-card">
-  <div class="profile-title">他のヒーローとつながる</div>
-  <%= form_with(url: add_friend_users_path, method: :post, local: true, style: "display: flex; flex-direction: row; gap: 0.75rem; align-items: center;") do |form| %>
-    <%= form.text_field :identifier,
-        placeholder: "キャラクター名を入力",
-        required: true,
-        style: "flex: 1; padding: 0.75rem; background-color: #374151; border: 1px solid #4b5563; border-radius: 0.5rem; color: #f3f4f6;" %>
-
-    <%= form.button "追加",
-        type: 'submit',
-        style: "padding: 0.75rem 1.5rem; background-color: #d4af37; color: #111827; font-weight: bold; border: none; border-radius: 0.5rem; cursor: pointer; white-space: nowrap;" %>
-  <% end %>
-
-  <p style="font-size: 0.875rem; color: #9ca3af; margin-top: 0.75rem; font-style: italic;">
-    追加するには、ユーザーの正確なキャラクター名を入力してください。
-  </p>
-</div>
-
-<div class="card profile-card">
-  <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-action" %>
-</div>
-
 </div>
 <%= render 'shared/bottom_navbar' %>
-
-
-<script>
-document.addEventListener('turbo:load', () => {
-  document.querySelectorAll('.toggle-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const target = btn.dataset.target;
-      document.getElementById('leaderboard-global').style.display = target === 'global' ? 'block' : 'none';
-      document.getElementById('leaderboard-friends').style.display = target === 'friends' ? 'block' : 'none';
-    });
-  });
-});
-</script>

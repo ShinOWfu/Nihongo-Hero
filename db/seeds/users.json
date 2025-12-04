@@ -2,7 +2,7 @@
   {
     "email": "test@test",
     "encrypted_password": "123456",
-    "character_name": "Taro",
+    "character_name": "HalesKB",
     "experience_points": "1450",
     "level": "14"
   },
@@ -10,21 +10,70 @@
     "email": "test@test2",
     "encrypted_password": "123456",
     "character_name": "NanoBanana",
-    "experience_points": "2730",
-    "level": "27"
+    "experience_points": "700",
+    "level": "7"
   },
   {
     "email": "test@test3",
     "encrypted_password": "123456",
-    "character_name": "Leo",
-    "experience_points": "8100",
-    "level": "81"
+    "character_name": "LeoCba07",
+    "experience_points": "2400",
+    "level": "24"
   },
   {
     "email": "test@test4",
     "encrypted_password": "123456",
     "character_name": "Jonathan",
-    "experience_points": "980",
-    "level": "9"
+    "experience_points": "1980",
+    "level": "19"
+  },
+  {
+    "email": "test@test5",
+    "encrypted_password": "123456",
+    "character_name": "GaryGamer",
+    "experience_points": "5380",
+    "level": "53"
+  },
+  {
+    "email": "test@test6",
+    "encrypted_password": "123456",
+    "character_name": "Oliver77",
+    "experience_points": "1130",
+    "level": "11"
+  },
+  {
+    "email": "test@test7",
+    "encrypted_password": "123456",
+    "character_name": "SamSam",
+    "experience_points": "1030",
+    "level": "10"
+  },
+  {
+    "email": "test@test8",
+    "encrypted_password": "123456",
+    "character_name": "Matias69",
+    "experience_points": "830",
+    "level": "8"
+  },
+  {
+    "email": "test@test9",
+    "encrypted_password": "123456",
+    "character_name": "DougDoug",
+    "experience_points": "430",
+    "level": "4"
+  },
+  {
+    "email": "test@test10",
+    "encrypted_password": "123456",
+    "character_name": "LeWagonTokyo",
+    "experience_points": "530",
+    "level": "5"
+  },
+  {
+    "email": "test@test11",
+    "encrypted_password": "123456",
+    "character_name": "Haris420",
+    "experience_points": "430",
+    "level": "4"
   }
 ]

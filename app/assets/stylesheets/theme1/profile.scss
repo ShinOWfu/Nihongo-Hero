@@ -1,204 +1,576 @@
-// DEBUG - Remove when done
-// * {
-// border: 1px solid red !important;
-// }
+// ============================================
+// PROFILE PAGE - RPG STATUS WINDOW STYLE
+// ============================================
 
 .profile-page {
-  height: 100vh;
-  overflow-y: auto;  // scroll inside this container
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 80px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 1rem;
+  padding-bottom: 100px;
+  background: $gray-900;
+  position: relative;
 
   &::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-image: url("crane_pattern.jpg");
     background-size: cover;
     background-position: center;
     opacity: 0.1;
-    z-index: -1;
+    z-index: 0;
     filter: contrast(3);
+    pointer-events: none;
   }
 }
 
-.profile-sprite-outer {
+.page-title {
+  color: $accent-gold;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+// ============================================
+// RPG WINDOW - Base style for all windows
+// ============================================
+
+.rpg-window,
+.status-window {
+  background: $gray-800;
+  border: 4px solid $gray-500;
+  border-radius: 4px;
+  max-width: 500px;
+  margin: 0 auto 1rem;
+  box-shadow:
+    inset 0 0 0 2px $gray-900,
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.status-window {
+  border-color: $accent-gold;
+  box-shadow:
+    inset 0 0 0 2px $gray-900,
+    0 0 20px $accent-gold-glow,
+    0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.window-header {
+  background: $gray-600;
+  color: white;
+  padding: 0.9rem 1.1rem;
+  font-weight: 700;
+  font-size: 1.25rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  border-bottom: 2px solid $gray-500;
+
+  &.centered {
+    justify-content: center;
+  }
+
+  i {
+    margin-right: 0.5rem;
+  }
 }
 
-.profile-sprite-holder {
+.status-window .window-header {
+  background: $accent-gold;
+  color: $gray-900;
+  border-bottom-color: $accent-gold-dark;
+}
+
+.character-name {
+  font-size: clamp(1.3rem, 6vw, 1.6rem);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 65%;
+}
+
+.header-level {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.window-content {
+  padding: 1.25rem;
+}
+
+// ============================================
+// CHARACTER ROW - Sprite with stats on sides
+// ============================================
+
+.character-row {
   display: flex;
-}
-
-.profile-sprite {
-  height: 25vh;
-  width: auto;
-  image-rendering: pixelated;
-}
-
-.profile-stats {
-  display: flex;
-  justify-content: space-around;
   gap: 0.5rem;
+  align-items: stretch;
+  justify-content: center;
 }
 
-.stat-box {
-  flex: 1;  // Share space equally
-  max-width: 30%;  // Prevent getting too big
+.sprite-box {
+  width: 100px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, $gray-800 0%, $gray-900 100%);
+  border: 3px solid $accent-gold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6), 0 0 10px $accent-gold-glow;
+}
+
+.status-sprite {
+  height: 90%;
+  width: auto;
+  max-width: 90%;
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+// ============================================
+// STATS - Vertical stacks on each side
+// ============================================
+
+.stats-left,
+.stats-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  max-width: 120px;
+}
+
+.stat-item {
+  background: $gray-900;
+  border: 1px solid $gray-600;
+  padding: 0.3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-color: $gray-600;
-  border: 4px solid $accent-gold-glow;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  aspect-ratio: 1;
-  position: relative;
-  max-height: 20rem;
-}
-
-.stat-value {
-  font-size: clamp(2rem, 5vw, 4rem);  // Scales with viewport
-  font-weight: bold;
-  color: $accent-gold;
-  line-height: 1.2;
-}
-
-.stat-label {
-  font-size: clamp(0.75rem, 2vw, 0.9rem);  // Scales with viewport
-  color: $gray-300;
   text-align: center;
-  font-weight: 500;
-  white-space: nowrap;
+  flex: 1;
+  justify-content: center;
 }
 
+.stat-item .stat-label {
+  color: $gray-200;
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 
-.leaderboard-title {
+  i {
+    font-size: 0.9rem;
+  }
+}
+
+.stat-item .stat-value {
   color: $accent-gold;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: left;
-  font-size: clamp(1.3rem, 4vw, 3rem); // same font size as form title
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.stat-item.streak {
+  .stat-label {
+    color: #f97316;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+
+    i {
+      font-size: 0.7rem;
+    }
+  }
+
+  .stat-value {
+    color: #f97316;
+  }
+}
+
+// ============================================
+// LEADERBOARD
+// ============================================
+
+.leaderboard-toggle {
+  display: flex;
+  border-bottom: 2px solid $gray-700;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 0.9rem;
+  border: none;
+  background: $gray-700;
+  color: $gray-300;
+  font-family: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-right: 1px solid $gray-600;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &.active {
+    background: $gray-900;
+    color: $accent-gold;
+    font-weight: 700;
+  }
+
+  @media (hover: hover) {
+    &:hover:not(.active) {
+      background: $gray-600;
+    }
+  }
+}
+
+.leaderboard-list {
+  padding: 0.75rem;
 }
 
 .leaderboard-row {
   display: flex;
   align-items: center;
-  padding: 0.75rem;
-  background-color: $gray-700;
-  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid $gray-700;
+  transition: background 0.15s ease;
 
-  & + & {
-    margin-top: 0.5rem;
-    border-top: 1px solid $gray-600;
-    padding-top: 1rem;
-  }
-}
-
-.leaderboard-rank {
-  width: 2rem;
-  font-weight: bold;
-  color: $accent-gold;
-}
-
-.leaderboard-name {
-  flex: 1;
-  color: $gray-100;
-}
-
-.leaderboard-level {
-  color: $gray-300;
-  font-size: 0.875rem;
-}
-
-.leaderboard-toggle {
-  display: flex;
-  margin-bottom: 1rem;
-  background-color: $gray-800;
-  border-radius: 0.5rem;
-  padding: 0.25rem;
-}
-
-.toggle-btn {
-  flex: 1;
-  padding: 0.5rem 1rem;
-  border: none;
-  background: transparent;
-  color: $gray-300;
-  cursor: pointer;
-  border-radius: 0.25rem;
-  transition: all 0.2s;
-
-  &.active {
-    background-color: $accent-gold;
-    color: $gray-900;
-    font-weight: bold;
+  &:last-child {
+    border-bottom: none;
   }
 
-  @media (hover: hover) {
-    &:hover:not(.active) {
-      background-color: $gray-700;
+  &.is-user {
+    background: rgba($accent-gold, 0.15);
+    border-radius: 4px;
+    margin: 0.3rem 0;
+
+    .leaderboard-name {
+      color: $accent-gold;
+      font-weight: 700;
     }
   }
 }
 
-.friend-form-.friend-input {
-  padding: 0.75rem;
-  background-color: $gray-700 !important;
-  border: 1px solid $gray-600 !important;
-  border-radius: 0.5rem;
-  color: $gray-100 !important;
-  width: 100%;
+.leaderboard-rank {
+  width: 2.5rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: $gray-300;
+
+  &.rank-1 { color: #ffd700; }
+  &.rank-2 { color: #c0c0c0; }
+  &.rank-3 { color: #cd7f32; }
+}
+
+.leaderboard-name {
+  flex: 1;
+  color: white;
+  font-size: 1.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0.5rem;
+}
+
+.leaderboard-level {
+  color: $gray-300;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.empty-state {
+  padding: 2rem;
+  text-align: center;
+  color: $gray-400;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.leaderboard-divider {
+  text-align: center;
+  color: $gray-300;
+  padding: 0.5rem 0;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+// ============================================
+// ADD FRIEND FORM
+// ============================================
+
+.friend-form {
+  margin-bottom: 0.75rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.rpg-input {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  border-radius: 4px;
+  color: white;
+  font-family: inherit;
+  font-size: 1.1rem;
+  transition: border-color 0.15s ease;
 
   &::placeholder {
     color: $gray-400;
   }
 
   &:focus {
-    outline: none !important;
-    border-color: $accent-gold !important;
-    box-shadow: none !important;
+    outline: none;
+    border-color: $accent-gold;
   }
 }
 
-.friend-submit-btn {
-  padding: 0.75rem 1.5rem;
-  background-color: $accent-gold !important;
-  color: $gray-900 !important;
-  font-weight: bold;
-  border: none !important;
-  border-radius: 0.5rem;
+.rpg-btn {
+  padding: 0.85rem 1.2rem;
+  background: $accent-gold;
+  border: 2px solid $accent-gold-dark;
+  border-radius: 4px;
+  color: $gray-900;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  box-shadow: 0 3px 0 $accent-gold-dark;
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 $accent-gold-dark;
+  }
 
   @media (hover: hover) {
     &:hover {
-      background-color: darken($accent-gold, 10%) !important;
+      background: lighten($accent-gold, 5%);
     }
   }
+}
+
+.helper-text {
+  font-size: 0.7rem;
+  color: $gray-500;
+  font-style: italic;
+  margin: 0;
+}
+
+// ============================================
+// SETTINGS
+// ============================================
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px dashed $gray-600;
+
+  &.no-border {
+    border-bottom: none;
+    margin-bottom: 1.1rem;
+  }
+}
+
+.setting-label {
+  color: white;
+  font-weight: 700;
+  font-size: 1.15rem;
+
+  i {
+    color: $accent-gold;
+  }
+}
+
+// Compact settings row
+.settings-row-compact {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  i {
+    color: $accent-gold;
+    font-size: 1rem;
+  }
+}
+
+.rpg-select-small {
+  padding: 0.4rem 1.5rem 0.4rem 0.5rem;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  border-radius: 4px;
+  color: $accent-gold;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%23f0c31e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.4rem center;
 
   &:focus {
-    outline: none !important;
-    box-shadow: none !important;
+    outline: none;
+    border-color: $accent-gold;
+  }
+}
+
+.sound-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  color: $gray-500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &.active {
+    border-color: $accent-gold;
+    color: $accent-gold;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.rpg-select {
+  padding: 0.7rem 2.4rem 0.7rem 1rem;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  border-radius: 4px;
+  color: $accent-gold;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1.15rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23f0c31e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-gold;
+  }
+}
+
+.sound-toggle {
+  width: 52px;
+  height: 42px;
+  border-radius: 6px;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  color: $gray-400;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &.active {
+    border-color: $accent-gold;
+    color: $accent-gold;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.logout-row {
+  display: flex;
+  justify-content: center;
+}
+
+.action-btn {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: $gray-900;
+  border: 2px solid $gray-600;
+  border-radius: 4px;
+  color: white;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  i {
+    margin-right: 0.5rem;
   }
 
   &:active {
     transform: scale(0.98);
   }
+
+  &.logout {
+    @media (hover: hover) {
+      &:hover {
+        border-color: $accent-gold;
+        color: $accent-gold;
+      }
+    }
+  }
 }
-.profile-title {
-  color: $accent-gold;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: left;
-  font-size: clamp(1.3rem, 4vw, 3rem); // same font size as form title
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: 380px) {
+  .sprite-box {
+    width: 85px;
+  }
+
+  .character-name {
+    font-size: 1.2rem;
+  }
+
+  .stat-item .stat-value {
+    font-size: 1.2rem;
+  }
+
+  .stat-item .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .stats-left,
+  .stats-right {
+    max-width: 105px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .rpg-input,
+  .rpg-btn {
+    width: 100%;
+  }
 }

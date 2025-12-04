@@ -1,6 +1,43 @@
 .alert {
   position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 1000;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  max-width: 85%;
+  background: linear-gradient(135deg, $accent-gold, darken($accent-gold, 8%));
+  color: $gray-900;
+  padding: 12px 40px 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+  animation: slide-down 0.3s ease, fade-out 0.5s ease 3s forwards;
+
+  .btn-close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+    filter: none;
+    background-size: 10px;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  color: white;
+
+  .btn-close {
+    filter: invert(1);
+  }
 }

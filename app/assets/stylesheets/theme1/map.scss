@@ -294,6 +294,7 @@
   border-radius: $border-radius;
   padding: 10px 14px;
   width: 110px;
+  max-width: calc(50vw - 90px);
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
   z-index: 10;
@@ -490,7 +491,7 @@
   border: 2px solid $accent-gold;
   border-radius: $border-radius;
   padding: 10px 14px;
-  max-width: 220px;
+  max-width: 240px;
   backdrop-filter: blur(10px);
   box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.3),
@@ -502,7 +503,7 @@
 
 .story-bubble-content {
   color: $gray-100;
-  font-size: 0.8rem;
+  font-size: 1rem;
   line-height: 1.5;
   text-align: center;
 }
@@ -595,5 +596,17 @@
 @keyframes fade-out {
   to {
     opacity: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .completed-story-bubble {
+    width: 90px;
+    left: calc(100% + 8px);
+    padding: 6px 8px;
+  }
+
+  .completed-story-bubble-content {
+    font-size: 0.85rem;
   }
 }
