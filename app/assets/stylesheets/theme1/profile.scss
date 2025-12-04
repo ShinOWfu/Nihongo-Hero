@@ -192,3 +192,10 @@
     transform: scale(0.98);
   }
 }
+.profile-title {
+  color: $accent-gold;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: left;
+  font-size: clamp(1.3rem, 4vw, 3rem); // same font size as form title
+}

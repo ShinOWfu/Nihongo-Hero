@@ -4,7 +4,16 @@
 //* {
 // border: 1px solid red !important;
 //}
+@font-face {
+  font-family: 'JF Dot Gothic';
+  src: url('JF-Dot-Gothic-16.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'JF Dot Gothic', sans-serif !important;
+}
 // If we need a card
 .card {
   background-color: $gray-700;
@@ -16,19 +25,13 @@
     margin-right: 1rem;
     margin-bottom: 1rem;
     padding: 1rem;
-
-    &h3 {
-      font-size: clamp(1.3rem, 4vw, 3rem);
-      font-weight: bold;
-      color: $accent-gold
-
-    }
   }
 
   label {
-    color: $gray-300;
+    color: $accent-gold;
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
     font-size: clamp(1.3rem, 4vw, 3rem);
   }
 
