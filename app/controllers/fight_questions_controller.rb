@@ -88,7 +88,7 @@ class FightQuestionsController < ApplicationController
     @enemy_damage = BASE_ENEMY_DAMAGE
 
     vvs = VoiceVoxService.new(ENV["VOICE_VOX_APIKEY"])
-    @question_audio = vvs.synthesize(@question.question.gsub(/_+を?/, "　なになにを"))
+    @question_audio = vvs.synthesize(@question.question.gsub(/_+/, "　なになに"))
   end
 
   def update
