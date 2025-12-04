@@ -29,7 +29,7 @@
 
   <div class="card profile-card">
     <div class="difficulty">
-      <label for="jlpt-level">Difficulty</label>
+      <label clas="profile-title" for="jlpt-level">Difficulty</label>
       <%= select_tag :difficulty,
         options_for_select([["N1", "N1"], ["N2", "N2"], ["N3", "N3"]], @user.japanese_difficulty),
         class: "form-select" %>
@@ -37,7 +37,7 @@
   </div>
 
 <div id="leaderboard" class="card profile-card">
-  <h3 class="leaderboard-title">Leaderboard</h3>
+  <div class="leaderboard-title">Leaderboard</div>
 
   <div class="leaderboard-toggle">
     <button class="toggle-btn active" data-target="global">Global</button>
@@ -66,7 +66,7 @@
 </div>
 
 <div class="card profile-card">
-  <h3>Connect with other Heroes</h3>
+  <div class="profile-title">Connect with other Heroes</div>
 
   <%= form_with(url: add_friend_users_path, method: :post, local: true, style: "display: flex; flex-direction: row; gap: 0.75rem; align-items: center;") do |form| %>
     <%= form.text_field :identifier,
