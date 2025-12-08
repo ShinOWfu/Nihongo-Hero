@@ -64,4 +64,9 @@ Built by a team of 4 developers during Le Wagon Tokyo Batch #2123.
 
 ---
 
+## License
+This project is licensed under the MIT License
+
+---
+
 *Level up your Japanese. Defeat your enemies. Become a Nihongo Hero.*
